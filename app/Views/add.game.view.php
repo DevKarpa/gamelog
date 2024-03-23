@@ -21,58 +21,50 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form action="/usuarios-sistema/<?php echo isset($edit) ? 'edit/' . $id : 'add' ?>" method="post">         
+                <form action="/game-list/<?php echo isset($edit) ? 'edit/' . $id : 'add' ?>" method="post" enctype="multipart/form-data">         
                     <!--form method="get"-->
                     <div class="row">
+                        
                         <div class="mb-3 col-sm-6">
                             <label for="cif">Nombre del juego</label>
-                            <input class="form-control" id="email" type="text" name="email" placeholder="Fortnite..." value="<?php echo isset($input['email']) ? $input['email'] : ''; ?>" <?php echo isset($edit) ? "" : "required" ?>>
-                                   <p class="text-danger"><?php echo isset($errores['email']) ? $errores['email'] : ''; ?></p>
+                            <input class="form-control" id="name" type="text" name="name" value="<?php echo isset($input['name']) ? $input['name'] : ''; ?>" <?php echo isset($edit) ? "" : "required" ?>>
+                                   <p class="text-danger"><?php echo isset($errores['name']) ? $errores['name'] : ''; ?></p>
                         </div>
+                        
                         <div class="mb-3 col-sm-6">
                             <label for="codigo">Año de salida</label>
-                            <input class="form-control" id="username" type="text" name="username" placeholder="Nombre de usuario" value="<?php echo isset($input['username']) ? $input['username'] : ''; ?>" <?php echo isset($edit) ? "disabled" : "required" ?>>
-                                   <p class="text-danger"><?php echo isset($errores['username']) ? $errores['username'] : ''; ?></p>
+                            <input class="form-control" id="year" type="text" name="year" placeholder="0000" value="<?php echo isset($input['year']) ? $input['year'] : ''; ?>" <?php echo isset($edit) ? "" : "required" ?>>
+                                   <p class="text-danger"><?php echo isset($errores['year']) ? $errores['year'] : ''; ?></p>
                         </div>
+                        
                         <div class="mb-3 col-sm-6">
                             <label for="nombre">Nota</label>
-                            <input class="form-control" id="password" type="password" name="password" placeholder="Contraseña" value="<?php echo isset($input['password']) ? $input['password'] : ''; ?>"  <?php echo isset($edit) ? "" : "required" ?>>
-                                   <p class="text-danger"><?php 
-                                   
-                                   if(isset($errores['password'])){
-                                       for ($i = 0; $i < count($errores['password']); $i++) {
-                                           echo $errores['password'][$i] . "<br>";
-                                       }
-                                   }
-                                   
-                                   ?></p>
-
+                            <input class="form-control" id="score" type="number" min="1" max="100" name="score"  value="<?php echo isset($input['score']) ? $input['score'] : ''; ?>"  <?php echo isset($edit) ? "" : "required" ?>>
+                                   <p class="text-danger"><?php echo isset($errores['score']) ? $errores['score'] : '';?></p>
                         </div>
-                       
+                        
                         <div class="mb-3 col-sm-6">
-                            <label for="rol">Desarrolladora/s</label>
-                            <select class="form-control select2" name="devs[]" multiple>
+                            <label for="devs">Desarrolladora/s</label>
+                            <select class="form-control select2" name="devs[]" multiple required>
                                 
                                 <?php
-                               /** foreach ($devs as $dev) {
-                                    echo "<option value=" . $dev['devID'] . ">" . $rol['devName'] . "</option>";
+                                foreach ($devs as $dev) {
+                                    echo "<option value=" . $dev['devID'] . ">" . $dev['devName'] . "</option>";
                                 }
-                                **/
                                 ?>
-                                <option value=1>s</option>
-                                <option value=3>suuu</option>
-                                
+ 
                             </select>
-
                         </div>
+                        
                         <div class="mb-3 col-sm-6">
                             <label for="codigo">Steam Grid (Aspect Ratio 92 : 43)</label>
-                            <input class="form-control-file" id="username" type="file" name="username" accept="image/png, image/jpeg">
-                                   <p class="text-danger"></p>
+                            <input class="form-control-file" id="image" type="file" name="image" accept="image/png" required>
+                                   <p class="text-danger"><?php echo isset($errores['image']) ? $errores['image'] : '';?></p>
                         </div>
+                        
                         <div class="col-12 text-right">                            
-                            <input type="submit" value="Enviar" name="enviar" class="btn btn-primary"/>
-                            <a href="/usuarios-sistema" class="btn btn-danger ml-3">Cancelar</a>                            
+                            <input type="submit" value="Enviar" name="submit" class="btn btn-primary"/>
+                            <a href="/game-list" class="btn btn-danger ml-3">Cancelar</a>                            
                         </div>
                     </div>
                 </form>
