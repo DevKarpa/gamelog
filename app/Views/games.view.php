@@ -31,20 +31,20 @@
                             <th>ID</th>
                             <th>Game</th>                          
                             <th>Year</th>                            
-                            <th>Score</th>
                             <th>Developer/s</th>
+                            <th>Platform</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                            <?php
+                            <?php                                
                             foreach ($games as $game) {
                                 echo "<tr>";
                                 echo "<td>".$game['gameID']."</td>";
                                 echo "<td>".$game['gameTitle']."</td>";
                                 echo "<td>".$game['gameYear']."</td>";
-                                echo "<td>".$game['gameScore']."</td>";
                                 echo "<td>".$game['developers']."</td>";
+                                echo "<td>".$game['platformName']."</td>";
                                 ?>
                         
                             <td><a href="/game-list/edit/<?php echo $game['gameID']?>" class="btn btn-success"><i class="fas fa-edit"></i></a>

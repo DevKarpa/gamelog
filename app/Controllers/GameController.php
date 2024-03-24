@@ -19,17 +19,19 @@ class GameController extends \Com\Daw2\Core\BaseController {
     function addGame(): void {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $devModel = new \Com\Daw2\Models\DevModel();
+        $platModel = new \Com\Daw2\Models\PlatformModel();
         $data = [];
         $data['titulo'] = 'Add new game';
         $data['seccion'] = 'game-list';
         $data['games'] = $gameModel->getAll();
         $data['devs'] = $devModel->getAllDevs();
+        $data['platforms'] = $platModel->getAllPlatforms();
 
         $post = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
 
         if (isset($post['submit'])) {
-           // var_dump();
-            $data['errores'] = $gameModel->addNewGame($post,$_FILES);
+            // var_dump();
+            $data['errores'] = $gameModel->addNewGame($post, $_FILES);
         }
 
         $this->view->showViews(array('templates/header.view.php', 'add.game.view.php', 'templates/footer.view.php'), $data);

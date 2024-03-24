@@ -27,25 +27,32 @@
                         
                         <div class="mb-3 col-sm-6">
                             <label for="cif">Nombre del juego</label>
-                            <input class="form-control" id="name" type="text" name="name" value="<?php echo isset($input['name']) ? $input['name'] : ''; ?>" <?php echo isset($edit) ? "" : "required" ?>>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Título del juego..." value="<?php echo isset($input['name']) ? $input['name'] : ''; ?>" <?php echo isset($edit) ? "" : "required" ?>>
                                    <p class="text-danger"><?php echo isset($errores['name']) ? $errores['name'] : ''; ?></p>
                         </div>
                         
-                        <div class="mb-3 col-sm-6">
+                        <div class="mb-3 col-sm-2">
                             <label for="codigo">Año de salida</label>
                             <input class="form-control" id="year" type="text" name="year" placeholder="0000" value="<?php echo isset($input['year']) ? $input['year'] : ''; ?>" <?php echo isset($edit) ? "" : "required" ?>>
                                    <p class="text-danger"><?php echo isset($errores['year']) ? $errores['year'] : ''; ?></p>
                         </div>
                         
-                        <div class="mb-3 col-sm-6">
-                            <label for="nombre">Nota</label>
-                            <input class="form-control" id="score" type="number" min="1" max="100" name="score"  value="<?php echo isset($input['score']) ? $input['score'] : ''; ?>"  <?php echo isset($edit) ? "" : "required" ?>>
-                                   <p class="text-danger"><?php echo isset($errores['score']) ? $errores['score'] : '';?></p>
+                        <div class="mb-3 col-sm-4">
+                            <label for="platform">Plataforma</label>
+                            <select class="form-control select2" name="platform" required>
+                                
+                                <?php
+                                foreach ($platforms as $platform) {
+                                    echo "<option value=" . $platform['platformID'] . ">" . $platform['platformName'] . "</option>";
+                                }
+                                ?>
+ 
+                            </select>
                         </div>
                         
                         <div class="mb-3 col-sm-6">
                             <label for="devs">Desarrolladora/s</label>
-                            <select class="form-control select2" name="devs[]" multiple required>
+                            <select class="form-control js-example-basic-multiple" name="devs[]" multiple="multiple" required>
                                 
                                 <?php
                                 foreach ($devs as $dev) {
@@ -56,8 +63,10 @@
                             </select>
                         </div>
                         
+                        
+                        
                         <div class="mb-3 col-sm-6">
-                            <label for="codigo">Steam Grid (Aspect Ratio 92 : 43)</label>
+                            <label for="codigo">Steam Grid (Aspect Ratio 92 : 43) <a title="Ayuda con la imagen" href="imghelp">?</a></label>
                             <input class="form-control-file" id="image" type="file" name="image" accept="image/png" required>
                                    <p class="text-danger"><?php echo isset($errores['image']) ? $errores['image'] : '';?></p>
                         </div>
