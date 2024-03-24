@@ -4,16 +4,13 @@
 
     <div class="col-12">
         <div class="card shadow mb-4">
-            <?php
-            
+            <?php   
             if(isset($errores)){
-                
                 if(count($errores)==0){
                     echo "Juego añadido exitosamente";
-                }
-                
-            }
-            
+                }   
+            }     
+            var_dump($errores);
             ?>
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">

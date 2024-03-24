@@ -12,5 +12,19 @@ class DevModel extends \Com\Daw2\Core\BaseModel {
         $stmt = $this->pdo->query(self::BASE . " ORDER BY devName ASC");
         return $stmt->fetchAll();
     }
+    
+    function checkDevExists($inputDevs) {
+        $devs = $this->getAllDevs();
+
+        foreach ($devs as $dev) {
+            foreach ($inputDevs as $inputDev) {
+                if($inputDev==$dev['devID']){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
 
 }

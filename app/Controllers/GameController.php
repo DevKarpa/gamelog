@@ -30,10 +30,64 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $post = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
 
         if (isset($post['submit'])) {
-            // var_dump();
-            $data['errores'] = $gameModel->addNewGame($post, $_FILES);
+            $data['errores'] = $this->checkGameErrors($post, $_FILES);
+            
+            if (count($data['errores']) == 0) {
+               $gameModel->saveNewGame($post, $_FILES); 
+            }
         }
 
         $this->view->showViews(array('templates/header.view.php', 'add.game.view.php', 'templates/footer.view.php'), $data);
+    }
+
+    function checkGameErrors($metadata, $img) {
+        $devModel = new \Com\Daw2\Models\DevModel();
+        $platModel = new \Com\Daw2\Models\PlatformModel();
+        $errors = [];
+        echo (int) date("Y");
+        // Comprobación de título del juego
+        if (strlen($metadata['name']) > 30 || is_null($metadata['name'])) {
+            $errors['name'] = "El título del juego debe tener una longitud de entre 1 y 30 carácteres.";
+        }
+
+        // Comprobación de año
+        if (is_numeric($metadata['year'])) {
+            // Si el año no se encuentra entre 1900 y el año actual
+            if ($metadata['year'] < 1900 || $metadata['year'] > (int) date("Y")) {
+                $errors['year'] = "El año debe estar compredido entre 1900 y el año actual.";
+            }
+        }
+        
+        // Comprobación de plataforma
+        if(!$platModel->checkPlatformExists($metadata['platform'])){
+            $errors['platform'] = "La plataforma introducida no existe";
+        }
+        
+        // Comprobación de devs
+        if(!$devModel->checkDevExists($metadata['devs'])){   
+            $errors['platform'] = "La plataforma introducida no existe";
+        }
+
+        // Comprobación de imagen
+        if(!is_null($this->checkGameImage($img))){
+            $errors['image'] = $this->checkGameImage($img);
+        }
+
+        return $errors;
+    }
+
+    function checkGameImage($img) {
+        $upload = true;
+        
+        $check = getimagesize($img["image"]["tmp_name"]);
+        if ($check === false) {
+            $error = "Tipo de archivo no compatible";
+            $upload = false;
+        }
+        
+        if(!$upload){
+            return $error;
+        }
+
     }
 }

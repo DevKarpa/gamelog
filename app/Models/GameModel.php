@@ -13,30 +13,26 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         return $stmt->fetchAll();
     }
 
-    function addNewGame($metadata, $img) {
-        $errors = [];
-        $errors['image'] = $this->saveGameImage($img);
+    function saveNewGame($metadata, $img) {
         
-        return $errors;
+        
+        
+        // SAVE IMAGE
+        $this->saveImage($img);
     }
-
-    function saveGameImage($img) {
-        $upload = true;
-        
-        $dir = "assets/img/games/";
-        $fullDir = $dir . basename($img["image"]["name"]);
-        
-        $check = getimagesize($img["image"]["tmp_name"]);
-        if ($check === false) {
-            $error = "Tipo de archivo no compatible";
-            $upload = false;
-        }
-
-        if ($upload) {
-            move_uploaded_file($img["image"]["tmp_name"], $fullDir);
-        }else{
-            return $error;
-        }
-        
+    
+    function saveImage($img) {
+        $dir = "assets/img/games/" . $this->getLastRegister() . ".png";
+        move_uploaded_file($img["image"]["tmp_name"], $dir);
+    }
+    
+    /**
+     * Devuelve el último gameID de la tabla games
+     * @return int
+     */
+    function getLastRegister(): int {
+        $query = $this->pdo->query("SELECT gameID FROM games ORDER BY gameID DESC");
+        $query->execute();
+        return $query->fetch()['gameID'];
     }
 }
