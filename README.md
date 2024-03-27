@@ -22,7 +22,7 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ❌ Sección añadir juegos al perfil, (async select)
  - ❌ Paginación de lista total de juego con filtros
 
- ## DISEÑO
+ ### DISEÑO
  - ❌ Hacer bonito el front
  - ❌ Modificar back para darle personalidad
  - ❌ Modificar vista de login y register
