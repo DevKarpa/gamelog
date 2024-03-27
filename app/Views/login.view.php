@@ -51,13 +51,14 @@
                                             <span class="fas fa-lock"></span>
                                         </div>
                                     </div>  
+                                </div>
                                     <?php
                                 }
                                 ?>
-                            </div>     
+                                
 
                             <p class="login-box-msg text-danger"><?php echo isset($error) ? $error : '' ?></p>      
-                            <p class="login-box-msg"> <?php echo isset($register) ? "¿Tienes cuenta?" : "¿No tienes cuenta?" ?> <a href='register'> <?php echo isset($register) ? "¡Inicia Sesión!" : "¡Regístrate!" ?> </a></p>
+                            <p class="login-box-msg"> <?php echo isset($register) ? "¿Tienes cuenta?" : "¿No tienes cuenta?" ?> <a href='<?php echo isset($register) ? "" : "register" ?>'> <?php echo isset($register) ? "¡Inicia Sesión!" : "¡Regístrate!" ?> </a></p>
                             <div class="row">
                                 <div class="col-12">            
                                     <button name="submit" type="submit" class="btn btn-<?php echo isset($register) ? "danger" : "primary" ?> btn-block float-right"> <?php echo isset($register) ? "Registrarse" : "Iniciar Sesión" ?> </button>
