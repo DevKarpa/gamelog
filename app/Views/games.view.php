@@ -1,3 +1,8 @@
+<style>
+    #grid{
+        width:120px;
+    }
+</style>
 <div class="row">       
     <div class="col-12">
         <?php
@@ -33,6 +38,7 @@
                             <th>Year</th>                            
                             <th>Developer/s</th>
                             <th>Platform</th>
+                            <th>Grid</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -46,9 +52,10 @@
                                 echo "<td>".$game['developers']."</td>";
                                 echo "<td>".$game['platformName']."</td>";
                                 ?>
+                                
+                            <td><img id="grid" src="assets/img/games/<?php echo $game['gameID'] ?>.png"></td>
                         
                             <td><a href="/game-list/edit/<?php echo $game['gameID']?>" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                                <a href="/game-list/hide/<?php echo $game['gameID']?>" class="btn btn-primary"> <i class="fas fa-toggle-off"></i></a>
                                 <a href="/game-list/delete/<?php echo $game['gameID']?>" class="btn btn-danger"><i class="fas fa-trash"></i></a></td></tr>
                                 <?php
                             }

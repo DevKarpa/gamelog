@@ -9,15 +9,28 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
     private const BASE = "SELECT games.gameID, games.gameTitle, games.gameYear, platforms.platformName, GROUP_CONCAT(devs.devName ORDER BY devs.devName ASC) AS developers FROM games JOIN devGames ON games.gameID = devGames.gameID JOIN devs ON devGames.devID = devs.devID JOIN platforms on games.gamePlatform = platforms.platformID GROUP BY games.gameID ";
 
     function getAll(): array {
-        $stmt = $this->pdo->query(self::BASE);
-        return $stmt->fetchAll();
+        $query = $this->pdo->query(self::BASE);
+        $query->execute();
+        
+        return $query->fetchAll();
     }
 
     function saveNewGame($metadata, $img) {
         
+        var_dump($metadata);
         
+        // Guarda el juego en la tabla games
+        $query = $this->pdo->prepare("INSERT INTO games (gameTitle,gameYear,gamePlatform) VALUES (?,?,?)");
+        $query->execute([$metadata['name'],$metadata['year'],$metadata['platform']]);
         
-        // SAVE IMAGE
+        // Relaciona el juego con la/las desarrolladoras añadiendo los registros necesarios en la tabla
+        // devGames
+        foreach ($metadata['devs'] as $dev) {
+            $query = $this->pdo->prepare("INSERT INTO devGames (devID,gameID) VALUES (?,?)");
+            $query->execute([$dev,$this->getLastRegister()]);
+        }
+        
+        // Llamada a la función que guarda la imagen
         $this->saveImage($img);
     }
     
