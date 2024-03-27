@@ -43,4 +43,14 @@ class UserController extends \Com\Daw2\Core\BaseController {
         session_destroy();
         header("location: /");
     }
+    
+    function showAllUsers() {
+        $userModel = new \Com\Daw2\Models\UserModel();
+        $data = [];
+        $data['titulo'] = 'Lista de usuarios';
+        $data['seccion'] = 'user-list';
+        $data['users'] = $userModel->getAllUsers();
+
+        $this->view->showViews(array('templates/header.view.php', 'users.view.php', 'templates/footer.view.php'), $data);
+    }
 }

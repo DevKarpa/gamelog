@@ -10,7 +10,6 @@
                     echo "Juego añadido exitosamente";
                 }   
             }     
-            session_destroy();
             ?>
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -18,19 +17,21 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form action="/game-list/<?php echo isset($edit) ? 'edit/' . $id : 'add' ?>" method="post" enctype="multipart/form-data">         
+                <?php
+                var_dump($inputd); ?>
+                <form action="/game-list/<?php echo isset($input) ? 'edit/' . $input['gameID'] : 'add' ?>" method="post" enctype="multipart/form-data">         
                     <!--form method="get"-->
                     <div class="row">
                         
                         <div class="mb-3 col-sm-6">
                             <label for="cif">Nombre del juego</label>
-                            <input class="form-control" id="name" type="text" name="name" placeholder="Título del juego..." value="<?php echo isset($input['name']) ? $input['name'] : ''; ?>" <?php echo isset($edit) ? "" : "required" ?>>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Título del juego..." value="<?php echo isset($input['gameTitle']) ? $input['gameTitle'] : ''; ?>" <?php echo isset($edit) ? "" : "required" ?>>
                                    <p class="text-danger"><?php echo isset($errores['name']) ? $errores['name'] : ''; ?></p>
                         </div>
                         
                         <div class="mb-3 col-sm-2">
                             <label for="codigo">Año de salida</label>
-                            <input class="form-control" id="year" type="text" name="year" placeholder="0000" value="<?php echo isset($input['year']) ? $input['year'] : ''; ?>" <?php echo isset($edit) ? "" : "required" ?>>
+                            <input class="form-control" id="year" type="text" name="year" placeholder="0000" value="<?php echo isset($input['gameYear']) ? $input['gameYear'] : ''; ?>" <?php echo isset($edit) ? "" : "required" ?>>
                                    <p class="text-danger"><?php echo isset($errores['year']) ? $errores['year'] : ''; ?></p>
                         </div>
                         
@@ -40,7 +41,8 @@
                                 
                                 <?php
                                 foreach ($platforms as $platform) {
-                                    echo "<option value=" . $platform['platformID'] . ">" . $platform['platformName'] . "</option>";
+                                    $selected = isset($input['platformID']) ? $input['platformID']==$platform['platformID'] ? "selected" : "" : "";
+                                    echo "<option value='" . $platform['platformID'] . "' ".$selected . ">" . $platform['platformName'] . "</option>";
                                 }
                                 ?>
  
@@ -49,11 +51,14 @@
                         
                         <div class="mb-3 col-sm-6">
                             <label for="devs">Desarrolladora/s</label>
+                            <?PHP  var_dump( in_array(3, $inputd) ); ?>
                             <select class="form-control js-example-basic-multiple" name="devs[]" multiple="multiple" required>
                                 
                                 <?php
                                 foreach ($devs as $dev) {
-                                    echo "<option value=" . $dev['devID'] . ">" . $dev['devName'] . "</option>";
+                                    
+                                    $selected = isset($inputd) ? in_array($dev['devID'], $inputd['devID']) ? "selected" : " " : "" ;
+                                    echo "<option value=" . $dev['devID'] . $selected .">" . $dev['devName'] . "</option>";
                                 }
                                 ?>
  

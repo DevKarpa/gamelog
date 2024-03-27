@@ -60,7 +60,7 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
       <img src="assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Gamelog</span>
+      <span class="brand-text font-weight-light">Gamelog Admin</span>
     </a>
 
     <!-- Sidebar -->
@@ -100,7 +100,13 @@
               <li class="nav-item">
                 <a href="/game-list" class="nav-link <?php echo isset($seccion) && $seccion === 'game-list' ? 'active' : ''; ?>">
                   <i class="fas fa-gamepad nav-icon"></i>
-                  <p>Game list</p>
+                  <p>Lista de juegos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/user-list" class="nav-link <?php echo isset($seccion) && $seccion === 'user-list' ? 'active' : ''; ?>">
+                  <i class="fas fa-user nav-icon"></i>
+                  <p>Lista de usuarios</p>
                 </a>
               </li>
             </ul>

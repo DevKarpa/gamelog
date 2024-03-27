@@ -39,6 +39,32 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
         $this->view->showViews(array('templates/header.view.php', 'add.game.view.php', 'templates/footer.view.php'), $data);
     }
+    
+    function editGame($id) {
+        $gameModel = new \Com\Daw2\Models\GameModel();
+        $devModel = new \Com\Daw2\Models\DevModel();
+        $platModel = new \Com\Daw2\Models\PlatformModel();
+        $data = [];
+        $data['titulo'] = 'Add new game';
+        $data['seccion'] = 'game-list';
+        $data['games'] = $gameModel->getAll();
+        $data['devs'] = $devModel->getAllDevs();
+        $data['platforms'] = $platModel->getAllPlatforms();
+        $data['input'] = $gameModel->getGameById($id);
+        $data['inputd'] = $devModel->getDevGamesById($id);
+
+        $post = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+
+        if (isset($post['submit'])) {
+            $data['errores'] = $this->checkGameErrors($post, $_FILES);
+            
+            if (count($data['errores']) == 0) {
+               $gameModel->modifyGameData($post, $_FILES, $id);
+            }
+        }
+
+        $this->view->showViews(array('templates/header.view.php', 'add.game.view.php', 'templates/footer.view.php'), $data);
+    }
 
     function checkGameErrors($metadata, $img) {
         $devModel = new \Com\Daw2\Models\DevModel();

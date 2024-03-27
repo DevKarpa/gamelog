@@ -41,6 +41,7 @@ class FrontController {
                         }
                         , 'get');
 
+                // LISTA DE JUEGOS
                 Route::add('/game-list',
                         function () {
                             $controlador = new \Com\Daw2\Controllers\GameController();
@@ -61,8 +62,38 @@ class FrontController {
                             $controlador->addGame();
                         }
                         , 'get');
+                        
+                Route::add('/game-list/edit/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->editGame($id);
+                        }
+                        , 'get');
+                        
+                Route::add('/game-list/edit/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->editGame($id);
+                        }
+                        , 'post');
 
-                Route::add('/game-list/add',
+                        
+                // LISTA DE USUARIOS
+                Route::add('/user-list',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->showAllUsers();
+                        }
+                        , 'post');
+                        
+                Route::add('/user-list',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->showAllUsers();
+                        }
+                        , 'get');
+
+                Route::add('/game-list',
                         function () {
                             $controlador = new \Com\Daw2\Controllers\GameController();
                             $controlador->addGame();

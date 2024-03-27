@@ -26,5 +26,11 @@ class DevModel extends \Com\Daw2\Core\BaseModel {
         
         return false;
     }
+    
+    function getDevGamesById($id) {
+        $query = $this->pdo->prepare("SELECT devID FROM devGames WHERE gameID = ?");
+        $query->execute([$id]);
+        return $query->fetchAll();
+    }
 
 }
