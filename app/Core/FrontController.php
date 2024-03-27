@@ -4,58 +4,97 @@ namespace Com\Daw2\Core;
 
 use Steampixel\Route;
 
-class FrontController{
-    
-    static function main(){
-        Route::add('/', 
-                function(){
-                    $controlador = new \Com\Daw2\Controllers\InicioController();
-                    $controlador->index();
-                }
-                , 'get');
-        
-        Route::add('/game-list', 
-                function(){
-                    $controlador = new \Com\Daw2\Controllers\GameController();
-                    $controlador->showAllGames();
-                }
-                , 'get');
+class FrontController {
+
+    static function main() {
+
+        if (!isset($_SESSION['user'])) {
+
+            Route::add('/',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\UserController();
+                        $controlador->loginUser();
+                    }
+                    , 'get');
+
+            Route::pathNotFound(
+                    function () {
+                        $controller = new \Com\Daw2\Controllers\UserController();
+                        $controller->loginUser();
+                    }
+            );
+        } else {
+
+            if ($_SESSION['user']['userType'] == 1) {
+
+                Route::add('/',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\InicioController();
+                            $controlador->index();
+                        }
+                        , 'get');
+
+                Route::add('/game-list',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->showAllGames();
+                        }
+                        , 'get');
+
+                Route::add('/game-list',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->showAllGames();
+                        }
+                        , 'post');
+
+                Route::add('/game-list/add',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->addGame();
+                        }
+                        , 'get');
+
+                Route::add('/game-list/add',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->addGame();
+                        }
+                        , 'post');
+            } else {
                 
-        Route::add('/game-list', 
-                function(){
-                    $controlador = new \Com\Daw2\Controllers\GameController();
-                    $controlador->showAllGames();
-                }
-                , 'post');
-                
-        Route::add('/game-list/add', 
-                function(){
-                    $controlador = new \Com\Daw2\Controllers\GameController();
-                    $controlador->addGame();
-                }
-                , 'get');
-                
-        Route::add('/game-list/add', 
-                function(){
-                    $controlador = new \Com\Daw2\Controllers\GameController();
-                    $controlador->addGame();
-                }
-                , 'post');
-                
-        Route::pathNotFound(
-            function(){
-                $controller = new \Com\Daw2\Controllers\ErroresController();
-                $controller->error404();
+                Route::add('/',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\InicioController();
+                            $controlador->userIndex();
+                        }
+                        , 'get');
+                        
             }
-        );
-        
-        Route::methodNotAllowed(
-            function(){
-                $controller = new \Com\Daw2\Controllers\ErroresController();
-                $controller->error405();
-            }
-        );
+
+            Route::add('/logout',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\UserController();
+                        $controlador->logout();
+                    }
+                    , 'get');
+
+            Route::pathNotFound(
+                    function () {
+                        $controller = new \Com\Daw2\Controllers\ErroresController();
+                        $controller->error404();
+                    }
+            );
+
+            Route::methodNotAllowed(
+                    function () {
+                        $controller = new \Com\Daw2\Controllers\ErroresController();
+                        $controller->error405();
+                    }
+            );
+        }
+
+
         Route::run();
     }
 }
-

@@ -4,7 +4,7 @@
 </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>DWES <?php echo date('Y'); ?></strong>    
+    <strong>Alejandro Martínez Domínguez <?php echo date('Y'); ?></strong>    
   </footer>
 
   <!-- Control Sidebar -->

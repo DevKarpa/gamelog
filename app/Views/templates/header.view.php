@@ -43,10 +43,8 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="text-danger fas fa-sign-out-alt"></i>
-        </a>        
+      <li class="nav-item">      
+          <a href="logout" class="nav-link"><i class="text-danger fas fa-sign-out-alt"></i></a>   
       </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -73,7 +71,7 @@
           <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Username</a>
+          <a href="#" class="d-block"><?php echo isset($_SESSION['user']) ? $_SESSION['user']['username'] : 'none' ?></a>
         </div>
       </div>
      
@@ -101,7 +99,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/game-list" class="nav-link <?php echo isset($seccion) && $seccion === 'game-list' ? 'active' : ''; ?>">
-                  <i class="fas fa-cube nav-icon"></i>
+                  <i class="fas fa-gamepad nav-icon"></i>
                   <p>Game list</p>
                 </a>
               </li>
