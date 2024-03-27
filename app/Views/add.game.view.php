@@ -18,8 +18,8 @@
             <!-- Card Body -->
             <div class="card-body">
                 <?php
-                var_dump($inputd); ?>
-                <form action="/game-list/<?php echo isset($input) ? 'edit/' . $input['gameID'] : 'add' ?>" method="post" enctype="multipart/form-data">         
+                //var_dump($inputd); ?>
+                <form action="/game-list/<?php echo isset($input) ? 'edit/' . $input['gameID'] : 'add/' ?>" method="post" enctype="multipart/form-data">         
                     <!--form method="get"-->
                     <div class="row">
                         
@@ -51,7 +51,7 @@
                         
                         <div class="mb-3 col-sm-6">
                             <label for="devs">Desarrolladora/s</label>
-                            <?PHP  var_dump( in_array(3, $inputd) ); ?>
+                            <?PHP // var_dump( in_array(3, $inputd) ); ?>
                             <select class="form-control js-example-basic-multiple" name="devs[]" multiple="multiple" required>
                                 
                                 <?php

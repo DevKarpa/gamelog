@@ -63,6 +63,13 @@ class FrontController {
                         }
                         , 'get');
                         
+                Route::add('/game-list/add',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->addGame();
+                        }
+                        , 'post');
+                        
                 Route::add('/game-list/edit/([0-9]+)',
                         function ($id) {
                             $controlador = new \Com\Daw2\Controllers\GameController();
