@@ -30,6 +30,15 @@ class UserController extends \Com\Daw2\Core\BaseController {
         
     }
     
+    function registerUser(): void {
+        $userModel = new \Com\Daw2\Models\UserModel();
+        $data = [];
+        $data['register'] = true;
+
+        $this->view->showViews(array('login.view.php'), $data);
+        
+    }
+    
     function logout() {
         session_destroy();
         header("location: /");

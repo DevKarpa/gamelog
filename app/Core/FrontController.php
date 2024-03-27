@@ -16,6 +16,13 @@ class FrontController {
                         $controlador->loginUser();
                     }
                     , 'get');
+                    
+            Route::add('/register',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\UserController();
+                        $controlador->registerUser();
+                    }
+                    , 'get');
 
             Route::pathNotFound(
                     function () {
