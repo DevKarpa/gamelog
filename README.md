@@ -13,7 +13,7 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ❌ Borrar juego
  - ❌ Editar usuario
  - ❌ Borrar usuario
- - ❌ Formulario de register funcional
+ - ✅ Formulario de register funcional
  - ❌ Borrar registro en userGames al borrar juego / usuario
  - ❌ Paginación en games
  - ❌ Listado de developers

@@ -33,6 +33,7 @@
                                 </div>
                             </div>
                         </div>
+                        <p class="login-box-msg text-danger"><?php echo isset($errors['username']) ? $errors['username'] : '' ?></p>  
                         <div class="input-group mb-3">
                             <input type="password" class="form-control" name="pass" placeholder="Password">
                             <div class="input-group-append">
@@ -41,6 +42,15 @@
                                 </div>
                             </div>
                         </div>
+                        <p class="login-box-msg text-danger"><?php 
+                        
+                        if(isset($errors['password'])){
+                            foreach ($errors['password'] as $err) {
+                                echo $err . "<br>";
+                            }
+                        }
+                        
+                        ?></p>  
                             <?php
                             if (isset($register)) {
                                 ?>

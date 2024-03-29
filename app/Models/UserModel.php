@@ -30,6 +30,23 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         return null;
     }
     
+    function checkUserExists($username) {
+        $query = $this->pdo->prepare(self::BASE . "WHERE username = ?");
+        $query->execute([$username]);
+        $user = $query->fetch();
+        
+        if($user){
+            return true;
+        }
+        
+        return false;
+    }
     
+    function registerUser($user): array {
+        $query = $this->pdo->prepare("INSERT INTO users (username, password, userType) VALUES (?, ?, ?)");
+        $query->execute([$user['username'], password_hash($user['pass'], PASSWORD_DEFAULT), 0]);
+        
+        return $this->loginUser($user['username'], $user['pass']);
+    }
 
 }

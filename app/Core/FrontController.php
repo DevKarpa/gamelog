@@ -23,6 +23,13 @@ class FrontController {
                         $controlador->registerUser();
                     }
                     , 'get');
+                    
+            Route::add('/register',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\UserController();
+                        $controlador->registerUser();
+                    }
+                    , 'post');
 
             Route::pathNotFound(
                     function () {
