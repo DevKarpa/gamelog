@@ -9,14 +9,14 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ❌ Añadir relaciones en phpmyadmin
 
  ### BACK
- - ❌ Mostrar valores de desarrolladora/s en editar juego
- - ❌ Borrar juego
- - ❌ Editar usuario
- - ❌ Borrar usuario
  - ✅ Formulario de register funcional
+ - ✅ Borrar juego
+ - ❌ Borrar usuario
  - ❌ Borrar registro en userGames al borrar juego / usuario
- - ❌ Paginación en games
+ - ❌ Editar usuario
  - ❌ Listado de developers
+ - ❌ Paginación en games
+ - ❌ Mostrar valores de desarrolladora/s en editar juego
 
  ### FRONT
  - ❌ Sección mi perfil para poder ver

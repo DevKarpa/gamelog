@@ -90,6 +90,20 @@ class FrontController {
                             $controlador->editGame($id);
                         }
                         , 'post');
+                        
+                Route::add('/game-list/delete/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->deleteGame($id);
+                        }
+                        , 'get');
+                        
+                Route::add('/game-list/delete/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->deleteGame($id);
+                        }
+                        , 'post');
 
                         
                 // LISTA DE USUARIOS

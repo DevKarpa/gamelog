@@ -116,4 +116,18 @@ class GameController extends \Com\Daw2\Core\BaseController {
         }
 
     }
+    
+    function deleteGame($id) {
+        $gameModel = new \Com\Daw2\Models\GameModel();
+        $deletedGame = $gameModel->getGameById($id)['gameTitle'];
+
+        $data = [];
+        $data['titulo'] = 'Lista de juegos';
+        $data['seccion'] = 'game-list';
+        $data['deletedGame'] = $deletedGame;
+        $gameModel->deleteGameById($id);
+        $data['games'] = $gameModel->getAll();
+
+        $this->view->showViews(array('templates/header.view.php', 'games.view.php', 'templates/footer.view.php'), $data);
+    }
 }
