@@ -141,6 +141,20 @@ class FrontController {
                             $controlador->deleteUser($id);
                         }
                         , 'post');
+                        
+                Route::add('/user-list/edit/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->editUser($id);
+                        }
+                        , 'get');
+                        
+                Route::add('/user-list/edit/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->editUser($id);
+                        }
+                        , 'post');
 
             } else {
                 

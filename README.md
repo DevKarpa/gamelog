@@ -10,7 +10,7 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ✅ Borrar juego
  - ✅ Borrar usuario
  - ✅ Borrar registro en userGames al borrar juego / usuario
- - ❌ Editar usuario
+ - ✅ Editar usuario
  - ❌ Listado de developers
  - ❌ Paginación en games
  - ❌ Mostrar valores de desarrolladora/s en editar juego

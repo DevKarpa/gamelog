@@ -29,11 +29,14 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         }
 
         // Llamada a la función que guarda la imagen
-        $this->saveImage($img);
+        $this->saveImage($img,0);
     }
 
-    function saveImage($img) {
-        $dir = "assets/img/games/" . $this->getLastRegister() . ".png";
+    function saveImage($img,$id) {
+        if($id==0){
+            $id = $this->getLastRegister();
+        }
+        $dir = "assets/img/games/" . $id . ".png";
         move_uploaded_file($img["image"]["tmp_name"], $dir);
     }
 
@@ -80,10 +83,10 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         // devGames
         foreach ($metadata['devs'] as $dev) {
             $query = $this->pdo->prepare("INSERT INTO devGames (devID,gameID) VALUES (?,?)");
-            $query->execute([$dev, $this->getLastRegister()]);
+            $query->execute([$dev, $id]);
         }
 
         // Llamada a la función que guarda la imagen
-        $this->saveImage($img);
+        $this->saveImage($img,$id);
     }
 }

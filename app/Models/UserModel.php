@@ -64,5 +64,10 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         $queryu = $this->pdo->prepare("DELETE FROM userGames WHERE userID = ?");
         $queryu->execute([$id]);
     }
+    
+    function editUserData($userdata,$id) {
+        $query = $this->pdo->prepare("UPDATE users SET username = ?, password= ?, userType = ? WHERE userID = ?");
+        $query->execute([$userdata['username'],$userdata['pass'],$userdata['userType'],$id]);
+    }
 
 }
