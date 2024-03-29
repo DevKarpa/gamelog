@@ -48,5 +48,21 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         
         return $this->loginUser($user['username'], $user['pass']);
     }
+    
+    function getUserById($id) {
+        $query = $this->pdo->prepare(self::BASE . "WHERE userID = ?");
+        $query->execute([$id]);
+        $user = $query->fetch();
+        
+        return $user;
+    }
+    
+    function deleteUserById($id) {
+        $query = $this->pdo->prepare("DELETE FROM users WHERE userID = ?");
+        $query->execute([$id]);
+        
+        $queryu = $this->pdo->prepare("DELETE FROM userGames WHERE userID = ?");
+        $queryu->execute([$id]);
+    }
 
 }

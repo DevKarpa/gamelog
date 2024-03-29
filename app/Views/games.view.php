@@ -7,7 +7,7 @@
     <div class="col-12">
         <?php
         if(isset($deletedGame)){
-                ?> <div class="alert alert-warning"><p>El juego <?php echo $deletedGame ?> ha sido borrado correctamente.</p></div> <?php
+                ?> <div class="alert alert-success"><p>El juego <?php echo $deletedGame ?> ha sido borrado correctamente.</p></div> <?php
         }
         ?>
     </div>

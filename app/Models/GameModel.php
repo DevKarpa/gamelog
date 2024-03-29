@@ -59,6 +59,9 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
 
         $queryg = $this->pdo->prepare("DELETE FROM games WHERE gameID = ?");
         $queryg->execute([$id]);
+        
+        $queryu = $this->pdo->prepare("DELETE FROM userGames WHERE gameID = ?");
+        $queryu->execute([$id]);
     }
     
     function deleteDevGamesById($id) {

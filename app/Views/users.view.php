@@ -2,7 +2,10 @@
     <div class="col-12">
         <?php
         if(isset($error)){
-            ?> <div class="alert alert-warning"><p>No está permitido eliminarse a uno mismo.</p></div> <?php
+            ?> <div class="alert alert-danger"><p><?php echo $error ?></p></div> <?php
+        }
+        if(isset($deletedUser)){
+            ?> <div class="alert alert-success"><p>Usuario <?php echo $deletedUser ?> elminado con éxito.</p></div> <?php
         }
         ?>
     </div>

@@ -119,4 +119,25 @@ class UserController extends \Com\Daw2\Core\BaseController {
         
         return $errors;
     }
+    
+    function deleteUser($id) {
+        $userModel = new \Com\Daw2\Models\UserModel();
+        $deletedUser = $userModel->getUserById($id);
+
+        $data = [];
+        $data['titulo'] = 'Lista de juegos';
+        $data['seccion'] = 'game-list';
+        
+        
+        if($deletedUser['userID']==$_SESSION['user']['userID']){
+            $data['error'] = "Error: No puedes eliminarte a ti mismo";
+        }else{
+            $data['deletedUser'] = $deletedUser['username'];
+            $userModel->deleteUserById($id);
+        }
+        
+        $data['users'] = $userModel->getAllUsers();
+
+        $this->view->showViews(array('templates/header.view.php', 'users.view.php', 'templates/footer.view.php'), $data);
+    }
 }

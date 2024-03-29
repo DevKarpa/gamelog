@@ -62,6 +62,13 @@ class FrontController {
                             $controlador->showAllGames();
                         }
                         , 'post');
+                        
+                Route::add('/game-list',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->addGame();
+                        }
+                        , 'post');
 
                 Route::add('/game-list/add',
                         function () {
@@ -120,13 +127,21 @@ class FrontController {
                             $controlador->showAllUsers();
                         }
                         , 'get');
-
-                Route::add('/game-list',
-                        function () {
-                            $controlador = new \Com\Daw2\Controllers\GameController();
-                            $controlador->addGame();
+                        
+                Route::add('/user-list/delete/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->deleteUser($id);
+                        }
+                        , 'get');
+                        
+                Route::add('/user-list/delete/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->deleteUser($id);
                         }
                         , 'post');
+
             } else {
                 
                 Route::add('/',

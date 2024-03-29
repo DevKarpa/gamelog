@@ -5,14 +5,11 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
 
 ## ✨ Tareas Pendientes ✨
 
- ### DB
- - ❌ Añadir relaciones en phpmyadmin
-
  ### BACK
  - ✅ Formulario de register funcional
  - ✅ Borrar juego
- - ❌ Borrar usuario
- - ❌ Borrar registro en userGames al borrar juego / usuario
+ - ✅ Borrar usuario
+ - ✅ Borrar registro en userGames al borrar juego / usuario
  - ❌ Editar usuario
  - ❌ Listado de developers
  - ❌ Paginación en games
@@ -28,3 +25,6 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ❌ Modificar back para darle personalidad
  - ❌ Modificar vista de login y register
  - ❌ Hacer logo
+
+ ### DB
+ - ❌ Añadir relaciones en phpmyadmin
