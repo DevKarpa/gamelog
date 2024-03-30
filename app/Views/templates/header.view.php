@@ -109,6 +109,12 @@
                   <p>Lista de usuarios</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/dev-list" class="nav-link <?php echo isset($seccion) && $seccion === 'dev-list' ? 'active' : ''; ?>">
+                  <i class="fas fa-code nav-icon"></i>
+                  <p>Lista de desarrolladores</p>
+                </a>
+              </li>
             </ul>
           </li>                   
         </ul>

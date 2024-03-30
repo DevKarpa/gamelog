@@ -6,8 +6,8 @@
 <div class="row">       
     <div class="col-12">
         <?php
-        if(isset($deletedGame)){
-                ?> <div class="alert alert-success"><p>El juego <?php echo $deletedGame ?> ha sido borrado correctamente.</p></div> <?php
+        if (isset($deletedGame)) {
+            ?> <div class="alert alert-success"><p>El juego <?php echo $deletedGame ?> ha sido borrado correctamente.</p></div> <?php
         }
         ?>
     </div>
@@ -26,6 +26,43 @@
             </div>
             <!-- Card Body -->
             <div class="card-body" id="card_table">
+
+                <div class="row">
+                    <div class="col-12 col-lg-3">
+                        <div class="mb-3">
+                            <label for="username">Nombre:</label>
+                            <input type="text" class="form-control" name="username" id="username" value="" />
+                        </div>
+                    </div>  
+
+
+                    <div class="col-12 col-lg-3">
+                        <div class="mb-3">
+                            <label for="retencion">Año:</label>
+                            <input type="number" class="form-control" name="minRetencion" id="minRetencion" value="" placeholder="Mí­nima" />
+                        </div>
+                    </div>      
+                    <div class="col-12 col-lg-3">
+                        <div class="mb-3">
+                            <label for="devID">Desarrolladores:</label>
+                            <select name="devID[]" class="form-control js-example-basic-multiple" multiple>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="mb-3">
+                            <label for="plataforma">Plataforma:</label>
+                            <select name="plataforma" class="form-control">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 text-right">                            
+                        <input type="submit" value="Buscar" name="submit" class="btn btn-primary"/>
+                        <a href="/game-list" class="btn btn-danger ml-3">Reiniciar</a>                            
+                    </div>
+                </div>
                 <div id="button_container" class="mb-3"></div>
                 <!--<form action="./?sec=formulario" method="post">                   -->
                 <table id="tabladatos" class="table table-striped">                    
@@ -41,26 +78,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                            <?php                                
-                            foreach ($games as $game) {
-                                echo "<tr>";
-                                echo "<td>".$game['gameID']."</td>";
-                                echo "<td>".$game['gameTitle']."</td>";
-                                echo "<td>".$game['gameYear']."</td>";
-                                echo "<td>".$game['developers']."</td>";
-                                echo "<td>".$game['platformName']."</td>";
-                                ?>
-                                
-                            <td><img id="grid" src="assets/img/games/<?php echo $game['gameID'] ?>.png"></td>
-                        
-                            <td><a href="/game-list/edit/<?php echo $game['gameID']?>" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                                <a href="/game-list/delete/<?php echo $game['gameID']?>" class="btn btn-danger"><i class="fas fa-trash"></i></a></td></tr>
-                                <?php
-                            }
+                        <?php
+                        foreach ($games as $game) {
+                            echo "<tr>";
+                            echo "<td>" . $game['gameID'] . "</td>";
+                            echo "<td>" . $game['gameTitle'] . "</td>";
+                            echo "<td>" . $game['gameYear'] . "</td>";
+                            echo "<td>" . $game['developers'] . "</td>";
+                            echo "<td>" . $game['platformName'] . "</td>";
                             ?>
-                        
+
+                        <td><img id="grid" src="assets/img/games/<?php echo $game['gameID'] ?>.png"></td>
+
+                        <td><a href="/game-list/edit/<?php echo $game['gameID'] ?>" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                            <a href="/game-list/delete/<?php echo $game['gameID'] ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a></td></tr>
+                        <?php
+                    }
+                    ?>
+
                     </tbody>
-                    <tfoot>Número de juegos: <?php echo count($games); ?></tfoot>
+                    <tfoot>Número total de juegos: <?php echo count($games); ?></tfoot>
                 </table>
             </div>
         </div>

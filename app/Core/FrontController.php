@@ -155,6 +155,36 @@ class FrontController {
                             $controlador->editUser($id);
                         }
                         , 'post');
+                        
+                // LISTA DE DEVS
+                        
+                Route::add('/dev-list',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\DevController();
+                            $controlador->showAllDevs();
+                        }
+                        , 'get');
+
+                Route::add('/dev-list',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\DevController();
+                            $controlador->showAllDevs();
+                        }
+                        , 'post');
+
+                Route::add('/dev-list/add',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\DevController();
+                            $controlador->addDev();
+                        }
+                        , 'get');
+                        
+                Route::add('/dev-list/add',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\DevController();
+                            $controlador->addDev();
+                        }
+                        , 'post');
 
             } else {
                 

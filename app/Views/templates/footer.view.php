@@ -42,8 +42,15 @@
 <script src="plugins/select2/js/select2.full.min.js"></script>
 <script>
 $(document).ready(function() {
+    // Select2 basico
     $('.js-example-basic-multiple').select2();
+    // Select2 dinámico para crear tags
+    $(".js-example-tokenizer").select2({
+    tags: true,
+    tokenSeparators: [',']
+})
 });
+
 </script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
