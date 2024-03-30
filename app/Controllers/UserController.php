@@ -150,10 +150,9 @@ class UserController extends \Com\Daw2\Core\BaseController {
 
         if (isset($_POST['submit'])) {
             $input = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $data['errores'] = $this->checkEditUserData($input, $data['user']);
             
-            if($this->checkEditUserData($input, $data['user'])!=true){
-                $data['errores'] = $this->checkEditUserData($input, $data['user']);
-            }
         }
 
         $this->view->showViews(array('templates/header.view.php', 'edit.user.view.php', 'templates/footer.view.php'), $data);
@@ -192,11 +191,10 @@ class UserController extends \Com\Daw2\Core\BaseController {
         }else{
             $editedUser['userType'] = $user['userType'];
         }
-        
+
         // Si no hay errores, se modifica el usuario con los nuevos datos
         if(count($errors)==0){
             $userModel->editUserData($editedUser,$user['userID']);
-            return true;
         }
         return $errors;
     }

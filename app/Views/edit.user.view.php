@@ -1,16 +1,18 @@
 <!-- Content Row -->
 
 <div class="row">
-
     <div class="col-12">
-        <div class="card shadow mb-4">
             <?php   
             if(isset($errores)){
                 if(count($errores)==0){
-                    echo "Usuario editado exitosamente";
+                    ?> <div class="alert alert-success"><p>Usuario editado exitosamente.</p></div> <?php
                 }   
             }     
             ?>
+    </div>
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Introduzca los datos del usuario a editar</h6>                                    
@@ -30,7 +32,16 @@
                         <div class="mb-3 col-sm-3">
                             <label for="cif">Contraseña</label>
                             <input class="form-control" id="pass" type="password" name="pass">
-                            <p class="text-danger"><?php var_dump($errores['pass']) ?></p>
+                            <p class="text-danger"><?php 
+                            if(isset($errores['password'])){
+                                
+                                foreach ($errores['password'] as $error) {
+                                    echo $error . "<br>";
+                                }
+                                
+                            }
+                            ?></p>
+                            
                         </div>
                         
                         <div class="mb-3 col-sm-3">
