@@ -8,10 +8,19 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
     function showAllGames(): void {
         $gameModel = new \Com\Daw2\Models\GameModel();
+        $devModel = new \Com\Daw2\Models\DevModel();
+        $platModel = new \Com\Daw2\Models\PlatformModel();
         $data = [];
         $data['titulo'] = 'Lista de juegos';
         $data['seccion'] = 'game-list';
-        $data['games'] = $gameModel->getAll();
+        $data['devs'] = $devModel->getAllDevs();
+        $data['platforms'] = $platModel->getAllPlatforms();
+        
+        if(isset($_POST["submit"])){
+            $data['games'] = $gameModel->filterSearchGames($_POST);
+        }else{
+            $data['games'] = $gameModel->getAll();
+        }
 
         $this->view->showViews(array('templates/header.view.php', 'games.view.php', 'templates/footer.view.php'), $data);
     }

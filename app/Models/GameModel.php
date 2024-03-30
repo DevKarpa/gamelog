@@ -89,4 +89,39 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         // Llamada a la función que guarda la imagen
         $this->saveImage($img,$id);
     }
+    
+    function filterSearchGames($filter) {
+        var_dump($filter);
+        $values = [];
+        $where = [];
+        
+        if(strlen($filter['name'])!=0){
+            $where[] = " games.gameTitle LIKE ? ";
+            $values[] = "%". $filter['name'] . "%"; //contiene
+        }
+        
+        if(strlen($filter['year'])!=0){
+            $where[] = " games.gameYear = ? ";
+            $values[] = (int) $filter['year'];
+        }
+        
+        if(isset($filter['devID'])){
+            foreach ($filter['devID'] as $devID) {
+                $where[] = " devGames.devID = ? ";
+                $values[] = (int) $devID;
+            }
+        }
+        
+        if(strlen($filter['plataforma'])!=0){
+            $where[] = " games.gamePlatform = ? ";
+            $values[] = (int) $filter['plataforma'];
+        }
+        
+        
+        $query = $this->pdo->prepare(self::BASE  . "WHERE  " . implode("AND", $where) . " GROUP BY games.gameID");
+        var_dump($values);
+        $query->execute($values);
+        
+        return $query->fetchAll();
+    }
 }

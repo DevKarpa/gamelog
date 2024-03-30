@@ -26,43 +26,54 @@
             </div>
             <!-- Card Body -->
             <div class="card-body" id="card_table">
+                <form action="/game-list" method="post">
+                    <div class="row">
 
-                <div class="row">
-                    <div class="col-12 col-lg-3">
-                        <div class="mb-3">
-                            <label for="username">Nombre:</label>
-                            <input type="text" class="form-control" name="username" id="username" value="" />
+                        <div class="col-12 col-lg-3">
+                            <div class="mb-3">
+                                <label for="name">Nombre:</label>
+                                <input type="text" class="form-control" name="name" id="name" value="" />
+                            </div>
+                        </div>  
+
+
+                        <div class="col-12 col-lg-3">
+                            <div class="mb-3">
+                                <label for="retencion">Año:</label>
+                                <input type="number" class="form-control" name="year" id="year" value="" placeholder="0000" />
+                            </div>
+                        </div>      
+                        <div class="col-12 col-lg-3">
+                            <div class="mb-3">
+                                <label for="devID">Desarrolladores:</label>
+                                <select name="devID[]" class="form-control js-example-basic-multiple" multiple>
+                                    <?php
+                                    foreach ($devs as $dev) {
+                                         echo "<option value='". $dev['devID'] ."'>".$dev['devName']."</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>  
-
-
-                    <div class="col-12 col-lg-3">
-                        <div class="mb-3">
-                            <label for="retencion">Año:</label>
-                            <input type="number" class="form-control" name="minRetencion" id="minRetencion" value="" placeholder="Mí­nima" />
+                        <div class="col-12 col-lg-3">
+                            <div class="mb-3">
+                                <label for="plataforma">Plataforma:</label>
+                                <select name="plataforma" class="form-control">
+                                    <option value="">-</option>
+                                    <?php
+                                    foreach ($platforms as $plat) {
+                                        echo "<option value='". $plat['platformID'] ."'>".$plat['platformName']."</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>      
-                    <div class="col-12 col-lg-3">
-                        <div class="mb-3">
-                            <label for="devID">Desarrolladores:</label>
-                            <select name="devID[]" class="form-control js-example-basic-multiple" multiple>
-
-                            </select>
+                        <div class="col-12 text-right">                            
+                            <input type="submit" value="Buscar" name="submit" class="btn btn-primary"/>
+                            <a href="/game-list" class="btn btn-danger ml-3">Reiniciar</a>                            
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3">
-                        <div class="mb-3">
-                            <label for="plataforma">Plataforma:</label>
-                            <select name="plataforma" class="form-control">
-
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 text-right">                            
-                        <input type="submit" value="Buscar" name="submit" class="btn btn-primary"/>
-                        <a href="/game-list" class="btn btn-danger ml-3">Reiniciar</a>                            
-                    </div>
-                </div>
+                </form>
                 <div id="button_container" class="mb-3"></div>
                 <!--<form action="./?sec=formulario" method="post">                   -->
                 <table id="tabladatos" class="table table-striped">                    
