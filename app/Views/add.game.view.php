@@ -51,14 +51,21 @@
 
                         <div class="mb-3 col-sm-6">
                             <label for="devs">Desarrolladora/s</label>
-                            <?PHP // var_dump( in_array(3, $inputd) );  ?>
+                            <?PHP
+                            if (isset($inputd)) {
+                                $selectedDevs = [];
+                                foreach ($inputd as $value) {
+                                    $selectedDevs[] = $value['devID'];
+                                }
+                            }
+                            ?>
                             <select class="form-control js-example-basic-multiple" name="devs[]" multiple="multiple" required>
 
                                 <?php
                                 foreach ($devs as $dev) {
 
-                                    $selected = isset($inputd) ? in_array($dev['devID'], $inputd['devID']) ? "selected" : " " : "";
-                                    echo "<option value=" . $dev['devID'] . $selected . ">" . $dev['devName'] . "</option>";
+                                    $selected = isset($inputd) ? in_array($dev['devID'], $selectedDevs) ? "selected" : " " : "";
+                                    echo "<option value=" . $dev['devID'] . " " . $selected . ">" . $dev['devName'] . "</option>";
                                 }
                                 ?>
 
