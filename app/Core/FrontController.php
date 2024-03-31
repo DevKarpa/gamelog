@@ -185,8 +185,17 @@ class FrontController {
                             $controlador->addDev();
                         }
                         , 'post');
+                        
+                Route::pathNotFound(
+                    function () {
+                        $controller = new \Com\Daw2\Controllers\ErroresController();
+                        $controller->error404();
+                    }
+            );
 
             } else {
+                
+                // PÁGINA PRINCIPAL
                 
                 Route::add('/',
                         function () {
@@ -194,6 +203,55 @@ class FrontController {
                             $controlador->userIndex();
                         }
                         , 'get');
+                        
+                // PÁGINA DE PERFIL
+                        
+                Route::add('/profile/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->showUserProfile($id);
+                        }
+                        , 'get');
+                        
+                Route::add('/profile/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->showUserProfile($id);
+                        }
+                        , 'post');
+                        
+                // BUSCADOR DE JUEGOS, CON BOTÓN DE AÑADIR (AL PERFIL LOGEADO)
+                        
+                Route::add('/search',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->searchGames();
+                        }
+                        , 'get');
+                        
+                Route::add('/search',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->searchGames();
+                        }
+                        , 'post');
+                        
+                // EDITAR DATOS DEL USUARIO LOGEADO
+                        
+                Route::add('/settings',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->editCurrentUser();
+                        }
+                        , 'get');
+                        
+                Route::add('/settings',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->editCurrentUser();
+                        }
+                        , 'post');
+                
                         
             }
 
@@ -203,13 +261,6 @@ class FrontController {
                         $controlador->logout();
                     }
                     , 'get');
-
-            Route::pathNotFound(
-                    function () {
-                        $controller = new \Com\Daw2\Controllers\ErroresController();
-                        $controller->error404();
-                    }
-            );
 
             Route::methodNotAllowed(
                     function () {

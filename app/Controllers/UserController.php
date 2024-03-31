@@ -198,4 +198,22 @@ class UserController extends \Com\Daw2\Core\BaseController {
         }
         return $errors;
     }
+    
+    // Funciones para vista de cliente
+    
+    function showUserProfile($id) {
+        $userModel = new \Com\Daw2\Models\UserModel();
+        $data = [];
+        $data['user'] = $userModel->getUserById($id);
+
+        $this->view->showViews(array('client/profile.view.php'), $data);
+    }
+    
+    function editCurrentUser() {
+        $userModel = new \Com\Daw2\Models\UserModel();
+        $data = [];
+        $data['user'] = $_SESSION['user'];
+
+        $this->view->showViews(array('client/editProfile.view.php'), $data);
+    }
 }
