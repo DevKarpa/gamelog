@@ -11,15 +11,28 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $devModel = new \Com\Daw2\Models\DevModel();
         $platModel = new \Com\Daw2\Models\PlatformModel();
         $data = [];
+        $offset = null;
         $data['titulo'] = 'Lista de juegos';
         $data['seccion'] = 'game-list';
+        $data['allgames'] = $gameModel->getAll();
         $data['devs'] = $devModel->getAllDevs();
         $data['platforms'] = $platModel->getAllPlatforms();
+        $data['maxpage'] = ceil(count($data['allgames'])/5);
         
+        if(isset($_GET['page'])){
+            $data['page'] = $_GET['page'];
+            $offset = ($data['page']-1) * 5;
+        }
+
         if(isset($_POST["submit"])){
-            $data['games'] = $gameModel->filterSearchGames($_POST);
+            $data['games'] = $gameModel->filterSearchGames($_POST,$offset);
         }else{
-            $data['games'] = $gameModel->getAll();
+            if(isset($_GET['page'])){
+                $data['games'] = $gameModel->getPageGames($offset);
+            }else{
+                $data['games'] = $gameModel->getAll();
+            }
+            
         }
 
         $this->view->showViews(array('templates/header.view.php', 'games.view.php', 'templates/footer.view.php'), $data);

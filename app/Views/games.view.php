@@ -49,7 +49,7 @@
                                 <select name="devID[]" class="form-control js-example-basic-multiple" multiple>
                                     <?php
                                     foreach ($devs as $dev) {
-                                         echo "<option value='". $dev['devID'] ."'>".$dev['devName']."</option>";
+                                        echo "<option value='" . $dev['devID'] . "'>" . $dev['devName'] . "</option>";
                                     }
                                     ?>
                                 </select>
@@ -62,7 +62,7 @@
                                     <option value="">-</option>
                                     <?php
                                     foreach ($platforms as $plat) {
-                                        echo "<option value='". $plat['platformID'] ."'>".$plat['platformName']."</option>";
+                                        echo "<option value='" . $plat['platformID'] . "'>" . $plat['platformName'] . "</option>";
                                     }
                                     ?>
                                 </select>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="col-12 text-right">                            
                             <input type="submit" value="Buscar" name="submit" class="btn btn-primary"/>
-                            <a href="/game-list" class="btn btn-danger ml-3">Reiniciar</a>                            
+                            <a href="/game-list?page=1" class="btn btn-danger ml-3">Reiniciar</a>                            
                         </div>
                     </div>
                 </form>
@@ -108,9 +108,24 @@
                     ?>
 
                     </tbody>
-                    <tfoot>Número total de juegos: <?php echo count($games); ?></tfoot>
+                    <tfoot>Número total de juegos: <?php echo count($allgames); ?></tfoot>
                 </table>
+
             </div>
+
         </div>
+        <?php
+        if(isset($page)){
+            ?>
+        <div class="card shadow mb-4 d-flex">
+                <div class="col-2 align-self-center">
+                    <span>Página <span><?php echo isset($_GET["page"]) ? $_GET["page"] : ""; ?></span></span>
+                    <a class="btn btn-primary" href="/game-list?page=<?php echo $page-1<1 ? 1 : $page-1 ?>"><<a>
+                    <a class="btn btn-primary" href="/game-list?page=<?php echo $maxpage<$page+1 ? $page : $page+1 ?>">><a>
+                </div>    
+        </div>
+        <?php
+        }
+        ?>
     </div>                        
 </div>

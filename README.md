@@ -13,8 +13,8 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ✅ Editar usuario
  - ✅ Listado de developers
  - ✅ Añadir developers
- - ✅ Filtros en games
- - ❌ Paginación en games
+ - ✅ Filtros en games // "⚠️ No funciona con paginación por ahora"
+ - ✅ Paginación en games
  - ❌ Mostrar valores de desarrolladora/s en editar juego
 
  ### FRONT

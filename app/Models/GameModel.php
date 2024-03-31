@@ -7,14 +7,14 @@ namespace Com\Daw2\Models;
 class GameModel extends \Com\Daw2\Core\BaseModel {
 
     private const BASE = "SELECT *, GROUP_CONCAT(devs.devName ORDER BY devs.devName ASC) AS developers FROM games JOIN devGames ON games.gameID = devGames.gameID JOIN devs ON devGames.devID = devs.devID JOIN platforms on games.gamePlatform = platforms.platformID  ";
-
+    private const OFFSET = "LIMIT 5 OFFSET ";
+    
     function getAll(): array {
         $query = $this->pdo->query(self::BASE . "GROUP BY games.gameID");
         $query->execute();
 
         return $query->fetchAll();
     }
-
     function saveNewGame($metadata, $img) {
 
         // Guarda el juego en la tabla games
@@ -90,8 +90,7 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         $this->saveImage($img,$id);
     }
     
-    function filterSearchGames($filter) {
-        var_dump($filter);
+    function filterSearchGames($filter,$offset) {
         $values = [];
         $where = [];
         
@@ -117,11 +116,22 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
             $values[] = (int) $filter['plataforma'];
         }
         
-        
-        $query = $this->pdo->prepare(self::BASE  . "WHERE  " . implode("AND", $where) . " GROUP BY games.gameID");
-        var_dump($values);
+        if(is_null($offset)){
+            $query = $this->pdo->prepare(self::BASE  . "WHERE  " . implode("AND", $where) . " GROUP BY games.gameID");
+        }else{
+            $query = $this->pdo->prepare(self::BASE  . "WHERE  " . implode("AND", $where) . " GROUP BY games.gameID LIMIT 5 OFFSET ?");
+            $values[] = $offset;
+        }
+
         $query->execute($values);
         
+        return $query->fetchAll();
+    }
+    
+    function getPageGames($offset) {
+        
+        $query = $this->pdo->prepare(self::BASE . "GROUP BY games.gameID LIMIT 5 OFFSET ?");
+        $query->execute([$offset]);
         return $query->fetchAll();
     }
 }

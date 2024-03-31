@@ -98,7 +98,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/game-list" class="nav-link <?php echo isset($seccion) && $seccion === 'game-list' ? 'active' : ''; ?>">
+                <a href="/game-list?page=1" class="nav-link <?php echo isset($seccion) && $seccion === 'game-list' ? 'active' : ''; ?>">
                   <i class="fas fa-gamepad nav-icon"></i>
                   <p>Lista de juegos</p>
                 </a>
