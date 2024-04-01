@@ -19,7 +19,10 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ✅ Conexiones con el frontController a las rutas de cliente
 
  ### FRONT
- - ❌ Sección mi perfil para poder ver
+ - ✅ Sección mi perfil para poder ver
+ - ✅ Sección para añadir juegos al perfil
+ - ✅ Vista de juegos añadidos para cada perfil
+ - ❌ Si ya se tiene un juego en la lista, en vez de añadir, redirigir a editar
  - ❌ Sección añadir juegos al perfil, (async select)
  - ❌ Paginación de lista total de juego con filtros
 
