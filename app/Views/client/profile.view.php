@@ -14,7 +14,7 @@
             ?>
             <h2>IF el perfil es mio</h2>
             <h3><a href="/settings">Editar Perfil</a></h3>
-            <h2>+ BOTÓN AÑADIR JUEGO</h2><br>
+            <a href="/search">Añadir juego</a><br>
             <?php
         }
         foreach ($games as $game) {

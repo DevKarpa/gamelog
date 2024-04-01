@@ -11,7 +11,9 @@
         <h1>BARRA DE BUSQUEDA GRANDE</h1>
         <?php
             foreach ($games as $game) {
-                echo $game['gameTitle'] . "<br>";
+                echo $game['gameTitle'] . " ";
+                echo "<a href='/add/". $game['gameID'] ."'>+</a>";
+                echo "<br>";
             }
         ?>
     </body>

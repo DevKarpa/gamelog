@@ -251,6 +251,38 @@ class FrontController {
                             $controlador->editCurrentUser();
                         }
                         , 'post');
+                        
+               // VISTA DE AÑADIR JUEGO A LA COLECCIÓN
+                
+               Route::add('/add/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserGamesController();
+                            $controlador->addGameToCollection($id);
+                        }
+                        , 'get');
+                        
+                Route::add('/add/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserGamesController();
+                            $controlador->addGameToCollection($id);
+                        }
+                        , 'post');
+                        
+                // VISTA DE EDITAR JUEGO DE LA COLECCIÓN
+                
+               Route::add('/edit/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserGamesController();
+                            $controlador->editGameFromCollection($id);
+                        }
+                        , 'get');
+                        
+                Route::add('/edit/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserGamesController();
+                            $controlador->editGameFromCollection($id);
+                        }
+                        , 'post');
                 
                         
             }

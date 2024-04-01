@@ -14,4 +14,19 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
 
         return $query->fetchAll();
     }
+    
+    function addNewRegister($id, $reg, $user) {
+        
+        // Si la fecha está vacía, guarda null
+        if(!strtotime($reg['end'])){
+            $reg['end'] = null;
+        }
+        
+        if(!strtotime($reg['start'])){
+            $reg['start'] = null;
+        }
+        
+        $query = $this->pdo->prepare("INSERT INTO userGames (userID, gameID, fechaInicio, fechaFin, statusID) VALUES (?,?,?,?,?)");
+        $query->execute([$user['userID'],$id, $reg['start'], $reg['end'], $reg['status']]);
+    }
 }
