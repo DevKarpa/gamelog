@@ -17,16 +17,11 @@
             <h2>+ BOTÓN AÑADIR JUEGO</h2><br>
             <?php
         }
+        foreach ($games as $game) {
+            echo $game['gameTitle'] . " " . $game['developers'] . " " . $game['platformName'] . " " . $game['fechaInicio'] . " " . $game['fechaFin'] . " " . $game['statusName'] . "<br>";
+}
         ?>
 
-
-        <H3>listado de juegos del perfil...</H3>
-        <H3>listado de juegos del perfil...</H3>
-        <H3>listado de juegos del perfil...</H3>
-        <H3>listado de juegos del perfil...</H3>
-        <H3>listado de juegos del perfil...</H3>
-        <H3>listado de juegos del perfil...</H3>
-        <H3>listado de juegos del perfil...</H3>
 
     </body>
 </html>

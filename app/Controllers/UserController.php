@@ -203,8 +203,11 @@ class UserController extends \Com\Daw2\Core\BaseController {
     
     function showUserProfile($id) {
         $userModel = new \Com\Daw2\Models\UserModel();
+        $gameModel = new \Com\Daw2\Models\GameModel();
+        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
         $data = [];
         $data['user'] = $userModel->getUserById($id);
+        $data['games'] = $userGamesModel->getGamesByUserID($id);
 
         $this->view->showViews(array('client/profile.view.php'), $data);
     }
