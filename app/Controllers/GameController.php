@@ -157,6 +157,7 @@ class GameController extends \Com\Daw2\Core\BaseController {
     
     function searchGames(): void {
         $gameModel = new \Com\Daw2\Models\GameModel();
+        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
         $devModel = new \Com\Daw2\Models\DevModel();
         $platModel = new \Com\Daw2\Models\PlatformModel();
         $data = [];
@@ -167,7 +168,8 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $data['devs'] = $devModel->getAllDevs();
         $data['platforms'] = $platModel->getAllPlatforms();
         $data['maxpage'] = ceil(count($data['allgames'])/5);
-        
+        $data['userGames'] = $userGamesModel->getGamesIDByUserID($_SESSION['user']['userID']);
+
         if(isset($_GET['page'])){
             $data['page'] = $_GET['page'];
             $offset = ($data['page']-1) * 5;

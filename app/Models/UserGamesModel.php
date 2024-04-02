@@ -15,6 +15,18 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
         return $query->fetchAll();
     }
     
+    function getGamesIDByUserID($id) {
+        $gameidlist = [];
+        $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID");
+        $query->execute([$id]);
+        
+        foreach ($query->fetchAll() as $game) {
+            $gameidlist[] = $game['gameID'];
+        }
+
+        return $gameidlist;
+    }
+    
     function addNewRegister($id, $reg, $user) {
         
         // Si la fecha está vacía, guarda null
@@ -28,5 +40,17 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
         
         $query = $this->pdo->prepare("INSERT INTO userGames (userID, gameID, fechaInicio, fechaFin, statusID) VALUES (?,?,?,?,?)");
         $query->execute([$user['userID'],$id, $reg['start'], $reg['end'], $reg['status']]);
+    }
+    
+    function checkUserHasGame($id, $user) {
+        $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND userGames.gameID = ? GROUP BY games.gameID");
+        $query->execute([$user['userID'],$id]);
+        $hasGame = $query->fetch();
+        
+        if($hasGame){
+            return true;
+        }
+        
+        return false;
     }
 }

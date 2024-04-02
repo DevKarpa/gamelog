@@ -9,10 +9,10 @@
         <a href="/logout">Logout</a><br>
         <a href="/">Back</a>
         <h1>BARRA DE BUSQUEDA GRANDE</h1>
-        <?php
+        <?php $userGames;
             foreach ($games as $game) {
                 echo $game['gameTitle'] . " ";
-                echo "<a href='/add/". $game['gameID'] ."'>+</a>";
+                echo "<a href='/". (in_array($game['gameID'], $userGames) ? 'edit' : 'add') ."/". $game['gameID'] ."'>+</a>";
                 echo "<br>";
             }
         ?>
