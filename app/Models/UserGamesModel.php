@@ -53,4 +53,16 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
         
         return false;
     }
+    
+    function deleteGameRegister($id,$user) {
+        $query = $this->pdo->prepare("DELETE FROM userGames WHERE userID = ? AND gameID = ?");
+        $query->execute([$user['userID'],$id]);
+    }
+    
+    function getRegisterByID($id,$user) {
+        $query = $this->pdo->prepare("SELECT * FROM userGames WHERE userGames.userID = ? AND gameID = ?");
+        $query->execute([$user['userID'],$id]);
+
+        return $query->fetch();
+    }
 }

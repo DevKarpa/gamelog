@@ -268,7 +268,7 @@ class FrontController {
                         }
                         , 'post');
                         
-                // VISTA DE EDITAR JUEGO DE LA COLECCIÓN
+               // VISTA DE EDITAR JUEGO DE LA COLECCIÓN
                 
                Route::add('/edit/([0-9]+)',
                         function ($id) {
@@ -281,6 +281,22 @@ class FrontController {
                         function ($id) {
                             $controlador = new \Com\Daw2\Controllers\UserGamesController();
                             $controlador->editGameFromCollection($id);
+                        }
+                        , 'post');
+                        
+                // ELIMINAR JUEGO DE COLECCIÓN
+                
+               Route::add('/delete/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserGamesController();
+                            $controlador->deleteGameFromCollection($id);
+                        }
+                        , 'get');
+                        
+                Route::add('/delete/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserGamesController();
+                            $controlador->deleteGameFromCollection($id);
                         }
                         , 'post');
                 

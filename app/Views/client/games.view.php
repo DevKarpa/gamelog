@@ -12,7 +12,7 @@
         <?php $userGames;
             foreach ($games as $game) {
                 echo $game['gameTitle'] . " ";
-                echo "<a href='/". (in_array($game['gameID'], $userGames) ? 'edit' : 'add') ."/". $game['gameID'] ."'>+</a>";
+                echo "<a href='/". (in_array($game['gameID'], $userGames) ? 'edit' : 'add') ."/". $game['gameID'] ."'>".(in_array($game['gameID'], $userGames) ? 'EDIT' : 'ADD')."</a>";
                 echo "<br>";
             }
         ?>
