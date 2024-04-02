@@ -19,8 +19,12 @@
         }
         foreach ($games as $game) {
             echo $game['gameTitle'] . " " . $game['developers'] . " " . $game['platformName'] . " " . $game['fechaInicio'] . " " . $game['fechaFin'] . " " . $game['statusName'];
-            echo "<a href='/edit/". $game['gameID'] ."'> EDIT</a>"; ?>&nbsp;&nbsp;<?php
-            echo "<a href='/delete/". $game['gameID'] ."'> DELETE</a><br>";
+            if($_SESSION['user']['userID'] == $user['userID']){
+                echo "<a href='/edit/". $game['gameID'] ."'> EDIT</a>"; ?>&nbsp;&nbsp;<?php
+                echo "<a href='/delete/". $game['gameID'] ."'> DELETE</a><br>";
+            }else{
+                echo "<br>";
+            }
         }
         ?>
 
