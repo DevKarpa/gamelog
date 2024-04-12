@@ -26,8 +26,8 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ✅ Eliminar juego
  - ✅ Mejorar condiciones de añadir/editar juego según status
  - ✅ Si ya se tiene un juego en la lista, en vez de añadir, redirigir a editar
- - ❌ Sección añadir juegos al perfil, (async select)
- - ❌ Paginación de lista total de juego con filtros
+ - ✅ Sección añadir juegos al perfil, (async select)
+ - ❌ Paginación de lista personal de juegos
 
  ### DISEÑO
  - ❌ Hacer bonito el front

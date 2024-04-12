@@ -236,6 +236,22 @@ class FrontController {
                         }
                         , 'post');
                         
+                // VISTA PARA CONTROLAR ASINCRONISMO AL BUSCAR JUEGOS
+                        
+                Route::add('/async/([a-z0-9 ]+)',
+                        function ($txt) {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->asyncSearchGames($txt);
+                        }
+                        , 'get');
+                        
+                Route::add('/async/([a-z0-9 ]+)',
+                        function ($txt) {
+                            $controlador = new \Com\Daw2\Controllers\GameController();
+                            $controlador->asyncSearchGames($txt);
+                        }
+                        , 'post');
+                        
                 // EDITAR DATOS DEL USUARIO LOGEADO
                         
                 Route::add('/settings',

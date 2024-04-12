@@ -188,4 +188,43 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
         $this->view->showViews(array('client/games.view.php'), $data);
     }
+    
+    function asyncSearchGames($txt) {
+        $gameModel = new \Com\Daw2\Models\GameModel();
+        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
+        $devModel = new \Com\Daw2\Models\DevModel();
+        $platModel = new \Com\Daw2\Models\PlatformModel();
+
+        
+        $offset = null;
+        $allgames = $gameModel->getAll();
+        $devs = $devModel->getAllDevs();
+        $platforms = $platModel->getAllPlatforms();
+        $maxpage = ceil(count($allgames)/5);
+        $userGames = $userGamesModel->getGamesIDByUserID($_SESSION['user']['userID']);
+        
+        if(isset($_GET['page'])){
+            $page = $_GET['page'];
+            $offset = ($page-1) * 5;
+        }
+
+        if(isset($_POST["submit"])){
+            $games = $gameModel->filterSearchGames($_POST,$offset);
+        }else{
+            if(isset($_GET['page'])){
+                $games = $gameModel->getPageGames($offset);
+            }else{
+                $games = $gameModel->getAll();
+            }
+            
+        }
+        
+        foreach ($games as $game) {
+          if(str_contains(strtolower($game['gameTitle']), $txt)){
+            echo $game['gameTitle'] . " ";
+            echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? 'EDIT' : 'ADD') . "</a>";
+            echo "<br>";
+          }
+        }
+    }
 }

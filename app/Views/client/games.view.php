@@ -9,12 +9,33 @@
         <a href="/logout">Logout</a><br>
         <a href="/">Back</a>
         <h1>BARRA DE BUSQUEDA GRANDE</h1>
-        <?php $userGames;
-            foreach ($games as $game) {
-                echo $game['gameTitle'] . " ";
-                echo "<a href='/". (in_array($game['gameID'], $userGames) ? 'edit' : 'add') ."/". $game['gameID'] ."'>".(in_array($game['gameID'], $userGames) ? 'EDIT' : 'ADD')."</a>";
-                echo "<br>";
+        <form>
+            Juego: <input type="text" onkeyup="showGame(this.value)">
+        </form>
+        <div id="gamelist"></div>
+        <script>
+            gamelist = document.getElementById('gamelist');
+
+            function showGame(txt) {
+                if (txt.length != 0) {
+
+                    var xmlhttp = new XMLHttpRequest();
+
+                    xmlhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            gamelist.innerHTML = this.responseText;
+                        }
+                    }
+
+                    // La dirección cambia si la web está hosteada en remoto
+                    xmlhttp.open("GET", "http://gamelog.localhost:8080/async/" + txt.toLowerCase(), true);
+                    xmlhttp.send();
+
+                } else {
+                    gamelist.innerHTML = "";
+                }
+                
             }
-        ?>
+        </script>
     </body>
 </html>
