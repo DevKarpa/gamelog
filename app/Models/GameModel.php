@@ -129,7 +129,6 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
     }
 
     function getPageGames($offset) {
-
         $query = $this->pdo->prepare(self::BASE . "GROUP BY games.gameID LIMIT 5 OFFSET ?");
         $query->execute([$offset]);
         return $query->fetchAll();

@@ -27,6 +27,19 @@
             }
         }
         ?>
+        <?php
+        if(isset($page)){
+        ?>
+            <div class="card shadow mb-4 d-flex">
+                    <div class="col-2 align-self-center">
+                        <span>Página <span><?php echo isset($_GET["page"]) ? $_GET["page"] : ""; ?></span></span>
+                        <a class="btn btn-primary" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page-1<1 ? 1 : $page-1 ?>"><<a>
+                        <a class="btn btn-primary" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage<$page+1 ? $page : $page+1 ?>">><a>
+                    </div>    
+            </div>
+        <?php
+        }
+        ?>
 
     </body>
 </html>

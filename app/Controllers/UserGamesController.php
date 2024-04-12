@@ -29,7 +29,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         if(!$goToProfile){
             $this->view->showViews(array('client/addGame.view.php'), $data);
         }else{
-            header("location: /profile/" . $_SESSION['user']['userID']);
+            header("location: /profile/" . $_SESSION['user']['userID'] . "?page=1");
         }
         
     }
@@ -59,7 +59,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         if(!$goToProfile){
             $this->view->showViews(array('client/addGame.view.php'), $data);
         }else{
-            header("location: /profile/" . $_SESSION['user']['userID']);
+            header("location: /profile/" . $_SESSION['user']['userID'] . "?page=1");
         }
     }
 
@@ -67,7 +67,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
         $user = $_SESSION['user'];
         $userGamesModel->deleteGameRegister($id, $user);
-        header("location: /profile/" . $user['userID']);
+        header("location: /profile/" . $user['userID'] . "?page=1");
     }
 
     function checkRegValues($reg): array {

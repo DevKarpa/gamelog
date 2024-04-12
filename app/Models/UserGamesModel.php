@@ -65,4 +65,10 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
 
         return $query->fetch();
     }
+    
+    function getPagedGamesByUserID($offset,$id) {
+        $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID LIMIT 5 OFFSET ?");
+        $query->execute([$id, $offset]);
+        return $query->fetchAll();
+    }
 }

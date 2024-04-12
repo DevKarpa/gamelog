@@ -152,7 +152,6 @@ class UserController extends \Com\Daw2\Core\BaseController {
             $input = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
 
             $data['errores'] = $this->checkEditUserData($input, $data['user']);
-            
         }
 
         $this->view->showViews(array('templates/header.view.php', 'edit.user.view.php', 'templates/footer.view.php'), $data);
@@ -161,7 +160,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
     function checkEditUserData($input, $user) {
         $errors = [];
         $userModel = new \Com\Daw2\Models\UserModel();
-        
+
         // Comprobación de username, solo se aplica el cambio si el username no
         // existe, o es el mismo que el propio usuario que estamos editando
         if (!$userModel->checkUserExists($input['name']) || $input['name'] == $user['username']) {
@@ -183,24 +182,24 @@ class UserController extends \Com\Daw2\Core\BaseController {
         } else {
             $editedUser['pass'] = password_hash($input['pass'], PASSWORD_DEFAULT);
         }
-        
+
         // Comprobación de userType, si es 0 o 1 se modifica, si no, se aplica
         // el que ya tenía el usuario previamente.
-        if($input['type']==0 || $input['type']==1){
+        if ($input['type'] == 0 || $input['type'] == 1) {
             $editedUser['userType'] = $input['type'];
-        }else{
+        } else {
             $editedUser['userType'] = $user['userType'];
         }
 
         // Si no hay errores, se modifica el usuario con los nuevos datos
-        if(count($errors)==0){
-            $userModel->editUserData($editedUser,$user['userID']);
+        if (count($errors) == 0) {
+            $userModel->editUserData($editedUser, $user['userID']);
         }
         return $errors;
     }
-    
+
     // Funciones para vista de cliente
-    
+
     function showUserProfile($id) {
         $userModel = new \Com\Daw2\Models\UserModel();
         $gameModel = new \Com\Daw2\Models\GameModel();
@@ -209,9 +208,22 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $data['user'] = $userModel->getUserById($id);
         $data['games'] = $userGamesModel->getGamesByUserID($id);
 
+        $data['maxpage'] = ceil(count($data['games']) / 5);
+
+        if (isset($_GET['page'])) {
+            $data['page'] = $_GET['page'];
+            $offset = ($data['page'] - 1) * 5;
+        }
+
+        if (isset($_GET['page'])) {
+            $data['games'] = $userGamesModel->getPagedGamesByUserID($offset,$id);
+        } else {
+            $data['games'] = $userGamesModel->getGamesByUserID($id);
+        }
+
         $this->view->showViews(array('client/profile.view.php'), $data);
     }
-    
+
     function editCurrentUser() {
         $userModel = new \Com\Daw2\Models\UserModel();
         $data = [];
