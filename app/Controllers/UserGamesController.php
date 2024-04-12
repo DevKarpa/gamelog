@@ -14,17 +14,24 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         $data['user'] = $_SESSION['user'];
         $data['game'] = $gameModel->getGameById($id);
         $data['statusList'] = $statusModel->getAllStatus();
+        $goToProfile = false;
 
         if (isset($_POST['submit'])) {
             $reg = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
             if (count($this->checkRegValues($reg)) == 0) {
                 $userGamesModel->addNewRegister($id, $reg, $data['user']);
+                $goToProfile = true;
             } else {
                 $data['errors'] = $this->checkRegValues($reg);
             }
         }
 
-        $this->view->showViews(array('client/addGame.view.php'), $data);
+        if(!$goToProfile){
+            $this->view->showViews(array('client/addGame.view.php'), $data);
+        }else{
+            header("location: /profile/" . $_SESSION['user']['userID']);
+        }
+        
     }
 
     function editGameFromCollection($id) {
@@ -36,18 +43,24 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         $data['game'] = $gameModel->getGameById($id);
         $data['statusList'] = $statusModel->getAllStatus();
         $data['reg'] = $userGamesModel->getRegisterByID($id, $data['user']);
+        $goToProfile = false;
 
         if (isset($_POST['submit'])) {
             $reg = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
             if (count($this->checkRegValues($reg)) == 0) {
                 $userGamesModel->deleteGameRegister($id, $data['user']);
                 $userGamesModel->addNewRegister($id, $reg, $data['user']);
+                $goToProfile = true;
             } else {
                 $data['errors'] = $this->checkRegValues($reg);
             }
         }
 
-        $this->view->showViews(array('client/addGame.view.php'), $data);
+        if(!$goToProfile){
+            $this->view->showViews(array('client/addGame.view.php'), $data);
+        }else{
+            header("location: /profile/" . $_SESSION['user']['userID']);
+        }
     }
 
     function deleteGameFromCollection($id) {
