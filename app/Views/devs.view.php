@@ -7,7 +7,7 @@
     <div class="col-12">
         <?php
         if(isset($deletedDev)){
-                ?> <div class="alert alert-success"><p>El desarrollador <?php echo $deletedDev ?> ha sido borrado correctamente.</p></div> <?php
+                ?> <div class="alert alert-success"><p>El desarrollador <?php echo $deletedDev['devName'] ?> ha sido borrado correctamente.</p></div> <?php
         }
         ?>
     </div>
@@ -39,14 +39,18 @@
                     <tbody>
                             <?php                                
                             foreach ($devs as $dev) {
+                                
                                 echo "<tr>";
                                 echo "<td>".$dev['devID']."</td>";
                                 echo "<td>".$dev['devName']."</td>";
+                                if($dev['devID']!=1){
+
                                 ?>
-                        
+                                
                             <td>
                                 <a href="/dev-list/delete/<?php echo $dev['devID']?>" class="btn btn-danger"><i class="fas fa-trash"></i></a></td></tr>
                                 <?php
+                                }
                             }
                             ?>
                         

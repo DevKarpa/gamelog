@@ -7,7 +7,7 @@ use Steampixel\Route;
 class FrontController {
 
     static function main() {
-
+        // SI NO ESTÁ LOGEADO
         if (!isset($_SESSION['user'])) {
 
             Route::add('/',
@@ -37,8 +37,10 @@ class FrontController {
                         $controller->loginUser();
                     }
             );
+        // SI ESTÁ LOGEADO
         } else {
 
+            // SI ES ADMINISTRADOR
             if ($_SESSION['user']['userType'] == 1) {
 
                 Route::add('/',
@@ -186,13 +188,27 @@ class FrontController {
                         }
                         , 'post');
                         
+                Route::add('/dev-list/delete/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\DevController();
+                            $controlador->deleteDev($id);
+                        }
+                        , 'get');
+                        
+                Route::add('/dev-list/delete/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\DevController();
+                            $controlador->deleteDev($id);
+                        }
+                        , 'post');
+                        
                 Route::pathNotFound(
                     function () {
                         $controller = new \Com\Daw2\Controllers\ErroresController();
                         $controller->error404();
                     }
             );
-
+            // SI NO ES ADMINISTRADOR
             } else {
                 
                 // PÁGINA PRINCIPAL

@@ -17,7 +17,8 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ✅ Paginación en games
  - ✅ Mostrar valores de desarrolladora/s en editar juego
  - ✅ Conexiones con el frontController a las rutas de cliente
- - ❌ Eliminar developer
+ - ✅ Eliminar developer
+ - ❌ Guardar valores escritos en añadir developers
 
  ### FRONT
  - ✅ Sección mi perfil para poder ver
@@ -29,6 +30,8 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ✅ Si ya se tiene un juego en la lista, en vez de añadir, redirigir a editar
  - ✅ Sección añadir juegos al perfil, (async select)
  - ✅ Paginación de lista personal de juegos
+ - ❌ Mostrar lista de amigos
+ - ❌ Añadir amigos
 
  ### DISEÑO
  - ❌ Hacer bonito el front
@@ -37,4 +40,5 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ❌ Hacer logo
 
  ### DB
+ - ❌ Añadir tabla friend list
  - ❌ Añadir relaciones en phpmyadmin

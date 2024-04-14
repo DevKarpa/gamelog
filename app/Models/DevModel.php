@@ -31,6 +31,12 @@ class DevModel extends \Com\Daw2\Core\BaseModel {
 
         return false;
     }
+    
+    function getDevById($id) {
+        $stmt = $this->pdo->prepare(self::BASE . " WHERE devID = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
 
     function checkDevExistsByName($inputDevs) {
         $devs = $this->getAllDevs();
@@ -58,5 +64,16 @@ class DevModel extends \Com\Daw2\Core\BaseModel {
             $query = $this->pdo->prepare("INSERT INTO devs (devName) VALUES (?)");
             $query->execute([$dev]); 
         }
+    }
+    
+    function deleteDevById($id) {
+        $query = $this->pdo->prepare("DELETE FROM devs WHERE devID = ?");
+        $query->execute([$id]);
+        return $query->fetchAll();
+    }
+    
+    function deleteDevFromGame($id) {
+        $queryd = $this->pdo->prepare("UPDATE devGames SET devID = 1 WHERE devID = ?");
+        $queryd->execute([$id]);
     }
 }

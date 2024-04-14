@@ -133,6 +133,8 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         $query->execute([$offset]);
         return $query->fetchAll();
     }
+    
+    
 
     
 }
