@@ -18,7 +18,7 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ✅ Mostrar valores de desarrolladora/s en editar juego
  - ✅ Conexiones con el frontController a las rutas de cliente
  - ✅ Eliminar developer
- - ❌ Guardar valores escritos en añadir developers
+ - ✅ Guardar valores escritos en añadir developers
 
  ### FRONT
  - ✅ Sección mi perfil para poder ver

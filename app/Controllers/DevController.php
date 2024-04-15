@@ -30,6 +30,8 @@ class DevController extends \Com\Daw2\Core\BaseController {
                 $data['errores'] = $devModel->checkDevExistsByName($devs);
                 if(count($data['errores'])==0){
                     $devModel->addNewDevs($devs);
+                }else{
+                    $data['inputDevs'] = $devs;
                 }
             }
         }

@@ -26,6 +26,13 @@
                         <div class="mb-3 col-sm-12">
                             <label for="cif">Añadir desarrolladores (Separados por "," o Enter)</label>
                             <select class="form-control js-example-tokenizer" name="devs[]" multiple="multiple">
+                                <?php
+                                    if(isset($inputDevs)){
+                                        foreach ($inputDevs as $dev) {
+                                            ?> <option selected><?php echo $dev ?></option> <?php
+                                        }
+                                    }
+                                ?>
                             </select>
                             <p class="text-danger"><?php
                                 if (isset($errores)) {
