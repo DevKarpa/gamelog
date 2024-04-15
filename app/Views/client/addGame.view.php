@@ -7,7 +7,7 @@
     </head>
     <body>
         <a href="/logout">Logout</a><br>
-        <a href="/<?php echo !isset($reg) ? 'search' : 'profile/' . $user['userID'] ?>">Back</a>
+        <a href="/<?php echo !isset($reg) ? 'search' : 'profile/' . $user['userID'] . "?page=1" ?>">Back</a>
         <h1><?php echo $game['gameTitle'] // /profile/<?php echo $user['userID']   ?></h1>
         <div style="color:red">
             <?php
@@ -21,6 +21,7 @@
         <form action="/<?php echo (isset($reg) ? "edit/" : "add/") . $game['gameID'] ?>" method="post" enctype="multipart/form-data">
             > Inicio: <input type="date" id="start" name="start" value="<?php echo isset($reg) ? $reg['fechaInicio'] : '' ?>"><br>
             > Final: <input type="date" id="end" name="end" value="<?php echo isset($reg) ? $reg['fechaFin'] : '' ?>"><br><br>
+            > Notas: (Opcional)<br> <textarea name="note"><?php echo isset($reg) ? $reg['nota'] : '' ?></textarea><br><br>
             Status:
             <select name="status" id="status">
                 <?php

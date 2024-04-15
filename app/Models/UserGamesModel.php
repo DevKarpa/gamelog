@@ -38,8 +38,12 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
             $reg['start'] = null;
         }
         
-        $query = $this->pdo->prepare("INSERT INTO userGames (userID, gameID, fechaInicio, fechaFin, statusID) VALUES (?,?,?,?,?)");
-        $query->execute([$user['userID'],$id, $reg['start'], $reg['end'], $reg['status']]);
+        if(empty($reg['note'])){
+            $reg['note'] = null;
+        }
+        
+        $query = $this->pdo->prepare("INSERT INTO userGames (userID, gameID, fechaInicio, fechaFin, nota, statusID) VALUES (?,?,?,?,?,?)");
+        $query->execute([$user['userID'],$id, $reg['start'], $reg['end'], $reg['note'], $reg['status']]);
     }
     
     function checkUserHasGame($id, $user) {

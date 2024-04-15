@@ -31,6 +31,8 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ✅ Sección añadir juegos al perfil, (async select)
  - ✅ Paginación de lista personal de juegos
  - ✅ Editar perfil
+ - ✅ Añadir sección notas en añadir/editar juego
+ - ❌ Filtro por ordenación en juegos del perfil
  - ❌ Mostrar lista de amigos
  - ❌ Añadir amigos
 
@@ -41,6 +43,6 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ❌ Hacer logo
 
  ### DB
- - ❌ Añadir fila notas en tabla userGames
- - ❌ Añadir tabla friend list
+ - ✅ Añadir tabla friend list
+ - ✅ Añadir columna notas en tabla userGames
  - ❌ Añadir relaciones en phpmyadmin
