@@ -216,7 +216,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         }
 
         if (isset($_GET['page'])) {
-            $data['games'] = $userGamesModel->getPagedGamesByUserID($offset,$id);
+            $data['games'] = $userGamesModel->getPagedGamesByUserID($offset, $id);
         } else {
             $data['games'] = $userGamesModel->getGamesByUserID($id);
         }
@@ -228,7 +228,44 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $userModel = new \Com\Daw2\Models\UserModel();
         $data = [];
         $data['user'] = $_SESSION['user'];
+        
+        if (isset($_POST['usernamec'])) {
+            $username = filter_var($_POST['usernamec'], FILTER_SANITIZE_SPECIAL_CHARS);
+            
+            if (count($this->checkUsername($data['user']['userID'], $username))==0) {
+                $userModel->changeUsername($data['user']['userID'], $username);
+                // Cambia en tiempo real el valor de sesión de username para poder ver el cambio
+                // sin tener que cambiar de sesión
+                $_SESSION['user']['username'] = $username;
+                $data['user'] = $_SESSION['user'];
+            }else{
+                $data['errors'] = $this->checkUsername($data['user']['userID'], $username);
+            }
+        }
+        
+        if(!empty($_POST['passwordc1']) && !empty($_POST['passwordc2'])){
+            if($this->checkUserPassword($_POST['passwordc1'], $_POST['passwordc2'])==null){
+                $userModel->changePassword($data['user']['userID'],$_POST['passwordc1']);
+            }else{
+                $data['errors'] = $this->checkUserPassword($_POST['passwordc1'], $_POST['passwordc2']);
+            }
+        }
 
         $this->view->showViews(array('client/editProfile.view.php'), $data);
+    }
+
+    function checkUsername($id, $username) {
+        $userModel = new \Com\Daw2\Models\UserModel();
+        $errors = [];
+
+        if (!$userModel->checkUsernameExists($id,$username)) {
+            if (strlen($username) < 4 || strlen($username) > 16) {
+                $errors['username'] = "El nombre de usuario debe tener una longitud de entre 4 y 16 caracteres.";
+            }
+        } else {
+            $errors['username'] = "Este nombre ya pertenece a otro usuario";
+        }
+
+        return $errors;
     }
 }

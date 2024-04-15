@@ -43,7 +43,6 @@
             // Por alguna razon solo funciona en /add porque 
             // no puede sobreescribir los datos escritos por PHP
             function resetValues(){
-                console.log('hola');
                 start.value = "";
                 end.value = "";
                 status.value = 0;

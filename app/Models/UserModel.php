@@ -69,5 +69,31 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         $query = $this->pdo->prepare("UPDATE users SET username = ?, password= ?, userType = ? WHERE userID = ?");
         $query->execute([$userdata['username'],$userdata['pass'],$userdata['userType'],$id]);
     }
+    
+    function checkUsernameExists($id,$username) {
+        $query = $this->pdo->prepare(self::BASE . "WHERE username = ?");
+        $query->execute([$username]);
+        $user = $query->fetch();
+        
+        if($user){
+            if($user['userID']==$id){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    function changeUsername($id,$username) {
+        $query = $this->pdo->prepare("UPDATE users SET username = ? WHERE userID = ?");
+        $query->execute([$username,$id]);
+    }
+    
+    function changePassword($id,$pass) {
+        $query = $this->pdo->prepare("UPDATE users SET password = ? WHERE userID = ?");
+        $query->execute([password_hash($pass, PASSWORD_DEFAULT),$id]);
+    }
 
 }
