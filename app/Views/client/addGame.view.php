@@ -7,7 +7,7 @@
     </head>
     <body>
         <a href="/logout">Logout</a><br>
-        <a href="/<?php echo !isset($reg) ? 'search' : 'profile/' . $user['userID'] . "?page=1" ?>">Back</a>
+        <a href="/<?php echo !isset($reg) ? 'search' : 'profile/' . $user['userID'] . "?page=1&order=0&status=4" ?>">Back</a>
         <h1><?php echo $game['gameTitle'] // /profile/<?php echo $user['userID']   ?></h1>
         <div style="color:red">
             <?php

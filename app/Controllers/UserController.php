@@ -202,21 +202,33 @@ class UserController extends \Com\Daw2\Core\BaseController {
 
     function showUserProfile($id) {
         $userModel = new \Com\Daw2\Models\UserModel();
-        $gameModel = new \Com\Daw2\Models\GameModel();
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
         $data = [];
         $data['user'] = $userModel->getUserById($id);
-        $data['games'] = $userGamesModel->getGamesByUserID($id);
-
-        $data['maxpage'] = ceil(count($data['games']) / 5);
+        $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
+        $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
+        $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
 
         if (isset($_GET['page'])) {
             $data['page'] = $_GET['page'];
             $offset = ($data['page'] - 1) * 5;
-        }
-
-        if (isset($_GET['page'])) {
-            $data['games'] = $userGamesModel->getPagedGamesByUserID($offset, $id);
+            switch ($data['order']) {
+                case 0:
+                    $data['games'] = $userGamesModel->getPagedGamesByUserIDandName($id, $offset, $data['status']);
+                    break;
+                case 1:
+                    $data['games'] = $userGamesModel->getPagedGamesByUserIDandDevs($id, $offset, $data['status']);
+                    break;
+                case 2:
+                    $data['games'] = $userGamesModel->getPagedGamesByUserIDandInicio($id, $offset, $data['status']);
+                    break;
+                case 3:
+                    $data['games'] = $userGamesModel->getPagedGamesByUserIDandFin($id, $offset, $data['status']);
+                    break;
+                default:
+                    $data['games'] = $userGamesModel->getPagedGamesByUserID($offset, $id);
+                    break;
+            }
         } else {
             $data['games'] = $userGamesModel->getGamesByUserID($id);
         }
@@ -228,25 +240,25 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $userModel = new \Com\Daw2\Models\UserModel();
         $data = [];
         $data['user'] = $_SESSION['user'];
-        
+
         if (isset($_POST['usernamec'])) {
             $username = filter_var($_POST['usernamec'], FILTER_SANITIZE_SPECIAL_CHARS);
-            
-            if (count($this->checkUsername($data['user']['userID'], $username))==0) {
+
+            if (count($this->checkUsername($data['user']['userID'], $username)) == 0) {
                 $userModel->changeUsername($data['user']['userID'], $username);
                 // Cambia en tiempo real el valor de sesión de username para poder ver el cambio
                 // sin tener que cambiar de sesión
                 $_SESSION['user']['username'] = $username;
                 $data['user'] = $_SESSION['user'];
-            }else{
+            } else {
                 $data['errors'] = $this->checkUsername($data['user']['userID'], $username);
             }
         }
-        
-        if(!empty($_POST['passwordc1']) && !empty($_POST['passwordc2'])){
-            if($this->checkUserPassword($_POST['passwordc1'], $_POST['passwordc2'])==null){
-                $userModel->changePassword($data['user']['userID'],$_POST['passwordc1']);
-            }else{
+
+        if (!empty($_POST['passwordc1']) && !empty($_POST['passwordc2'])) {
+            if ($this->checkUserPassword($_POST['passwordc1'], $_POST['passwordc2']) == null) {
+                $userModel->changePassword($data['user']['userID'], $_POST['passwordc1']);
+            } else {
                 $data['errors'] = $this->checkUserPassword($_POST['passwordc1'], $_POST['passwordc2']);
             }
         }
@@ -258,7 +270,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $userModel = new \Com\Daw2\Models\UserModel();
         $errors = [];
 
-        if (!$userModel->checkUsernameExists($id,$username)) {
+        if (!$userModel->checkUsernameExists($id, $username)) {
             if (strlen($username) < 4 || strlen($username) > 16) {
                 $errors['username'] = "El nombre de usuario debe tener una longitud de entre 4 y 16 caracteres.";
             }

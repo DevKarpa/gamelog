@@ -16,7 +16,7 @@
             ?>
         </div>
         <a href="/logout">Logout</a><br>
-        <a href="/profile/<?php echo $_SESSION['user']['userID'] ?>">Back</a>
+        <a href="/profile/<?php echo $_SESSION['user']['userID'] ?>?page=1&order=0&status=4">Back</a>
         <h1>Cosas de editar perfil</h1>
         <h2>Editando perfil de <?php echo $user['username'] ?></h2>
         <form action="/settings" method="post" enctype="multipart/form-data">
