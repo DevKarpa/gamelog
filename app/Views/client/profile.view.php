@@ -16,6 +16,9 @@
             <h3><a href="/settings">Editar Perfil</a></h3>
             <a href="/search">Añadir juego</a><br><br>
             <?php
+                
+        }else if(!in_array($user['userID'],$_SESSION['friends'])){
+            ?> <a href="/addfriend">+ Añadir amigos</a><br> <?php
         }
         ?>
         <a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=0&status=<?php echo $status ?>">Nombre</a>
@@ -45,6 +48,8 @@
             echo "No tienes juegos con esas características";
         }
         ?>
+            
+                    
         <?php
         if (isset($page)) {
             ?>
@@ -52,12 +57,20 @@
                 <div class="col-2 align-self-center">
                     <span>Página <span><?php echo isset($_GET["page"]) ? $_GET["page"] : ""; ?></span></span>
                     <a class="btn btn-primary" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page - 1 < 1 ? 1 : $page - 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><<a>
-                            <a class="btn btn-primary" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage < $page + 1 ? $page : $page + 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">><a>
-                                    </div>    
-                                    </div>
-                                    <?php
-                                }
-                                ?>
-
-                                </body>
-                                </html>
+                    <a class="btn btn-primary" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage < $page + 1 ? $page : $page + 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">><a>
+                </div>    
+            </div>
+        <?php
+        }
+    ?>
+    
+    <h3>Amigos</h3>
+        <?php 
+        if(isset($friends)){
+            foreach ($friends as $friend) {
+                echo "<a href='/profile/".$friend['userID']."?page=1&order=0&status=4'>".$friend['username']."</a>" . "<br>";
+            }
+        }
+        ?>
+    </body>
+</html>

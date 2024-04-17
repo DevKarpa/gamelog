@@ -16,6 +16,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
             if ($userModel->loginUser($loginData['username'], $loginData['pass'])) {
                 $user = $userModel->loginUser($loginData['username'], $loginData['pass']);
                 $_SESSION['user'] = $user;
+                $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($user['userID']);
             } else {
                 $data['error'] = "Datos incorrectos";
             }
@@ -38,6 +39,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
                 var_dump(count($this->checkRegisterData($_POST)));
                 if (count($this->checkRegisterData($_POST)) == 0) {
                     $_SESSION['user'] = $userModel->registerUser($_POST);
+                    $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
                     header("location: /");
                 } else {
                     $data['errors'] = $this->checkRegisterData($_POST);
@@ -205,13 +207,16 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
         $data = [];
         $data['user'] = $userModel->getUserById($id);
+        $data['friends'] = $userModel->getFriendsFromUserID($id);
         $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
         $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
         $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
 
+        // Si existe page en el get
         if (isset($_GET['page'])) {
             $data['page'] = $_GET['page'];
             $offset = ($data['page'] - 1) * 5;
+            // Según el orden se ejecuta una consulta u otra para mostrar los juegos
             switch ($data['order']) {
                 case 0:
                     $data['games'] = $userGamesModel->getPagedGamesByUserIDandName($id, $offset, $data['status']);

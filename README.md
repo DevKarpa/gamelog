@@ -34,7 +34,7 @@ Aplicación web para llevar la cuenta de el estado de juegos completados, pendie
  - ✅ Añadir sección notas en añadir/editar juego
  - ✅ Filtro por ordenación en juegos del perfil
  - ✅ Filtro por status en juegos del perfil
- - ❌ Mostrar lista de amigos
+ - ✅ Mostrar lista de amigos
  - ❌ Añadir amigos
 
  ### DISEÑO

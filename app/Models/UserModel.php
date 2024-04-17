@@ -95,5 +95,23 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         $query = $this->pdo->prepare("UPDATE users SET password = ? WHERE userID = ?");
         $query->execute([password_hash($pass, PASSWORD_DEFAULT),$id]);
     }
+    
+    function getFriendsFromUserID($id) {
+        $query = $this->pdo->prepare(self::BASE . "JOIN userFriends ON users.userID = userFriends.friendUserID WHERE userFriends.mainUserID = ?");
+        $query->execute([$id]);
+        return $query->fetchAll();
+    }
+    
+    function getFriendsIDFromUserID($id) {
+        $query = $this->pdo->prepare("SELECT userID FROM users JOIN userFriends ON users.userID = userFriends.friendUserID WHERE userFriends.mainUserID = ?");
+        $query->execute([$id]);
+        $friends = [];
+        
+        foreach ($query->fetchAll() as $friendID) {
+            $friends[] = $friendID['userID'];
+        }
+        
+        return $friends;
+    }
 
 }
