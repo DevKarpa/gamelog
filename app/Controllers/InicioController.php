@@ -4,6 +4,7 @@ namespace Com\Daw2\Controllers;
 
 class InicioController extends \Com\Daw2\Core\BaseController {
 
+    // Carga la página de inicio del administrador
     public function index() {
         $data = array(
             'titulo' => 'Administrator page',
@@ -12,6 +13,7 @@ class InicioController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'inicio.view.php', 'templates/footer.view.php'), $data);
     }
     
+    // Carga la página de inicio del usuario no administrador
     public function userIndex() {
         $this->view->showViews(array('client/index.view.php'));
     }

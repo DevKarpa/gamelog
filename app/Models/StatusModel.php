@@ -6,6 +6,7 @@ namespace Com\Daw2\Models;
 
 class StatusModel extends \Com\Daw2\Core\BaseModel {
     
+    // Obtiene todos los status
     function getAllStatus(): array {
         $query = $this->pdo->query("SELECT * FROM status ");
         $query->execute();
@@ -13,6 +14,7 @@ class StatusModel extends \Com\Daw2\Core\BaseModel {
         return $query->fetchAll();
     }
     
+    // Comprueba que el status existe en base al ID
     function checkStatusExistsById($id): bool {
         $statusList = $this->getAllStatus();
         

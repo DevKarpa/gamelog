@@ -8,29 +8,28 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
 
     private const BASE = "SELECT * FROM users ";
 
+    // Obtiene todos los usuarios
     function getAllUsers(): array {
         $stmt = $this->pdo->query(self::BASE);
         return $stmt->fetchAll();
     }
     
+    // Hace login al usuario comprobando la contraseña
     function loginUser($username, $pass): ?array {
-
         $query = $this->pdo->prepare(self::BASE . 'WHERE username = ?');
         $query->execute([$username]);
         $user = $query->fetch();
 
         if ($user) {
-            var_dump(password_verify($pass, $user['password']));
             if (password_verify($pass, $user['password'])) {
-                
                 return $user;
             }
         }
-        
         return null;
     }
     
-    function checkUserExists($username) {
+    // Comprueba si un nombre de usuario ya existe
+    function checkUserExists($username): bool {
         $query = $this->pdo->prepare(self::BASE . "WHERE username = ?");
         $query->execute([$username]);
         $user = $query->fetch();
@@ -42,6 +41,7 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         return false;
     }
     
+    // Registra al usuario añadiendo un registro a la tabla users
     function registerUser($user): array {
         $query = $this->pdo->prepare("INSERT INTO users (username, password, userType) VALUES (?, ?, ?)");
         $query->execute([$user['username'], password_hash($user['pass'], PASSWORD_DEFAULT), 0]);
@@ -49,7 +49,8 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         return $this->loginUser($user['username'], $user['pass']);
     }
     
-    function getUserById($id) {
+    // Obtiene un usuario a partir de su id
+    function getUserById($id): array {
         $query = $this->pdo->prepare(self::BASE . "WHERE userID = ?");
         $query->execute([$id]);
         $user = $query->fetch();
@@ -57,7 +58,8 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         return $user;
     }
     
-    function deleteUserById($id) {
+    // Elimina un usuario a partir de su id, además de sus otros registros
+    function deleteUserById($id): void {
         $query = $this->pdo->prepare("DELETE FROM users WHERE userID = ?");
         $query->execute([$id]);
         
@@ -65,12 +67,15 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         $queryu->execute([$id]);
     }
     
-    function editUserData($userdata,$id) {
+    // Edita los datos de un usuario
+    function editUserData($userdata,$id): void {
         $query = $this->pdo->prepare("UPDATE users SET username = ?, password= ?, userType = ? WHERE userID = ?");
         $query->execute([$userdata['username'],$userdata['pass'],$userdata['userType'],$id]);
     }
     
-    function checkUsernameExists($id,$username) {
+    // Comprueba si el nombre de usuario ya existe, dejándolo pasar si este
+    // se trata del mismo usuario logeado
+    function checkUsernameExists($id,$username): bool {
         $query = $this->pdo->prepare(self::BASE . "WHERE username = ?");
         $query->execute([$username]);
         $user = $query->fetch();
@@ -86,23 +91,27 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         return false;
     }
     
-    function changeUsername($id,$username) {
+    // Cambia el username de un usuario
+    function changeUsername($id,$username): void {
         $query = $this->pdo->prepare("UPDATE users SET username = ? WHERE userID = ?");
         $query->execute([$username,$id]);
     }
     
-    function changePassword($id,$pass) {
+    // Cambia la contraseña de un usuario
+    function changePassword($id,$pass): void {
         $query = $this->pdo->prepare("UPDATE users SET password = ? WHERE userID = ?");
         $query->execute([password_hash($pass, PASSWORD_DEFAULT),$id]);
     }
     
-    function getFriendsFromUserID($id) {
+    // Obtiene los amigos de un usuario
+    function getFriendsFromUserID($id): ?array {
         $query = $this->pdo->prepare(self::BASE . "JOIN userFriends ON users.userID = userFriends.friendUserID WHERE userFriends.mainUserID = ?");
         $query->execute([$id]);
         return $query->fetchAll();
     }
     
-    function getFriendsIDFromUserID($id) {
+    // Obtiene los ID de amigos de un usuario
+    function getFriendsIDFromUserID($id): ?array {
         $query = $this->pdo->prepare("SELECT userID FROM users JOIN userFriends ON users.userID = userFriends.friendUserID WHERE userFriends.mainUserID = ?");
         $query->execute([$id]);
         $friends = [];
@@ -114,7 +123,8 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         return $friends;
     }
     
-    function addNewFriend($mainUserID,$friendUserID) {
+    // Añade un amigo a la lista
+    function addNewFriend($mainUserID,$friendUserID): void {
         $query = $this->pdo->prepare("INSERT INTO userFriends(mainUserID, friendUserId) VALUES (?,?)");
         $query->execute([$mainUserID,$friendUserID]);
         $query->execute([$friendUserID,$mainUserID]);

@@ -6,6 +6,7 @@ namespace Com\Daw2\Controllers;
 
 class UserGamesController extends \Com\Daw2\Core\BaseController {
 
+    // Carga un juego nuevo a la colección
     function addGameToCollection($id) {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
@@ -34,6 +35,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         
     }
 
+    // Carga un juego de tu colección
     function editGameFromCollection($id) {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
@@ -63,6 +65,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         }
     }
 
+    // Elimina un juego de tu colección
     function deleteGameFromCollection($id) {
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
         $user = $_SESSION['user'];
@@ -70,6 +73,8 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         header("location: /profile/" . $user['userID'] . "?page=1");
     }
 
+    // Comprueba que los datos introducidos al añadir/editar juego de la colección,
+    // sean coherentes.
     function checkRegValues($reg): array {
         $statusModel = new \Com\Daw2\Models\StatusModel();
         $errors = [];

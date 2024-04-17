@@ -6,6 +6,8 @@ namespace Com\Daw2\Controllers;
 
 class UserController extends \Com\Daw2\Core\BaseController {
 
+    // Logea al usuario si coinciden las credenciales y guarda sus datos
+    // en sesión, al igual que a su lista de amigos.
     function loginUser(): void {
         $userModel = new \Com\Daw2\Models\UserModel();
         $user = null;
@@ -29,6 +31,8 @@ class UserController extends \Com\Daw2\Core\BaseController {
         }
     }
 
+    // Registra al usuario si las credenciales son válidas y ya no están
+    // siendo utilizadas, y guarda en sesión los datos.
     function registerUser(): void {
         $userModel = new \Com\Daw2\Models\UserModel();
         $data = [];
@@ -52,11 +56,13 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('login.view.php'), $data);
     }
 
+    // Cierra el login el usuario destruyendo la sesisón
     function logout() {
         session_destroy();
         header("location: /");
     }
 
+    // Guarda todos los usuarios para llevarlos a la vista
     function showAllUsers() {
         $userModel = new \Com\Daw2\Models\UserModel();
         $data = [];
@@ -67,6 +73,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'users.view.php', 'templates/footer.view.php'), $data);
     }
 
+    // Comprueba que los datos introducidos en el formulario de registro son correctos
     function checkRegisterData($data): array {
         $errors = [];
         $userModel = new \Com\Daw2\Models\UserModel();
@@ -90,6 +97,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         return $errors;
     }
 
+    // Comprueba que las contraseñas sean válidas y cumplan con los requisitos
     function checkUserPassword($pass, $pass2): ?array {
         $errors = [];
 
@@ -121,6 +129,8 @@ class UserController extends \Com\Daw2\Core\BaseController {
         return $errors;
     }
 
+    // Elimina a un usuario desde la vista de admin, no te puedes borrar a ti
+    // mismo.
     function deleteUser($id) {
         $userModel = new \Com\Daw2\Models\UserModel();
         $deletedUser = $userModel->getUserById($id);
@@ -141,6 +151,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'users.view.php', 'templates/footer.view.php'), $data);
     }
 
+    // Carga la vista para editar a un usuario
     function editUser($id) {
         $userModel = new \Com\Daw2\Models\UserModel();
 
@@ -159,6 +170,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'edit.user.view.php', 'templates/footer.view.php'), $data);
     }
 
+    // Comprueba que los datos introducidos para editar un usuario sean correctos
     function checkEditUserData($input, $user) {
         $errors = [];
         $userModel = new \Com\Daw2\Models\UserModel();
@@ -200,8 +212,10 @@ class UserController extends \Com\Daw2\Core\BaseController {
         return $errors;
     }
 
-    // Funciones para vista de cliente
+    // FUNCIONES USADAS PARA LA VISTA DEL USUARIO NO ADMINISTRADOR
 
+    // Muestra el perfil de un usuario, sus juegos, amigos, y con paginación
+    // y ordenamiento.
     function showUserProfile($id) {
         $userModel = new \Com\Daw2\Models\UserModel();
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
@@ -241,6 +255,8 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('client/profile.view.php'), $data);
     }
 
+    // Carga la vista para editar tu usuario, comprueba si los datos introducidos
+    // están correctos.
     function editCurrentUser() {
         $userModel = new \Com\Daw2\Models\UserModel();
         $data = [];
@@ -271,6 +287,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('client/editProfile.view.php'), $data);
     }
 
+    // Comprueba que un nombre de usuario sea válido
     function checkUsername($id, $username) {
         $userModel = new \Com\Daw2\Models\UserModel();
         $errors = [];
@@ -286,6 +303,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         return $errors;
     }
     
+    // Añade un amigo a tu lista, y carga de vuelta el perfil del usuario logeado.
     function addFriend($id) {
         $userModel = new \Com\Daw2\Models\UserModel();
         $userModel->addNewFriend($_SESSION['user']['userID'],$id);

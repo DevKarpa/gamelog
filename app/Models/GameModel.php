@@ -8,6 +8,7 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
 
     private const BASE = "SELECT *, GROUP_CONCAT(devs.devName ORDER BY devs.devName ASC) AS developers FROM games JOIN devGames ON games.gameID = devGames.gameID JOIN devs ON devGames.devID = devs.devID JOIN platforms on games.gamePlatform = platforms.platformID  ";
 
+    // Obtiene todos los juegos
     function getAll(): array {
         $query = $this->pdo->query(self::BASE . "GROUP BY games.gameID");
         $query->execute();
@@ -15,6 +16,8 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         return $query->fetchAll();
     }
 
+    // Guarda el juego en la base de datos, y en otra para relacionarlo con los devs
+    // ademas de guardar la imagen del juego localmente.
     function saveNewGame($metadata, $img) {
 
         // Guarda el juego en la tabla games
@@ -32,6 +35,8 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         $this->saveImage($img, 0);
     }
 
+    // Le da un nombre a la imagen tomando como base el ID del último juego 
+    // introducido, y se asigna una ruta a ella.
     function saveImage($img, $id) {
         if ($id == 0) {
             $id = $this->getLastRegister();
@@ -40,22 +45,21 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         move_uploaded_file($img["image"]["tmp_name"], $dir);
     }
 
-    /**
-     * Devuelve el último gameID de la tabla games
-     * @return int
-     */
+    // Devuelve el último gameID de la tabla games
     function getLastRegister(): int {
         $query = $this->pdo->query("SELECT gameID FROM games ORDER BY gameID DESC");
         $query->execute();
         return $query->fetch()['gameID'];
     }
 
+    // Devuelve un juego desde la ID pasada por parámetro
     function getGameById($id) {
         $query = $this->pdo->prepare(self::BASE . "WHERE games.gameID = ? GROUP BY games.gameID");
         $query->execute([$id]);
         return $query->fetch();
     }
 
+    // Elimina un juego y sus registros en otras tablas
     function deleteGameById($id) {
         $queryd = $this->pdo->prepare("DELETE FROM devGames WHERE gameID = ?");
         $queryd->execute([$id]);
@@ -67,11 +71,13 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         $queryu->execute([$id]);
     }
 
+    // Elimina registro de la tabla devGames
     function deleteDevGamesById($id) {
         $queryd = $this->pdo->prepare("DELETE FROM devGames WHERE gameID = ?");
         $queryd->execute([$id]);
     }
 
+    // Modifica los datos de un juego 
     function modifyGameData($metadata, $img, $id) {
         // Actualiza la tabla games con los nuevos datos del juego
         $query = $this->pdo->prepare("UPDATE games SET gameTitle = ?, gameYear = ?, gamePlatform = ? WHERE gameID = ?");
@@ -90,6 +96,7 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         $this->saveImage($img, $id);
     }
 
+    // Búsqueda por filtro y paginación
     function filterSearchGames($filter, $offset) {
         $values = [];
         $where = [];

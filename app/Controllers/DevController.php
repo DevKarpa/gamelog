@@ -6,6 +6,7 @@ namespace Com\Daw2\Controllers;
 
 class DevController extends \Com\Daw2\Core\BaseController {
 
+    // Guarda datos de todos los devs ordenados para mostrarlos en la vista
     function showAllDevs(): void {
         $devModel = new \Com\Daw2\Models\DevModel();
         $data = [];
@@ -16,6 +17,7 @@ class DevController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'devs.view.php', 'templates/footer.view.php'), $data);
     }
     
+    // Añade devs a la base de datos siempre que este no exista
     function addDev() {
         $devModel = new \Com\Daw2\Models\DevModel();
         $data = [];
@@ -39,6 +41,7 @@ class DevController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'add.devs.view.php', 'templates/footer.view.php'), $data);
     }
     
+    // Elimina el dev con el id pasado por parámetro 
     function deleteDev($id) {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $devModel = new \Com\Daw2\Models\DevModel();

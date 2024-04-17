@@ -6,6 +6,8 @@ namespace Com\Daw2\Controllers;
 
 class GameController extends \Com\Daw2\Core\BaseController {
 
+    // Guarda todos los juegos, les aplica paginación y filtros y los muestra
+    // en la vista.
     function showAllGames(): void {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $devModel = new \Com\Daw2\Models\DevModel();
@@ -38,6 +40,7 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'games.view.php', 'templates/footer.view.php'), $data);
     }
 
+    // Añade juego a la base de datos, siempre que no tenga errores.
     function addGame(): void {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $devModel = new \Com\Daw2\Models\DevModel();
@@ -62,6 +65,7 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'add.game.view.php', 'templates/footer.view.php'), $data);
     }
     
+    // Edita un juego ya existente, comprobando que no tenga fallos
     function editGame($id) {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $devModel = new \Com\Daw2\Models\DevModel();
@@ -88,6 +92,7 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'add.game.view.php', 'templates/footer.view.php'), $data);
     }
 
+    // Comprueba que los datos introducidos al añadir/editar juego, están correctos.
     function checkGameErrors($metadata, $img) {
         $devModel = new \Com\Daw2\Models\DevModel();
         $platModel = new \Com\Daw2\Models\PlatformModel();
@@ -124,6 +129,7 @@ class GameController extends \Com\Daw2\Core\BaseController {
         return $errors;
     }
 
+    // Comprueba que el archivo subido se trata de una imagen
     function checkGameImage($img) {
         $upload = true;
         
@@ -139,6 +145,7 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
     }
     
+    // Elimina el juego de la base de datos
     function deleteGame($id) {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $deletedGame = $gameModel->getGameById($id)['gameTitle'];
@@ -153,72 +160,24 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'games.view.php', 'templates/footer.view.php'), $data);
     }
     
-    // Funciones para vista de cliente
+    // FUNCIONES USADAS PARA LA VISTA DEL USUARIO NO ADMINISTRADOR
     
+    // Carga la vista principal de /search
     function searchGames(): void {
-        $gameModel = new \Com\Daw2\Models\GameModel();
-        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
-        $devModel = new \Com\Daw2\Models\DevModel();
-        $platModel = new \Com\Daw2\Models\PlatformModel();
         $data = [];
-        $offset = null;
-        $data['titulo'] = 'Lista de juegos';
-        $data['seccion'] = 'game-list';
-        $data['allgames'] = $gameModel->getAll();
-        $data['devs'] = $devModel->getAllDevs();
-        $data['platforms'] = $platModel->getAllPlatforms();
-        $data['maxpage'] = ceil(count($data['allgames'])/5);
-        $data['userGames'] = $userGamesModel->getGamesIDByUserID($_SESSION['user']['userID']);
-
-        if(isset($_GET['page'])){
-            $data['page'] = $_GET['page'];
-            $offset = ($data['page']-1) * 5;
-        }
-
-        if(isset($_POST["submit"])){
-            $data['games'] = $gameModel->filterSearchGames($_POST,$offset);
-        }else{
-            if(isset($_GET['page'])){
-                $data['games'] = $gameModel->getPageGames($offset);
-            }else{
-                $data['games'] = $gameModel->getAll();
-            }
-            
-        }
-
         $this->view->showViews(array('client/games.view.php'), $data);
     }
     
+    // Función que se ejecuta de forma asíncrona, y va mostrando los juegos que coinciden con
+    // el texto pasado por parámetro
     function asyncSearchGames($txt) {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
-        $devModel = new \Com\Daw2\Models\DevModel();
-        $platModel = new \Com\Daw2\Models\PlatformModel();
 
-        
-        $offset = null;
-        $allgames = $gameModel->getAll();
-        $devs = $devModel->getAllDevs();
-        $platforms = $platModel->getAllPlatforms();
-        $maxpage = ceil(count($allgames)/5);
         $userGames = $userGamesModel->getGamesIDByUserID($_SESSION['user']['userID']);
-        
-        if(isset($_GET['page'])){
-            $page = $_GET['page'];
-            $offset = ($page-1) * 5;
-        }
 
-        if(isset($_POST["submit"])){
-            $games = $gameModel->filterSearchGames($_POST,$offset);
-        }else{
-            if(isset($_GET['page'])){
-                $games = $gameModel->getPageGames($offset);
-            }else{
-                $games = $gameModel->getAll();
-            }
-            
-        }
-        
+        $games = $gameModel->getAll();
+
         foreach ($games as $game) {
           if(str_contains(strtolower($game['gameTitle']), $txt)){
             echo $game['gameTitle'] . " ";
