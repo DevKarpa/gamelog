@@ -113,5 +113,11 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         
         return $friends;
     }
+    
+    function addNewFriend($mainUserID,$friendUserID) {
+        $query = $this->pdo->prepare("INSERT INTO userFriends(mainUserID, friendUserId) VALUES (?,?)");
+        $query->execute([$mainUserID,$friendUserID]);
+        $query->execute([$friendUserID,$mainUserID]);
+    }
 
 }

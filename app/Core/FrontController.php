@@ -284,6 +284,21 @@ class FrontController {
                         }
                         , 'post');
                         
+                
+                Route::add('/addfriend/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->addFriend($id);
+                        }
+                        , 'get');
+                        
+                Route::add('/addfriend/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->addFriend($id);
+                        }
+                        , 'post');  
+                        
                // VISTA DE AÑADIR JUEGO A LA COLECCIÓN
                 
                Route::add('/add/([0-9]+)',

@@ -18,7 +18,7 @@
             <?php
                 
         }else if(!in_array($user['userID'],$_SESSION['friends'])){
-            ?> <a href="/addfriend">+ Añadir amigos</a><br> <?php
+            ?> <a href="/addfriend/<?php echo $user['userID'] ?>">+ Añadir amigos</a><br> <?php
         }
         ?>
         <a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=0&status=<?php echo $status ?>">Nombre</a>

@@ -285,4 +285,11 @@ class UserController extends \Com\Daw2\Core\BaseController {
 
         return $errors;
     }
+    
+    function addFriend($id) {
+        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel->addNewFriend($_SESSION['user']['userID'],$id);
+        $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
+        header("location: /profile/". $_SESSION['user']['userID'] ."?page=1&order=0&status=4");
+    }
 }
