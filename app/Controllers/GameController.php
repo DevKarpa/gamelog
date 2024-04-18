@@ -98,8 +98,8 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $errors = [];
         echo (int) date("Y");
         // Comprobación de título del juego
-        if (strlen($metadata['name']) > 30 || is_null($metadata['name'])) {
-            $errors['name'] = "El título del juego debe tener una longitud de entre 1 y 30 carácteres.";
+        if (strlen($metadata['name']) > 60 || is_null($metadata['name'])) {
+            $errors['name'] = "El título del juego debe tener una longitud de entre 1 y 60 carácteres.";
         }
 
         // Comprobación de año
@@ -161,30 +161,42 @@ class GameController extends \Com\Daw2\Core\BaseController {
     // FUNCIONES USADAS PARA LA VISTA DEL USUARIO NO ADMINISTRADOR
     // Carga la vista principal de /search
     function searchGames(): void {
-        $data = [];
+        $platModel = new \Com\Daw2\Models\PlatformModel();
+        $data['platforms'] = $platModel->getAllPlatforms();
         $this->view->showViews(array('client/games.view.php'), $data);
     }
 
     // Función que se ejecuta de forma asíncrona, y va mostrando los juegos que coinciden con
     // el texto pasado por parámetro
-    function asyncSearchGames($txt) {
+    function asyncSearchGames($txt, $id) {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
 
         if (isset($_SESSION['user'])) {
             $userGames = $userGamesModel->getGamesIDByUserID($_SESSION['user']['userID']);
         }
-        
 
         $games = $gameModel->getAll();
 
         foreach ($games as $game) {
             if (str_contains(strtolower($game['gameTitle']), $txt)) {
-                echo $game['gameTitle'] . " ";
-                if (isset($_SESSION['user'])) {
-                    echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? 'EDIT' : 'ADD') . "</a>";
+                // Si el id de plataforma es distinto de 0, muestra juegos de todas las plataformas, sino
+                // solo muestra el juego de la plataforma correspondiente.
+                if ($id != 0) {
+                    if ($id == $game['platformID']) {
+                        echo $game['gameTitle'] . " ";
+                        if (isset($_SESSION['user'])) {
+                            echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? 'EDIT' : 'ADD') . "</a>";
+                        }
+                        echo "<br>";
+                    }
+                } else {
+                    echo $game['gameTitle'] . " ";
+                    if (isset($_SESSION['user'])) {
+                        echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? 'EDIT' : 'ADD') . "</a>";
+                    }
+                    echo "<br>";
                 }
-                echo "<br>";
             }
         }
     }

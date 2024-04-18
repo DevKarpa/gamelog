@@ -56,17 +56,17 @@ class FrontController {
 
             // VISTA PARA CONTROLAR ASINCRONISMO AL BUSCAR JUEGOS
 
-            Route::add('/async/([a-z0-9 ]+)',
-                    function ($txt) {
+            Route::add('/async/([a-z0-9 ]+)/([0-9]+)',
+                    function ($txt,$id) {
                         $controlador = new \Com\Daw2\Controllers\GameController();
-                        $controlador->asyncSearchGames($txt);
+                        $controlador->asyncSearchGames($txt,$id);
                     }
                     , 'get');
 
-            Route::add('/async/([a-z0-9 ]+)',
-                    function ($txt) {
+            Route::add('/async/([a-z0-9 ]+)/([0-9]+)',
+                    function ($txt,$id) {
                         $controlador = new \Com\Daw2\Controllers\GameController();
-                        $controlador->asyncSearchGames($txt);
+                        $controlador->asyncSearchGames($txt,$id);
                     }
                     , 'post');
 
@@ -299,17 +299,17 @@ class FrontController {
 
             // VISTA PARA CONTROLAR ASINCRONISMO AL BUSCAR JUEGOS
 
-            Route::add('/async/([a-z0-9 ]+)',
-                    function ($txt) {
+            Route::add('/async/([a-z0-9 ]+)/([0-9]+)',
+                    function ($txt,$id) {
                         $controlador = new \Com\Daw2\Controllers\GameController();
-                        $controlador->asyncSearchGames($txt);
+                        $controlador->asyncSearchGames($txt,$id);
                     }
                     , 'get');
 
-            Route::add('/async/([a-z0-9 ]+)',
-                    function ($txt) {
+            Route::add('/async/([a-z0-9 ]+)/([0-9]+)',
+                    function ($txt,$id) {
                         $controlador = new \Com\Daw2\Controllers\GameController();
-                        $controlador->asyncSearchGames($txt);
+                        $controlador->asyncSearchGames($txt,$id);
                     }
                     , 'post');
 
