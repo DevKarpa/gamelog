@@ -225,6 +225,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
         $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
         $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
+        //$data['pending'] = $userModel->checkPendingFriendRequest($id);
 
         // Si existe page en el get
         if (isset($_GET['page'])) {

@@ -19,22 +19,21 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $data['allgames'] = $gameModel->getAll();
         $data['devs'] = $devModel->getAllDevs();
         $data['platforms'] = $platModel->getAllPlatforms();
-        $data['maxpage'] = ceil(count($data['allgames'])/5);
-        
-        if(isset($_GET['page'])){
+        $data['maxpage'] = ceil(count($data['allgames']) / 5);
+
+        if (isset($_GET['page'])) {
             $data['page'] = $_GET['page'];
-            $offset = ($data['page']-1) * 5;
+            $offset = ($data['page'] - 1) * 5;
         }
 
-        if(isset($_POST["submit"])){
-            $data['games'] = $gameModel->filterSearchGames($_POST,$offset);
-        }else{
-            if(isset($_GET['page'])){
+        if (isset($_POST["submit"])) {
+            $data['games'] = $gameModel->filterSearchGames($_POST, $offset);
+        } else {
+            if (isset($_GET['page'])) {
                 $data['games'] = $gameModel->getPageGames($offset);
-            }else{
+            } else {
                 $data['games'] = $gameModel->getAll();
             }
-            
         }
 
         $this->view->showViews(array('templates/header.view.php', 'games.view.php', 'templates/footer.view.php'), $data);
@@ -56,15 +55,15 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
         if (isset($post['submit'])) {
             $data['errores'] = $this->checkGameErrors($post, $_FILES);
-            
+
             if (count($data['errores']) == 0) {
-               $gameModel->saveNewGame($post, $_FILES); 
+                $gameModel->saveNewGame($post, $_FILES);
             }
         }
 
         $this->view->showViews(array('templates/header.view.php', 'add.game.view.php', 'templates/footer.view.php'), $data);
     }
-    
+
     // Edita un juego ya existente, comprobando que no tenga fallos
     function editGame($id) {
         $gameModel = new \Com\Daw2\Models\GameModel();
@@ -83,9 +82,9 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
         if (isset($post['submit'])) {
             $data['errores'] = $this->checkGameErrors($post, $_FILES);
-            
+
             if (count($data['errores']) == 0) {
-               $gameModel->modifyGameData($post, $_FILES, $id);
+                $gameModel->modifyGameData($post, $_FILES, $id);
             }
         }
 
@@ -110,19 +109,19 @@ class GameController extends \Com\Daw2\Core\BaseController {
                 $errors['year'] = "El año debe estar compredido entre 1900 y el año actual.";
             }
         }
-        
+
         // Comprobación de plataforma
-        if(!$platModel->checkPlatformExists($metadata['platform'])){
+        if (!$platModel->checkPlatformExists($metadata['platform'])) {
             $errors['platform'] = "La plataforma introducida no existe";
         }
-        
+
         // Comprobación de devs
-        if(!$devModel->checkDevExists($metadata['devs'])){   
+        if (!$devModel->checkDevExists($metadata['devs'])) {
             $errors['platform'] = "La plataforma introducida no existe";
         }
 
         // Comprobación de imagen
-        if(!is_null($this->checkGameImage($img))){
+        if (!is_null($this->checkGameImage($img))) {
             $errors['image'] = $this->checkGameImage($img);
         }
 
@@ -132,19 +131,18 @@ class GameController extends \Com\Daw2\Core\BaseController {
     // Comprueba que el archivo subido se trata de una imagen
     function checkGameImage($img) {
         $upload = true;
-        
+
         $check = getimagesize($img["image"]["tmp_name"]);
         if ($check === false) {
             $error = "Tipo de archivo no compatible";
             $upload = false;
         }
-        
-        if(!$upload){
+
+        if (!$upload) {
             return $error;
         }
-
     }
-    
+
     // Elimina el juego de la base de datos
     function deleteGame($id) {
         $gameModel = new \Com\Daw2\Models\GameModel();
@@ -159,31 +157,35 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
         $this->view->showViews(array('templates/header.view.php', 'games.view.php', 'templates/footer.view.php'), $data);
     }
-    
+
     // FUNCIONES USADAS PARA LA VISTA DEL USUARIO NO ADMINISTRADOR
-    
     // Carga la vista principal de /search
     function searchGames(): void {
         $data = [];
         $this->view->showViews(array('client/games.view.php'), $data);
     }
-    
+
     // Función que se ejecuta de forma asíncrona, y va mostrando los juegos que coinciden con
     // el texto pasado por parámetro
     function asyncSearchGames($txt) {
         $gameModel = new \Com\Daw2\Models\GameModel();
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
 
-        $userGames = $userGamesModel->getGamesIDByUserID($_SESSION['user']['userID']);
+        if (isset($_SESSION['user'])) {
+            $userGames = $userGamesModel->getGamesIDByUserID($_SESSION['user']['userID']);
+        }
+        
 
         $games = $gameModel->getAll();
 
         foreach ($games as $game) {
-          if(str_contains(strtolower($game['gameTitle']), $txt)){
-            echo $game['gameTitle'] . " ";
-            echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? 'EDIT' : 'ADD') . "</a>";
-            echo "<br>";
-          }
+            if (str_contains(strtolower($game['gameTitle']), $txt)) {
+                echo $game['gameTitle'] . " ";
+                if (isset($_SESSION['user'])) {
+                    echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? 'EDIT' : 'ADD') . "</a>";
+                }
+                echo "<br>";
+            }
         }
     }
 }

@@ -6,8 +6,18 @@
         <title>LISTA DE JUEGOS</title>
     </head>
     <body>
-        <a href="/logout">Logout</a><br>
+        <?php
+        if(isset($_SESSION['user'])){
+            ?> <a href="/logout">Logout</a> 
+               <h2><a href="/profile/<?php echo $_SESSION['user']['userID'] ?>?page=1&order=0&status=4">Mi perfil</a></h2>
+                <?php
+        }else{
+            ?> <a href="/login">Iniciar Sesión</a> <?php
+            ?> <a href="/register">Registrarse</a> <?php
+        }
+        ?><br>
         <a href="/">Back</a>
+        
         <h1>BARRA DE BUSQUEDA GRANDE</h1>
         <form>
             Juego: <input type="text" onkeyup="showGame(this.value)">

@@ -35,7 +35,7 @@
         <?php
         if (count($games) != 0) {
             foreach ($games as $game) {
-                echo $game['gameTitle'] . " " . $game['developers'] . " " . $game['platformName'] . " " . $game['fechaInicio'] . " " . $game['fechaFin'] . " " . $game['statusName'];
+                echo $game['gameTitle'] . " " . $game['developers'] . " " . $game['platformName'] . " " . $game['fechaInicio'] . " " . $game['fechaFin'] . " " . $game['statusName'] . " NOTA: " . $game['nota'];
                 if ($_SESSION['user']['userID'] == $user['userID']) {
                     echo "<a href='/edit/" . $game['gameID'] . "'> EDIT</a>";
                     ?>&nbsp;&nbsp;<?php
@@ -66,6 +66,13 @@
     
     <h3>Amigos</h3>
         <?php 
+        if(isset($pending)){
+            if(count($pending)>0){
+                foreach ($pending as $pendiente) {
+                    echo "<a href='/profile/".$pendiente['userID']."?page=1&order=0&status=4'>".$pendiente['username']."</a> <a href='/accept/". $pendiente['userID'] ."'>Aceptar</a> <a href='/reject/". $pendiente['userID'] ."'>Rechazar</a>" . "<br>";
+                }
+            }
+        }
         if(isset($friends)){
             foreach ($friends as $friend) {
                 echo "<a href='/profile/".$friend['userID']."?page=1&order=0&status=4'>".$friend['username']."</a>" . "<br>";
