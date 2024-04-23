@@ -7,10 +7,15 @@
 
 body{
     font-family: "Lato", sans-serif;
+    color: white;
+    
+    background: linear-gradient(90deg, #0f113d, #00365d);
+
+}
+
+.content{
     padding-left: 10%;
     padding-right: 10%;
-    color: white;
-    background-color: #010331;
 }
 
 nav ul{
@@ -34,4 +39,74 @@ nav ul li a{
 
 nav ul li:not(:last-child):after{
   content: '|';
+}
+
+footer{
+    display: flex;
+    background-color: #000123;
+    gap: 30px;
+    padding: 100px;
+    justify-content: space-between;
+}
+
+.footLeft{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.footLeft span:first-child{
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.footRight a{
+    color: #015CDB;
+    text-decoration: none;
+    transition-duration: 0.5s;
+}
+
+.footRight .footLinks a:hover{
+    color: #7fdbff;
+    transition-duration: 0.5s;
+}
+
+.footRight .socialMedia{
+    display: flex;
+    justify-content: space-around;
+    font-size: 3em;
+    color: white;
+}
+
+.footRight .socialMedia a{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.footRight .socialMedia a:first-child:hover{
+    color: white;
+    background-color: #5865F2;
+    transition-duration: 0.5s;
+    border-radius: 20px;
+}
+
+.footRight .socialMedia a:nth-child(2):hover{
+    color: white;
+    background-color: black;
+    transition-duration: 0.5s;
+    border-radius: 20px;
+}
+
+.footRight .socialMedia a:nth-child(3):hover{
+    color: white;
+    background-color: #1DA1F2;
+    transition-duration: 0.5s;
+    border-radius: 20px;
+}
+
+.footRight .socialMedia a:last-child:hover{
+    color: white;
+    background-color: #3b5998;
+    transition-duration: 0.5s;
+    border-radius: 20px;
 }

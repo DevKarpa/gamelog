@@ -1,6 +1,39 @@
+
+.headerTxtImg{
+    background: url("https://cdn.discordapp.com/attachments/1031933742102618134/1232409319933346023/Sin_titulo.png?ex=66295a1e&is=6628089e&hm=fb65fe5bd9095ce1fa0ee00a091e5c993a6c1cd578a30590fe9c4a6881575b60&") repeat-x;
+    filter: blur(2.5px);
+    opacity: 0.5;
+    z-index: -1;
+    height: 500px;
+    width: 100%;
+    position: fixed;
+    background-repeat: repeat;
+    top: 40px;
+    left: 0px;
+    animation: bnm 30s linear infinite;
+    
+}
+
+@keyframes bnm {
+  0% {
+      transform: translate(0%);
+  }
+  100% {
+      transform: translate(-100%);
+  }
+}
+
+.headerTxt{
+    z-index: 1;
+}
+
 .headerTxt #title{
     font-size: 7em;
-    margin-top: 40px;
+    margin-top: 40px; 
+    margin-right: 50%; 
+    background: linear-gradient(-70deg, #2dff00, #0095ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .headerTxt h2{
@@ -9,7 +42,7 @@
 }
 
 .headerTxt .headerAction{
-    padding: 80px 80px 80px 5px;
+    padding: 80px 80px 0px 5px;
 }
 
 .headerTxt .headerAction #headerButton{
@@ -17,13 +50,165 @@
     font-size: 1.6em;
     font-weight: bold;
     text-decoration: none;
-    background-color: #015CDB;
+    background-color: #00aff4;
     border-radius: 20px;
     margin-right: 10px;
     color: white;
+    transition-duration: 0.5s;
+}
+.headerTxt .headerAction #headerButton:hover{
+    background-color: #0064f4;
+    transition-duration: 0.5s;
 }
 
+
 .headerTxt .headerAction span a{
-    color: #01C2DB;
+    color: #00aff4;
     text-decoration: none;
+    transition-duration: 0.5s;
+}
+
+.headerTxt .headerAction span a:hover{
+    color: #7fdbff;
+    transition-duration: 0.5s;
+}
+
+.stats{
+    display: flex;
+    padding: 120px 3% 120px 3%;
+    justify-content: space-around;
+}
+
+.statBlock{
+    display: flex;
+    gap: 10px;
+}
+
+.statText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats .statBlock .statIcon{
+    font-size: 5em;
+}
+
+.stats .statBlock .statText .statTitle{
+    font-size: 1.5em;
+}
+
+.stats .statBlock .statText .statNum{
+    font-size: 3em;
+}
+
+.articles{
+    padding: 0px 0px 80px 0px;
+}
+
+.articles #articleTitle{
+    font-size: 2em;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.articles #articleText{
+    font-size: 1.3em;
+}
+
+#articleText #articleLt{
+    font-size: 0.5em;
+    color:grey;
+}
+
+.infoblocks{
+    display: flex;
+    justify-content: center;
+    gap:5%;
+    margin-bottom: 80px;
+}
+
+.infoblock{
+    margin: 30px;
+    padding: 20px;
+    background-color: #015CDB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 5px 5px #ffffff;
+}
+
+.infoblock .infoIcon{
+    font-size: 4.2em;
+}
+
+.infoblock .infoTitle{
+    font-size: 2em;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.infoblock .infoText{
+    padding-top: 5px;
+}
+
+.popularGamesSection p {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.popularGamesBlock{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding-top: 40px;
+    justify-content: space-between;
+    margin-bottom: 80px;
+    
+}
+
+.popularGameItem img{
+    width: 400px;
+    border-radius: 10px;
+}
+.popularGameItem{
+    transition-duration: 0.5s;
+    position: relative;
+    text-align: center;
+}
+
+.popularGameItem span{
+    position: absolute;
+    padding-top: 20%;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition-duration: 0.5s;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.popularGameItem span:hover{
+    opacity: 1;
+    transition-duration: 0.5s;
+    background-color: rgba(0,0,255,0.5);
+}
+
+/** Formato de pantalla cuadrada 4:3 / Tablet **/
+@media screen and (max-width:1500px){
+    .popularGamesBlock{
+        justify-content: space-around;
+    }
+    
+    .popularGameItem{
+        margin-bottom: 60px;
+    }
+    
+    .headerTxt #title{
+        margin-right: 0; 
+    }
 }
