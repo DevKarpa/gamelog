@@ -1,0 +1,110 @@
+header{
+    display: flex;
+    justify-content: space-between;
+}
+.title{
+    font-size: 4em;
+}
+
+.title a{
+    color:white;
+    text-decoration: none;
+}
+
+main{
+    margin-top: 50px;
+}
+
+.gameSearch form{
+   margin-top: 20px;
+   display: flex;
+   gap: 10px;
+}
+
+.gameSearch form #gametxt{
+    width: 75%;
+    background-color: #212121;
+    color: white;
+    font-size: 1.5em;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.gameSearch form #gametxt:focus{
+    outline: none;
+    border: 3px solid #015CDB;
+}
+
+.gameSearch form #platform{
+    width: 25%;
+    background-color: #212121;
+    color: white;
+    font-size: 1.7em;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.gameSearch form #platform:focus{
+    outline: none;
+    border: 3px solid #015CDB;
+}
+
+.game{
+    border: 3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.game .gameContentLeft{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.game .gameContentLeft .gameText{
+    display: flex;
+    flex-direction: column;
+}
+
+.game .gameContentRight{
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.gameImg{
+    width: 300px;
+    
+}
+
+.gameImg img{
+    width: 100%;
+    border-radius: 5px;
+    vertical-align: middle;
+}
+
+.gameTitle{
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.gameYear{
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.gameButtons{
+    align-self: center;
+}
+
+
+.gameButtons a{
+    color: white;
+    text-decoration: none;
+    font-size: 7em;
+    margin-right: 30px;
+}
+

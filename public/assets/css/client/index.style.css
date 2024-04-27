@@ -1,17 +1,28 @@
 
 .headerTxtImg{
-    background: url("https://cdn.discordapp.com/attachments/1031933742102618134/1232409319933346023/Sin_titulo.png?ex=66295a1e&is=6628089e&hm=fb65fe5bd9095ce1fa0ee00a091e5c993a6c1cd578a30590fe9c4a6881575b60&") repeat-x;
+    animation: bnm 30s linear infinite;
+    background: url("https://i.postimg.cc/R4t03V6z/Sin-titulo.png?dl=1") repeat-x;
     filter: blur(2.5px);
     opacity: 0.5;
     z-index: -1;
     height: 500px;
     width: 100%;
     position: fixed;
-    background-repeat: repeat;
-    top: 40px;
+    top: 80px;
     left: 0px;
+}
+
+.headerTxtImg2{
     animation: bnm 30s linear infinite;
-    
+    background: url("https://i.postimg.cc/R4t03V6z/Sin-titulo.png?dl=1") repeat-x;
+    filter: blur(2.5px);
+    opacity: 0.5;
+    z-index: -1;
+    height: 500px;
+    width: 100%;
+    position: fixed;
+    top: 80px;
+    left: -100%;
 }
 
 @keyframes bnm {
@@ -19,7 +30,7 @@
       transform: translate(0%);
   }
   100% {
-      transform: translate(-100%);
+      transform: translate(100%);
   }
 }
 

@@ -177,6 +177,7 @@ class GameController extends \Com\Daw2\Core\BaseController {
         }
 
         $games = $gameModel->getAll();
+        $i = 0;
 
         foreach ($games as $game) {
             if (str_contains(strtolower($game['gameTitle']), $txt)) {
@@ -184,18 +185,52 @@ class GameController extends \Com\Daw2\Core\BaseController {
                 // solo muestra el juego de la plataforma correspondiente.
                 if ($id != 0) {
                     if ($id == $game['platformID']) {
-                        echo $game['gameTitle'] . " ";
+                        echo "<div class='game'>
+                                <div class='gameContentLeft'>
+                                        <div class='gameImg'>
+                                            <img src='assets/img/games/" . $game['gameID'] . ".png'>
+                                        </div>
+                                        <div class='gameText'>
+                                            <span class='gameTitle'>" . $game['gameTitle'] . "</span>
+                                            <span class='gamePlat'>" . $game['platformName'] . "</span>
+                                        </div>
+                                    </div>
+                                <div class='gameContentRight'>
+                                        <span class='gameYear'>" . $game['gameYear'] . "</span>
+                                        <div class='gameButtons'>";
+                                    
+                                
                         if (isset($_SESSION['user'])) {
-                            echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? 'EDIT' : 'ADD') . "</a>";
+                            echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? '<i class="fas fa-pen-square"></i>' : '<i class="fas fa-plus-square"></i>') . "</a>";
                         }
-                        echo "<br>";
+                        echo "</div></div></div>";
                     }
                 } else {
-                    echo $game['gameTitle'] . " ";
-                    if (isset($_SESSION['user'])) {
-                        echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? 'EDIT' : 'ADD') . "</a>";
+                    echo "<div class='game'>
+                                <div class='gameContentLeft'>
+                                        <div class='gameImg'>
+                                            <img src='assets/img/games/" . $game['gameID'] . ".png'>
+                                        </div>
+                                        <div class='gameText'>
+                                            <span class='gameTitle'>" . $game['gameTitle'] . "</span>
+                                            <span class='gamePlat'>" . $game['platformName'] . "</span>
+                                        </div>
+                                    </div>
+                                <div class='gameContentRight'>
+                                        <span class='gameYear'>" . $game['gameYear'] . "</span>
+                                        <div class='gameButtons'>";
+                                    
+                                
+                        if (isset($_SESSION['user'])) {
+                            echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? '<i class="fas fa-pen-square"></i>' : '<i class="fas fa-plus-square"></i>') . "</a>";
+                        }
+                        echo "</div></div></div>";
+                    // TEMPORAL!! LIMITA A 30 LA CANTIDAD DE JUEGOS QUE SE MUESTRAN
+
+                    if ($i == 30) {
+                        break;
                     }
-                    echo "<br>";
+                    $i++;
                 }
             }
         }

@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../assets/css/client/main.style.css">
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
         <title><?php echo $user['username'] ?></title>
     </head>
     <body>
@@ -79,5 +80,26 @@
             }
         }
         ?>
+    <footer>
+            <div class="footLeft">
+                <span>GameLog</span>
+                <span>GameLog no está asociada con ninguna de las compañías dueñas de los juegos mostrados.</span>
+                <span>©️ GameLog 2024</span>
+            </div>
+            <div class="footRight">
+                <div class="socialMedia">
+                    <a href="#"><i class="footImg fab fa-discord"></i></a>
+                    <a href="#"><i class="footImg fab fa-steam"></i></i></a>
+                    <a href="#"><i class="footImg fab fa-twitter"></i></i></a>
+                    <a href="#"><i class="footImg fab fa-facebook"></i></i></a>
+                </div>
+                <div class="footLinks">
+                    <a href="#">Terminos de Servicio</a>
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">FAQ</a>
+
+                </div>
+            </div>
+        </footer>
     </body>
 </html>

@@ -25,6 +25,8 @@
                     </ul>
                 </nav>
                 <div class="headerTxtImg"></div>
+                <div class="headerTxtImg2"></div>
+                
                     <div class="headerTxt">
                         <h1 id="title">GameLog</h1>
                         <h2>Lleva el registro de tus juegos</h2>
@@ -36,7 +38,7 @@
                 
             </header>
             <main>
-
+                
                 <section class="stats">
                     <div class="statBlock">
                         <i class="statIcon fas fa-user"></i>
@@ -89,12 +91,12 @@
                 <section class="popularGamesSection">
                     <p>Juegos Populares</p>
                     <div class="popularGamesBlock">
-                        <div class="popularGameItem"><span>gamename</span><img src="assets/img/games/40.png"></div>
-                        <div class="popularGameItem"><span>gamename</span><img src="assets/img/games/100.png"></div>
-                        <div class="popularGameItem"><span>gamename</span><img src="assets/img/games/120.png"></div>
-                        <div class="popularGameItem"><span>gamename</span><img src="assets/img/games/33.png"></div>
-                        <div class="popularGameItem"><span>gamename</span><img src="assets/img/games/9.png"></div>
-                        <div class="popularGameItem"><span>gamename</span><img src="assets/img/games/78.png"></div>
+                        <div class="popularGameItem"><span>Forza Horizon 4</span><img src="assets/img/games/40.png"></div>
+                        <div class="popularGameItem"><span>Grand Theft Auto V</span><img src="assets/img/games/100.png"></div>
+                        <div class="popularGameItem"><span>Castle Crashers</span><img src="assets/img/games/120.png"></div>
+                        <div class="popularGameItem"><span>Left 4 Dead</span><img src="assets/img/games/33.png"></div>
+                        <div class="popularGameItem"><span>Spore</span><img src="assets/img/games/9.png"></div>
+                        <div class="popularGameItem"><span>Sonic Origins</span><img src="assets/img/games/78.png"></div>
                     </div>
                 </section>
             </main>
