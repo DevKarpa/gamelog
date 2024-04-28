@@ -145,4 +145,32 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
 
         return $query->fetchAll();
     }
+    
+    function getCompletedGamesByUserID($id) {
+        $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = 3 GROUP BY games.gameID");
+        $query->execute([$id]);
+
+        return $query->fetchAll();
+    }
+    
+    function getPlayingGamesByUserID($id) {
+        $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = 2 GROUP BY games.gameID");
+        $query->execute([$id]);
+
+        return $query->fetchAll();
+    }
+    
+    function getPendingGamesByUserID($id) {
+        $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = 1 GROUP BY games.gameID");
+        $query->execute([$id]);
+
+        return $query->fetchAll();
+    }
+    
+    function getDroppedGamesByUserID($id) {
+        $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = 0 GROUP BY games.gameID");
+        $query->execute([$id]);
+
+        return $query->fetchAll();
+    }
 }

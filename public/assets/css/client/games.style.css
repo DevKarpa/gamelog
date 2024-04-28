@@ -23,30 +23,26 @@ main{
 
 .gameSearch form #gametxt{
     width: 75%;
-    background-color: #212121;
     color: white;
     font-size: 1.5em;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-.gameSearch form #gametxt:focus{
-    outline: none;
-    border: 3px solid #015CDB;
+    padding: 10px;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .gameSearch form #platform{
     width: 25%;
-    background-color: #212121;
     color: white;
     font-size: 1.7em;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-.gameSearch form #platform:focus{
-    outline: none;
-    border: 3px solid #015CDB;
+    padding: 10px;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .game{
@@ -55,7 +51,12 @@ main{
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
-    border-radius: 10px;
+    background: rgba(1, 92, 219, 0.23);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .game .gameContentLeft{
@@ -77,12 +78,11 @@ main{
 
 .gameImg{
     width: 300px;
-    
 }
 
 .gameImg img{
     width: 100%;
-    border-radius: 5px;
+    border-radius: 16px;
     vertical-align: middle;
 }
 
@@ -106,5 +106,24 @@ main{
     text-decoration: none;
     font-size: 7em;
     margin-right: 30px;
+    
+}
+
+.gameButtons a i{
+    transition-duration: 300ms;
+}
+
+.gameButtons a .fa-pen-square:hover{
+    transition-duration: 300ms;
+    color: #ffff66;
+}
+
+.gameButtons a .fa-plus-square:hover{
+    transition-duration: 300ms;
+    color: #00E466;
+}
+
+footer{
+    margin-top: 500px;
 }
 

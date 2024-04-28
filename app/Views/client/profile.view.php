@@ -3,84 +3,198 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../assets/css/client/main.style.css">
-        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="../assets/css/client/profile.style.css" type="text/css">
+        <link rel="stylesheet" href="../assets/css/client/main.style.css" type="text/css">
+        <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
         <title><?php echo $user['username'] ?></title>
     </head>
     <body>
-        <a href="/logout">Logout</a><br>
-        <a href="/">Back</a>
-        <h1>PERFIL DE <?php echo $user['username'] ?></h1>
-        <?php
-        if ($_SESSION['user']['userID'] == $user['userID']) {
-            ?>
-            <h2>IF el perfil es mio</h2>
-            <h3><a href="/settings">Editar Perfil</a></h3>
-            <a href="/search">Añadir juego</a><br><br>
-            <?php
+        <div class="content">
+            <header>
+                <h1 class="title"><a href="/">GameLog</a></h1>
+                <nav>
+                    <ul>
+                        <?php if (isset($_SESSION['user'])) { ?>
+                            <li><a href="/profile/<?php echo $_SESSION['user']['userID'] ?>?page=1&order=0&status=4">Mi perfil</a></li>
+                        <?php } else { ?>
+                            <li><a href="/register">Registrarse</a></li> <?php } ?>
+                        <li><a href="/search">Buscar Juegos</a></li>
+                        <li><a href="/help">Ayuda</a></li>
+                        <?php if (isset($_SESSION['user'])) { ?>
+                            <li><a href="/logout">Cerrar sesión</a></li>
+                        <?php } ?>
+                    </ul>
+                </nav>
+            </header>
+            
+            <section class="topSection">
+                <div class="userInfo">
+                    <div class="userImg">
+                        <img src="../assets/img/profile/<?php echo $user['userID'] ?>.jpg">
+                    </div>
+                    <div class="userText">
+                        <span><?php echo $user['username'] ?></span>
+                        <span>@<?php echo $user['username'] ?></span>
+                        <span><?php echo $user['userDesc'] ?></span>
+                    </div>
+                </div>
                 
-        }else if(!in_array($user['userID'],$_SESSION['friends'])){
-            ?> <a href="/addfriend/<?php echo $user['userID'] ?>">+ Añadir amigos</a><br> <?php
-        }
-        ?>
-        <a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=0&status=<?php echo $status ?>">Nombre</a>
-        <a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=1&status=<?php echo $status ?>">Devs</a>
-        <a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=2&status=<?php echo $status ?>">Fecha Inicio</a>
-        <a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=3&status=<?php echo $status ?>">Fecha Fin</a>
-        <br>
-        <p>Estado:</p>
-        <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=0">Pausado</a>
-        <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=1">Pendiente</a>
-        <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=2">Jugando</a>
-        <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=3">Completado</a>
-        <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=4">Todos</a><br><br>
-        <?php
-        if (count($games) != 0) {
-            foreach ($games as $game) {
-                echo $game['gameTitle'] . " " . $game['developers'] . " " . $game['platformName'] . " " . $game['fechaInicio'] . " " . $game['fechaFin'] . " " . $game['statusName'] . " NOTA: " . $game['nota'];
-                if ($_SESSION['user']['userID'] == $user['userID']) {
-                    echo "<a href='/edit/" . $game['gameID'] . "'> EDIT</a>";
-                    ?>&nbsp;&nbsp;<?php
-                    echo "<a href='/delete/" . $game['gameID'] . "'> DELETE</a><br>";
-                } else {
-                    echo "<br>";
-                }
-            }
-        } else {
-            echo "No tienes juegos con esas características";
-        }
-        ?>
-                    
-        <?php
-        if (isset($page)) {
-            ?>
-            <div class="card shadow mb-4 d-flex">
-                <div class="col-2 align-self-center">
-                    <span>Página <span><?php echo isset($_GET["page"]) ? $_GET["page"] : ""; ?></span></span>
-                    <a class="btn btn-primary" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page - 1 < 1 ? 1 : $page - 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><<a>
-                    <a class="btn btn-primary" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage < $page + 1 ? $page : $page + 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">><a>
-                </div>    
+                <div class="userSubMenu">
+                    <ul>
+                        <li><a href="/profile/<?php echo $user['userID'] ?>?page=1&order=0&status=4">Perfil</a></li>
+                        <li><a href="/profile/<?php echo $user['userID'] ?>/friends">Amigos</a></li>
+                        <?php if (isset($_SESSION['user'])) {
+                            if ($_SESSION['user']['userID'] == $user['userID']) {?>
+                        <li><a href="/settings">Editar&nbsp;Perfil</a></li>
+                        <?php } }?>
+                    </ul>
+                </div>
+            </section>
+            
+            <div class="centerPage">
+                <aside>
+                    <section class="userCon">
+                        <span class="asideTitle">Conexiones</span>
+                        <ul>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Steam</a></li>
+                            <li><a href="#">Xbox</a></li>
+                            <li><a href="#">Playstation</a></li>
+                            <li><a href="#">Nintendo</a></li>
+                        </ul>
+                    </section>
+                    <section class="userStats">
+                        <span class="asideTitle">Estadísticas</span>
+                        <article class="userStatsCont">
+                            
+                            <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=3">
+                                <div class="userStat">
+                                    <span>Completados</span>
+                                    <span><?php echo $completedGames ?></span>
+                                </div>
+                            </a>
+                            
+                            <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=2">
+                                <div class="userStat">
+                                    <span>Jugando</span>
+                                    <span><?php echo $playingGames ?></span>
+                                </div>
+                            </a>
+                            
+                            <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=1">
+                                <div class="userStat">
+                                    <span>Pendientes</span>
+                                    <span><?php echo $pendingGames ?></span>
+                                </div>
+                            </a>
+                            
+                            <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=0">
+                                <div class="userStat">
+                                    <span>Pausados</span>
+                                    <span><?php echo $droppedGames ?></span>
+                                </div>
+                            </a>
+                            
+                            <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=4">
+                                <div class="userStat">
+                                    <span>Total</span>
+                                    <span><?php echo count($allgames) ?></span>
+                                </div>
+                            </a>
+                            
+                        </article>
+                    </section>
+                </aside>
+                <main>
+                    <section class="gameListContainer">
+                        <div class="gameListTitle">
+                            <span class="glTitle">Juegos</span>
+                            <span class="glSub"><?php echo count($allgames) ?></span>
+                        </div>
+                        <div class="gameListOrder">
+                            <ul>
+                                <li><a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=0&status=<?php echo $status ?>">Nombre</a></li>
+                                <li><a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=2&status=<?php echo $status ?>">Fecha Inicio</a></li>
+                                <li><a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=3&status=<?php echo $status ?>">Fecha Fin</a></li>
+                            </ul>
+                        </div>
+                        <div class="gameList">
+                            <?php if (count($games) != 0) { 
+                            foreach ($games as $game) { ?>
+                            <div class='game'>
+                                <div class='gameContentLeft'>
+                                        <div class='gameImg'>
+                                            <?php echo "<img src='../assets/img/games/" . $game['gameID'] . ".png'>" ?>
+                                        </div>
+                                        <div class='gameText'>
+                                            <?php echo "<span class='gameTitle'>" . $game['gameTitle'] . "</span>" ?>
+                                            <?php echo "<span class='gamePlat'>" . $game['platformName'] . "</span>" ?>
+                                        </div>
+                                </div>
+                                <div class='gameContentRight'>
+                                    <?php echo "<span class='gameStatus'>" . $game['statusName'] . "</span>" ?>
+                                    <div class='gameButtons'>
+                                        <?php
+                                            if(isset($_SESSION['user'])){
+                                                if ($_SESSION['user']['userID'] == $user['userID']) {
+                                                    echo "<a href='/edit/" . $game['gameID'] . "'><i class='fas fa-pen-square'></i></a>";
+                                                    echo "<a href='/delete/" . $game['gameID'] . "'><i class='fas fa-trash'></i></a>";
+                                                }
+                                            }
+                                        ?>
+                                    </div>
+                                </div>     
+                            </div>
+                            <?php }}else{
+                                echo "<span class='noGamesAlert'>No hay juegos<span>";
+                            } ?>
+                            <div class="paging">
+                                <?php if(isset($page)){ ?>
+                                    <div class="pageBtn">
+                                        <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><<</a>
+                                        <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page - 1 < 1 ? 1 : $page - 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><</a>
+                                        <span class="pageNumber">Página <?php echo $_GET["page"] ?></span>
+                                        <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage < $page + 1 ? $page : $page + 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">></a>
+                                        <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">>></a>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </section>
+                </main>
             </div>
-        <?php
-        }
-    ?>
-    
-    <h3>Amigos</h3>
-        <?php 
-        if(isset($pending)){
-            if(count($pending)>0){
-                foreach ($pending as $pendiente) {
-                    echo "<a href='/profile/".$pendiente['userID']."?page=1&order=0&status=4'>".$pendiente['username']."</a> <a href='/accept/". $pendiente['userID'] ."'>Aceptar</a> <a href='/reject/". $pendiente['userID'] ."'>Rechazar</a>" . "<br>";
-                }
+            
+            
+        <h3>Amigos</h3>
+                                    <?php
+                                    if (isset($pending)) {
+                                        if (count($pending) > 0) {
+                                            foreach ($pending as $pendiente) {
+                                                echo "<a href='/profile/" . $pendiente['userID'] . "?page=1&order=0&status=4'>" . $pendiente['username'] . "</a> <a href='/accept/" . $pendiente['userID'] . "'>Aceptar</a> <a href='/reject/" . $pendiente['userID'] . "'>Rechazar</a>" . "<br>";
+                                            }
+                                        }
+                                    }
+                                    if (isset($friends)) {
+                                        foreach ($friends as $friend) {
+                                            echo "<a href='/profile/" . $friend['userID'] . "?page=1&order=0&status=4'>" . $friend['username'] . "</a>" . "<br>";
+                                        }
+                                    }
+                                    ?>
+        <?PHP
+            // AÑADIR AMIGO
+            if(isset($_SESSION['user'])){
+                if ($_SESSION['user']['userID'] != $user['userID']) {
+                    if (!in_array($user['userID'], $_SESSION['friends'])) {
+                        ?> <a href="/addfriend/<?php echo $user['userID'] ?>"> + Añadir amigos</a><br> <?php
+                    }
+                } 
             }
-        }
-        if(isset($friends)){
-            foreach ($friends as $friend) {
-                echo "<a href='/profile/".$friend['userID']."?page=1&order=0&status=4'>".$friend['username']."</a>" . "<br>";
-            }
-        }
         ?>
-    <footer>
+                                        
+
+                                    
+        </div>
+        <footer>
             <div class="footLeft">
                 <span>GameLog</span>
                 <span>GameLog no está asociada con ninguna de las compañías dueñas de los juegos mostrados.</span>
@@ -97,7 +211,6 @@
                     <a href="#">Terminos de Servicio</a>
                     <a href="#">Política de Privacidad</a>
                     <a href="#">FAQ</a>
-
                 </div>
             </div>
         </footer>

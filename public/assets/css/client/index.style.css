@@ -26,12 +26,12 @@
 }
 
 @keyframes bnm {
-  0% {
-      transform: translate(0%);
-  }
-  100% {
-      transform: translate(100%);
-  }
+    0% {
+        transform: translate(0%);
+    }
+    100% {
+        transform: translate(100%);
+    }
 }
 
 .headerTxt{
@@ -40,16 +40,18 @@
 
 .headerTxt #title{
     font-size: 7em;
-    margin-top: 40px; 
-    margin-right: 50%; 
+    margin-top: 40px;
+    margin-right: 50%;
     background: linear-gradient(-70deg, #2dff00, #0095ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    
 }
 
 .headerTxt h2{
     font-size: 2.2em;
     padding-left: 5px;
+    
 }
 
 .headerTxt .headerAction{
@@ -61,14 +63,17 @@
     font-size: 1.6em;
     font-weight: bold;
     text-decoration: none;
-    background-color: #00aff4;
+    background-color: #0064f4;
+    
     border-radius: 20px;
     margin-right: 10px;
     color: white;
     transition-duration: 0.5s;
+    
+    box-shadow: rgba(0, 0, 255, 0.4) 5px 5px, rgba(0, 0, 255, 0.3) 10px 10px, rgba(0, 0, 255, 0.2) 15px 15px, rgba(0, 0, 255, 0.1) 20px 20px, rgba(0, 0, 255, 0.05) 25px 25px;
 }
 .headerTxt .headerAction #headerButton:hover{
-    background-color: #0064f4;
+    background-color: #00aff4;
     transition-duration: 0.5s;
 }
 
@@ -142,14 +147,18 @@
 .infoblock{
     margin: 30px;
     padding: 20px;
-    background-color: #015CDB;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     width: 300px;
-    border-radius: 10px;
-    box-shadow: 5px 5px #ffffff;
+    background: rgba(1, 92, 219, 0.23);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
 }
 
 .infoblock .infoIcon{
@@ -178,7 +187,7 @@
     padding-top: 40px;
     justify-content: space-between;
     margin-bottom: 80px;
-    
+
 }
 
 .popularGameItem img{
@@ -206,7 +215,13 @@
 .popularGameItem span:hover{
     opacity: 1;
     transition-duration: 0.5s;
-    background-color: rgba(0,0,255,0.5);
+    background: rgba(0, 0, 255, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
 }
 
 /** Formato de pantalla cuadrada 4:3 / Tablet **/
@@ -214,12 +229,12 @@
     .popularGamesBlock{
         justify-content: space-around;
     }
-    
+
     .popularGameItem{
         margin-bottom: 60px;
     }
-    
+
     .headerTxt #title{
-        margin-right: 0; 
+        margin-right: 0;
     }
 }

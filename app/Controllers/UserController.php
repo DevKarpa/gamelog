@@ -222,6 +222,11 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $data = [];
         $data['user'] = $userModel->getUserById($id);
         $data['friends'] = $userModel->getFriendsFromUserID($id);
+        $data['allgames'] = $userGamesModel->getGamesByUserID($id);
+        $data['completedGames'] = count($userGamesModel->getCompletedGamesByUserID($id));
+        $data['playingGames'] = count($userGamesModel->getPlayingGamesByUserID($id));
+        $data['pendingGames'] = count($userGamesModel->getPendingGamesByUserID($id));
+        $data['droppedGames'] = count($userGamesModel->getDroppedGamesByUserID($id));
         $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
         $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
         $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
