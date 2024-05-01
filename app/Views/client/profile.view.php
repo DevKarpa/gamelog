@@ -56,11 +56,22 @@
                     <section class="userCon">
                         <span class="asideTitle">Conexiones</span>
                         <ul>
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Steam</a></li>
-                            <li><a href="#">Xbox</a></li>
-                            <li><a href="#">Playstation</a></li>
-                            <li><a href="#">Nintendo</a></li>
+                        <?php
+                        $count = 0;
+                        foreach ($conections as $key => $value) {
+                            
+                            if($value!=NULL){
+                                echo "<li><i class='fab fa-" . $key . "'></i> $value</li>";
+                                $count++;
+                            }
+                        }
+                        if($count==0){
+                            echo "<li>Sin conexiones</li>";
+                        }
+                        
+                        ?>
+                        
+                            
                         </ul>
                     </section>
                     <section class="userStats">

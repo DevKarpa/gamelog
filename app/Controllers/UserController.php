@@ -35,6 +35,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
     // siendo utilizadas, y guarda en sesión los datos.
     function registerUser(): void {
         $userModel = new \Com\Daw2\Models\UserModel();
+        $userCon = new \Com\Daw2\Models\UserConectionsModel();
         $data = [];
         $data['register'] = true;
 
@@ -44,6 +45,8 @@ class UserController extends \Com\Daw2\Core\BaseController {
                 if (count($this->checkRegisterData($_POST)) == 0) {
                     $_SESSION['user'] = $userModel->registerUser($_POST);
                     $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
+                    $userCon->createNewRegister($_SESSION['user']['userID']);
+                    copy("assets/img/profile/2.jpg","assets/img/profile/".$_SESSION['user']['userID'].".jpg");
                     header("location: /");
                 } else {
                     $data['errors'] = $this->checkRegisterData($_POST);
@@ -133,6 +136,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
     // mismo.
     function deleteUser($id) {
         $userModel = new \Com\Daw2\Models\UserModel();
+        $userCon = new \Com\Daw2\Models\UserConectionsModel();
         $deletedUser = $userModel->getUserById($id);
 
         $data = [];
@@ -144,7 +148,9 @@ class UserController extends \Com\Daw2\Core\BaseController {
         } else {
             $data['deletedUser'] = $deletedUser['username'];
             $userModel->deleteUserById($id);
+            $userCon->deleteRegister($id);
         }
+        
 
         $data['users'] = $userModel->getAllUsers();
 
@@ -219,6 +225,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
     function showUserProfile($id) {
         $userModel = new \Com\Daw2\Models\UserModel();
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
+        $userCon = new \Com\Daw2\Models\UserConectionsModel();
         $data = [];
         $data['user'] = $userModel->getUserById($id);
         $data['friends'] = $userModel->getFriendsFromUserID($id);
@@ -230,6 +237,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
         $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
         $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
+        $data['conections'] = $userCon->getAllConectionsFromUserID($id);
         //$data['pending'] = $userModel->checkPendingFriendRequest($id);
 
         // Si existe page en el get
@@ -264,6 +272,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
     function showUserProfileFriends($id) {
         $userModel = new \Com\Daw2\Models\UserModel();
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
+        $userCon = new \Com\Daw2\Models\UserConectionsModel();
         $data = [];
         $data['user'] = $userModel->getUserById($id);
         $data['friends'] = $userModel->getFriendsFromUserID($id);
@@ -275,9 +284,8 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
         $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
         $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
+        $data['conections'] = $userCon->getAllConectionsFromUserID($id);
         //$data['pending'] = $userModel->checkPendingFriendRequest($id);
-
-        
 
         $this->view->showViews(array('client/friends.view.php'), $data);
     }
