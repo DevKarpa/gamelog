@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../assets/css/client/profile.style.css" type="text/css">
         <link rel="stylesheet" href="../assets/css/client/main.style.css" type="text/css">
         <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-        <title><?php echo $user['username'] ?></title>
+        <title>Amigos de <?php echo $user['username'] ?></title>
     </head>
     <body>
         <div class="content">
@@ -108,69 +108,30 @@
                 <main>
                     <section class="gameListContainer">
                         <div class="gameListTitle">
-                            <span class="glTitle">Juegos</span>
-                            <span class="glSub"><?php echo count($allgames) ?></span>
+                            <span class="glTitle">Amigos</span>
+                            <span class="glSub"><?php echo count($friends) ?></span>
                         </div>
-                        <div class="gameListOrder">
-                            <ul>
-                                <li><a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=0&status=<?php echo $status ?>">Nombre</a></li>
-                                <li><a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=2&status=<?php echo $status ?>">Fecha Inicio</a></li>
-                                <li><a href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page ?>&order=3&status=<?php echo $status ?>">Fecha Fin</a></li>
-                            </ul>
-                        </div>
-                        <div class="gameList">
-                            <?php if (count($games) != 0) { 
-                            foreach ($games as $game) { ?>
-                            <div class='game'>
-                                <div class='gameContentLeft'>
-                                        <div class='gameImg'>
-                                            <?php echo "<img src='../assets/img/games/" . $game['gameID'] . ".png'>" ?>
-                                        </div>
-                                        <div class='gameText'>
-                                            <?php echo "<span class='gameTitle'>" . $game['gameTitle'] . "</span>" ?>
-                                            <div class="gamePlat">
-                                                <?php echo "<span>" . $game['platformName'] . "</span>" ?>
-                                            </div>
-                                            <div class="gameTime">
-                                                <?php echo "<span>" . $game['fechaInicio'] . "</span>" ?>
-                                                <?php echo "<span>" . $game['fechaFin'] . "</span>" ?>
-                                            </div>
-                                            
-                                        </div>
+                        <div class="friendList">
+                            <?php if (count($friends) != 0) { 
+                            foreach ($friends as $friend) { ?>
+                      
+                            <a class="friend" href='/profile/<?php echo $friend['userID'] ?>?page=1&order=0&status=4'>
+                                <div class="friendImg">
+                                    <img src="../assets/img/profile/<?php echo $friend['userID']?>.jpg">
                                 </div>
-                                <div class='gameContentRight'>
-                                    <?php echo "<span class='gameStatus'>" . $game['statusName'] . "</span>" ?>
-                                    <div class='gameButtons'>
-                                        <?php
-                                            if(isset($_SESSION['user'])){
-                                                if ($_SESSION['user']['userID'] == $user['userID']) {
-                                                    echo "<a href='/edit/" . $game['gameID'] . "'><i class='fas fa-pen-square'></i></a>";
-                                                    echo "<a href='/delete/" . $game['gameID'] . "'><i class='fas fa-trash'></i></a>";
-                                                }
-                                            }
-                                        ?>
-                                    </div>
-                                </div>     
-                            </div>
+                                <div class="friendText">
+                                    <span><?php echo $friend['username'] ?></span>
+                                    <span>@<?php echo $friend['username'] ?></span>
+                                </div>
+                            </a>
+                            
                             <?php }}else{
-                                echo "<span class='noGamesAlert'>No hay juegos<span>";
+                                echo "<span class='noGamesAlert'>No tienes amigos :(<span>";
                             } ?>
-                            <div class="paging">
-                                <?php if(isset($page)){ ?>
-                                    <div class="pageBtn">
-                                        <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><<</a>
-                                        <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page - 1 < 1 ? 1 : $page - 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><</a>
-                                        <span class="pageNumber">Página <?php echo $_GET["page"] ?></span>
-                                        <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage < $page + 1 ? $page : $page + 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">></a>
-                                        <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">>></a>
-                                    </div>
-                                <?php } ?>
-                            </div>
                         </div>
                     </section>
                 </main>
             </div>
-
                                     <?php
                                     if (isset($pending)) {
                                         if (count($pending) > 0) {
@@ -179,6 +140,7 @@
                                             }
                                         }
                                     }
+                                    
                                     ?>
         <?PHP
             // AÑADIR AMIGO

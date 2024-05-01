@@ -265,7 +265,7 @@ class FrontController {
                         }
                         , 'get');
 
-                // PÁGINA DE PERFIL
+                // PÁGINA DE PERFIL 
 
                 Route::add('/profile/([0-9]+)',
                         function ($id) {
@@ -278,6 +278,22 @@ class FrontController {
                         function ($id) {
                             $controlador = new \Com\Daw2\Controllers\UserController();
                             $controlador->showUserProfile($id);
+                        }
+                        , 'post');
+                        
+                // PÁGINA DE AMIGOS 
+                        
+                Route::add('/profilefriends/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->showUserProfileFriends($id);
+                        }
+                        , 'get');
+
+                Route::add('/profilefriends/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->showUserProfileFriends($id);
                         }
                         , 'post');
                         
