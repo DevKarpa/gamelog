@@ -143,6 +143,10 @@ main{
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.selectedStat{
+    background: rgba(255, 0, 0, 0.43);
+}
+
 .userStat:hover{
     background: rgba(0, 0, 255, 0.40);
     transition-duration: 400ms;
@@ -338,4 +342,8 @@ main{
 
 .friendText span:first-child{
     font-weight: bold;
+}
+
+footer{
+    margin-top: 60px;
 }

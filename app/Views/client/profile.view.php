@@ -33,7 +33,7 @@
                         <img src="../assets/img/profile/<?php echo $user['userID'] ?>.jpg">
                     </div>
                     <div class="userText">
-                        <span><?php echo $user['username'] ?></span>
+                        <span><?php echo ($user['userDisplayName']==null) ? $user['username'] : $user['userDisplayName'] ?></span>
                         <span>@<?php echo $user['username'] ?></span>
                         <span><?php echo $user['userDesc'] ?></span>
                     </div>
@@ -70,8 +70,6 @@
                         }
                         
                         ?>
-                        
-                            
                         </ul>
                     </section>
                     <section class="userStats">
@@ -79,35 +77,35 @@
                         <article class="userStatsCont">
                             
                             <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=3">
-                                <div class="userStat">
+                                <div class="userStat<?php echo ($status==3) ? " selectedStat" : "" ?>">
                                     <span>Completados</span>
                                     <span><?php echo $completedGames ?></span>
                                 </div>
                             </a>
                             
                             <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=2">
-                                <div class="userStat">
+                                <div class="userStat<?php echo ($status==2) ? " selectedStat" : "" ?>">
                                     <span>Jugando</span>
                                     <span><?php echo $playingGames ?></span>
                                 </div>
                             </a>
                             
                             <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=1">
-                                <div class="userStat">
+                                <div class="userStat<?php echo ($status==1) ? " selectedStat" : "" ?>">
                                     <span>Pendientes</span>
                                     <span><?php echo $pendingGames ?></span>
                                 </div>
                             </a>
                             
                             <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=0">
-                                <div class="userStat">
+                                <div class="userStat<?php echo ($status==0) ? " selectedStat" : "" ?>">
                                     <span>Pausados</span>
                                     <span><?php echo $droppedGames ?></span>
                                 </div>
                             </a>
                             
                             <a href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo $order ?>&status=4">
-                                <div class="userStat">
+                                <div class="userStat<?php echo ($status==4) ? " selectedStat" : "" ?>">
                                     <span>Total</span>
                                     <span><?php echo count($allgames) ?></span>
                                 </div>

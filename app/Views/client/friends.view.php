@@ -33,7 +33,7 @@
                         <img src="../assets/img/profile/<?php echo $user['userID'] ?>.jpg">
                     </div>
                     <div class="userText">
-                        <span><?php echo $user['username'] ?></span>
+                        <span><?php echo ($user['userDisplayName']==null) ? $user['username'] : $user['userDisplayName'] ?></span>
                         <span>@<?php echo $user['username'] ?></span>
                         <span><?php echo $user['userDesc'] ?></span>
                     </div>
@@ -56,11 +56,20 @@
                     <section class="userCon">
                         <span class="asideTitle">Conexiones</span>
                         <ul>
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Steam</a></li>
-                            <li><a href="#">Xbox</a></li>
-                            <li><a href="#">Playstation</a></li>
-                            <li><a href="#">Nintendo</a></li>
+                            <?php
+                            $count = 0;
+                            foreach ($conections as $key => $value) {
+
+                                if($value!=NULL){
+                                    echo "<li><i class='fab fa-" . $key . "'></i> $value</li>";
+                                    $count++;
+                                }
+                            }
+                            if($count==0){
+                                echo "<li>Sin conexiones</li>";
+                            }
+
+                            ?>
                         </ul>
                     </section>
                     <section class="userStats">
@@ -120,7 +129,7 @@
                                     <img src="../assets/img/profile/<?php echo $friend['userID']?>.jpg">
                                 </div>
                                 <div class="friendText">
-                                    <span><?php echo $friend['username'] ?></span>
+                                    <span><?php echo ($friend['userDisplayName']==null) ? $friend['username'] : $friend['userDisplayName'] ?></span>
                                     <span>@<?php echo $friend['username'] ?></span>
                                 </div>
                             </a>

@@ -294,8 +294,10 @@ class UserController extends \Com\Daw2\Core\BaseController {
     // están correctos.
     function editCurrentUser() {
         $userModel = new \Com\Daw2\Models\UserModel();
+        $userCon = new \Com\Daw2\Models\UserConectionsModel();
         $data = [];
         $data['user'] = $_SESSION['user'];
+        $data['conections'] = $userCon->getAllConectionsFromUserID($data['user']['userID']);
 
         if (isset($_POST['usernamec'])) {
             $username = filter_var($_POST['usernamec'], FILTER_SANITIZE_SPECIAL_CHARS);
@@ -303,7 +305,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
             if (count($this->checkUsername($data['user']['userID'], $username)) == 0) {
                 $userModel->changeUsername($data['user']['userID'], $username);
                 // Cambia en tiempo real el valor de sesión de username para poder ver el cambio
-                // sin tener que cambiar de sesión
+                // sin tener que cerrar la sesión
                 $_SESSION['user']['username'] = $username;
                 $data['user'] = $_SESSION['user'];
             } else {
@@ -317,6 +319,29 @@ class UserController extends \Com\Daw2\Core\BaseController {
             } else {
                 $data['errors'] = $this->checkUserPassword($_POST['passwordc1'], $_POST['passwordc2']);
             }
+        }
+        
+        if(isset($_POST['displayNamec'])){
+            $displayName = filter_var($_POST['displayNamec'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $userModel->changeDisplayName($data['user']['userID'],$displayName);
+            $_SESSION['user']['userDisplayName'] = $displayName;
+            $data['user'] = $_SESSION['user'];
+        }
+        
+        if(isset($_POST['submit'])){
+            $con = ["twitter" => $_POST['twitter'],"steam" => $_POST['steam'],"xbox" => $_POST['xbox'],"playstation" => $_POST['playstation'],"nintendo" => $_POST['nintendo']];
+        
+            $userCon->updateRegisterFromUserID($data['user']['userID'], $con);
+            
+            //Recarga las conexiones
+            $data['conections'] = $userCon->getAllConectionsFromUserID($data['user']['userID']);
+        }
+        
+        if(!empty($_POST['descc'])){
+            $desc = filter_var($_POST['descc'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $userModel->updateDescription($data['user']['userID'],$desc);
+            $_SESSION['user']['userDesc'] = $desc;
+            $data['user'] = $_SESSION['user'];
         }
 
         $this->view->showViews(array('client/editProfile.view.php'), $data);

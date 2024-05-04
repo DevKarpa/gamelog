@@ -102,6 +102,16 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         $query = $this->pdo->prepare("UPDATE users SET password = ? WHERE userID = ?");
         $query->execute([password_hash($pass, PASSWORD_DEFAULT), $id]);
     }
+    
+    function changeDisplayName($id, $displayname) {
+        $query = $this->pdo->prepare("UPDATE users SET userDisplayName = ? WHERE userID = ?");
+        $query->execute([$displayname, $id]);
+    }
+    
+    function updateDescription($id, $desc) {
+        $query = $this->pdo->prepare("UPDATE users SET userDesc = ? WHERE userID = ?");
+        $query->execute([$desc, $id]);
+    }
 
     // Obtiene los amigos de un usuario
     function getFriendsFromUserID($id): ?array {
@@ -130,4 +140,5 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         // Por el momento los añade mutuamente
         $query->execute([$friendUserID,$mainUserID]);
     }
+    
 }

@@ -1,0 +1,122 @@
+header{
+    display: flex;
+    justify-content: space-between;
+}
+.title{
+    font-size: 4em;
+}
+
+.title a{
+    color:white;
+    text-decoration: none;
+}
+
+main{
+    margin-top: 50px;
+}
+
+.midPage{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.popularGameItem img{
+    width: 500px;
+    border-radius: 10px;
+}
+.popularGameItem{
+    transition-duration: 0.5s;
+    position: relative;
+    text-align: center;
+}
+
+.popularGameItem span{
+    position: absolute;
+    padding-top: 20%;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition-duration: 0.5s;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.popularGameItem span:hover{
+    opacity: 1;
+    transition-duration: 0.5s;
+    background: rgba(0, 0, 255, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+}
+
+.userData form{
+    display: flex;
+    flex-direction: column;
+}
+
+.gameTitle h1{
+    font-size: 3em;
+}
+
+.gameImg{
+    width: 400px;
+}
+
+.gameImg img{
+    width: 100%;
+    border-radius: 16px;
+    vertical-align: middle;
+}
+
+input, select, textarea{
+    background: none;
+    border: none;
+    background: rgba(1, 92, 255, 0.6);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    color: white;
+    font-size: 1.3em;
+    resize: none;
+    margin-bottom: 3px;
+    padding: 10px;
+    transition-duration: 200ms;
+    font-family: "Lato", sans-serif;
+}
+
+input:hover, select:hover, textarea:hover{
+    transition-duration: 200ms;
+    background: rgba(1, 92, 255, 1);
+}
+
+.datesItem{
+    display: flex;
+    gap: 10px;
+}
+
+.statusItem, .dItem, .noteItem{
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonsItem{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.bottomPage{
+    margin-bottom: 300px;
+}
+
+.btn{
+    cursor: pointer;
+}
