@@ -90,6 +90,10 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
                 if (strtotime($reg['end'])) {
                     $errors['end'] = "Si el juego ha sido cancelado, no has podido terminarlo";
                 }
+                if ($reg['note'] < 0 || $reg['note'] > 100){
+                    $errors['note'] = "La nota debe estar comprendida entre 0 y 100";
+                }
+                
             }
 
             // Si el juego está pendiente
@@ -99,6 +103,9 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
                 }
                 if (strtotime($reg['end'])) {
                     $errors['end'] = "Si tienes el juego pendiente, no puedes haberlo finalizado.";
+                }
+                if ($reg['note']!=null){
+                    $errors['note'] = "No puedes ponerle nota el juego si no lo has probado";
                 }
             }
 
@@ -110,6 +117,9 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
                 if (strtotime($reg['end'])) {
                     $errors['end'] = "Si el juego sigue en progreso, no has podido terminarlo.";
                 }
+                if ($reg['note'] < 0 || $reg['note'] > 100){
+                    $errors['note'] = "La nota debe estar comprendida entre 0 y 100";
+                }
             }
 
             // Si el juego ha sido completado
@@ -119,6 +129,9 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
                 }
                 if (!strtotime($reg['start'])) {
                     $errors['start'] = "La fecha de inicio es obligatoria si el juego ha sido completado.";
+                }
+                if ($reg['note'] < 0 || $reg['note'] > 100){
+                    $errors['note'] = "La nota debe estar comprendida entre 0 y 100";
                 }
             }
             

@@ -57,7 +57,7 @@
                         <div class="userSubMenu">
                             <ul>
                                 <li><a href="/profile/<?php echo $user['userID'] ?>?page=1&order=0&status=4">Perfil</a></li>
-                                <li><a href="/profilefriends/<?php echo $user['userID'] ?>">Amigos</a></li>
+                                <li><a href="/profilefriends/<?php echo $user['userID'] ?>">Seguidores</a></li>
                                 <?php if (isset($_SESSION['user'])) {
                                     if ($_SESSION['user']['userID'] == $user['userID']) {
                                         ?>

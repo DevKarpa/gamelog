@@ -76,14 +76,11 @@ main{
     gap: 60px;
 }
 
-.gameImg{
-    width: 300px;
-}
-
 .gameImg img{
-    width: 100%;
+    width: 300px;
     border-radius: 16px;
-    vertical-align: middle;
+    aspect-ratio: 92 / 43;
+    object-fit: cover;
 }
 
 .gameTitle{

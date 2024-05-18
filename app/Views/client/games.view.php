@@ -84,7 +84,7 @@
                     }
 
                     // La dirección cambia si la web está hosteada en remoto
-                    xmlhttp.open("GET", "http://gamelog.localhost:8080/async/" + txt.toLowerCase() + "/" + platform.value, true);
+                    xmlhttp.open("GET", "/async/" + txt.toLowerCase() + "/" + platform.value, true);
                     xmlhttp.send();
 
                 } else {

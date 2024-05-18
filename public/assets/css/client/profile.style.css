@@ -71,12 +71,9 @@ main{
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-
 .topSection .userSubMenu ul li{
     list-style: none;
 }
-
-
 
 .topSection .userSubMenu ul li a{
     text-decoration: none;
@@ -238,14 +235,12 @@ main{
     gap: 60px;
 }
 
-.gameImg{
-    width: 300px;
-}
 
 .gameImg img{
-    width: 100%;
+    width: 300px;
     border-radius: 16px;
-    vertical-align: middle;
+    aspect-ratio: 92 / 43;
+    object-fit: cover;
 }
 
 .gameTitle{
@@ -256,6 +251,10 @@ main{
 .gameStatus{
     font-weight: bold;
     font-size: 1.4em;
+}
+
+.gameButtons{
+    display: flex;
 }
 
 .gameButtons a{
@@ -278,6 +277,30 @@ main{
 .gameButtons a:last-child:hover{
     transition-duration: 300ms;
     color: #cc1e5c;
+}
+
+.gameNote{
+    border-radius: 30%;
+    font-size: 0.6em;
+    margin-left: 6px;
+    padding: 5px;
+    text-align: center;
+}
+
+.gnExcelent{
+    background-color: #01a252;
+}
+
+.gnGood{
+    background-color: #63c93a;
+}
+
+.gnMixed{
+    background-color: #f7c735;
+}
+
+.gnBad{
+    background-color: #ff0000;
 }
 
 .pageBtn{
@@ -346,4 +369,112 @@ main{
 
 footer{
     margin-top: 60px;
+}
+
+@media screen and (max-width: 1500px) {
+    .game .gameContentRight{
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .content{
+        padding-left: 3% !important;
+        padding-right: 3% !important;
+    }
+    
+    header{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    nav{
+        font-size: 0.65em;
+    }
+    
+    .topSection{
+        margin: 0px;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .centerPage{
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .conItems{
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    
+    .conItems li{
+        display:flex;
+        gap: 4px;
+    }
+    
+    .userStatsCont{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    
+    .userStatsCont a{
+        width: 100px;
+    }
+    
+    .userStat{
+        font-size: 0.6em;
+    }
+    
+    
+    .gameImg img{
+        width: 200px;
+    }
+    
+    .gameTitle{
+        font-size: 1em;
+    }
+    
+    .gamePlat{
+        font-size: 0.7em;
+    }
+    
+    .gameStatus{
+        font-size: 1em;
+    }
+    
+    .gameTime{
+        font-size: 0.7em;
+        gap: 2px;
+    }
+    
+    .gameContentRight{
+        flex-direction: column;
+        justify-content: center;
+        margin-right: 20px;
+    }
+    
+    .gameButtons a{
+        font-size: 2em;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    
+    .gameButtons{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .pageBtn a{
+        padding: 10px;
+    }
+   
+    .pageBtn span{
+        font-size: 1em;
+    }
+
 }

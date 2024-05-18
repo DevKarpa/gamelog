@@ -42,7 +42,7 @@
                 <div class="userSubMenu">
                     <ul>
                         <li><a href="/profile/<?php echo $user['userID'] ?>?page=1&order=0&status=4">Perfil</a></li>
-                        <li><a href="/profilefriends/<?php echo $user['userID'] ?>">Amigos</a></li>
+                        <li><a href="/profilefriends/<?php echo $user['userID'] ?>">Seguidores</a></li>
                         <?php if (isset($_SESSION['user'])) {
                             if ($_SESSION['user']['userID'] == $user['userID']) {?>
                         <li><a href="/settings">Editar&nbsp;Perfil</a></li>
@@ -55,7 +55,7 @@
                 <aside>
                     <section class="userCon">
                         <span class="asideTitle">Conexiones</span>
-                        <ul>
+                        <ul class="conItems">
                         <?php
                         $count = 0;
                         foreach ($conections as $key => $value) {
@@ -136,7 +136,12 @@
                                             <?php echo "<img src='../assets/img/games/" . $game['gameID'] . ".png'>" ?>
                                         </div>
                                         <div class='gameText'>
-                                            <?php echo "<span class='gameTitle'>" . $game['gameTitle'] . "</span>" ?>
+                                            <?php
+                                                if(isset($game['nota'])){
+                                                    $class = ($game['nota']<=100 && $game['nota']>=81) ? "gnExcelent" : (($game['nota']<=80 && $game['nota']>=61) ? "gnGood" : (($game['nota']<=60 && $game['nota']>=40) ? "gnMixed" : (($game['nota']<=39 && $game['nota']>=0) ? "gnBad" : "")));
+                                                }
+                                            ?>
+                                            <?php echo "<span class='gameTitle'>" . $game['gameTitle'] . (isset($game['nota']) ? "<span class='gameNote " . $class . "'>". $game['nota'] . "</span>" : '') . "</span>" ?>
                                             <div class="gamePlat">
                                                 <?php echo "<span>" . $game['platformName'] . "</span>" ?>
                                             </div>

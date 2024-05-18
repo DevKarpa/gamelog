@@ -118,7 +118,7 @@ footer{
 .errorbox{
     display: flex;
     justify-content: center;
-    
+    max-width: 100%;
 }
 
 .erroritems{
@@ -128,4 +128,20 @@ footer{
     padding: 20px;
     border-radius: 20px;
     border: 5px solid #f5c6cb;
+}
+
+@media screen and (max-width: 1500px) {
+    .content{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    
+    footer{
+        flex-direction: column-reverse;
+    }
+    
+    .footLinks{
+        font-size: 0.8em;
+        justify-content: center;
+    }
 }

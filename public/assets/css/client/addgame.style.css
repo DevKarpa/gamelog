@@ -76,7 +76,7 @@ main{
     vertical-align: middle;
 }
 
-input, select, textarea{
+input, select{
     background: none;
     border: none;
     background: rgba(1, 92, 255, 0.6);
@@ -91,7 +91,7 @@ input, select, textarea{
     font-family: "Lato", sans-serif;
 }
 
-input:hover, select:hover, textarea:hover{
+input:hover, select:hover{
     transition-duration: 200ms;
     background: rgba(1, 92, 255, 1);
 }
@@ -104,6 +104,14 @@ input:hover, select:hover, textarea:hover{
 .statusItem, .dItem, .noteItem{
     display: flex;
     flex-direction: column;
+}
+
+.noteItem:last-child{
+    align-items: center;
+}
+
+#nota{
+   max-width: 25%; 
 }
 
 .buttonsItem{

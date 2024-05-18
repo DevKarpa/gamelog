@@ -31,16 +31,6 @@
             
             <main>
                 
-                <?php
-                    if (isset($errors)) {
-                        echo '<div class="errorbox"><div class="erroritems">';
-                            foreach ($errors as $error) {
-                                echo "<p>" . $error ."</p>";
-                            }
-                        echo '</div></div>';
-                    }
-                ?>
-
                 <section class="midPage">
                     <section class="gameData">
                         <div class='gameImg'>
@@ -73,12 +63,13 @@
                                 </div>
                             </div>
                             <div class="noteItem">
-                                <label>Notas (Opcional)</label>
-                                <textarea name="note"><?php echo isset($reg) ? $reg['nota'] : '' ?></textarea>
+                                <label>Nota (Opcional)</label>
+                                <input id="nota" name="note" type="number" min="0" max="100" value="<?php echo isset($reg) ? $reg['nota'] : '' ?>">
                             </div>
                             
                         
                     </section>
+                    
                 </section>
                 
                 <section class="bottomPage">
@@ -87,7 +78,18 @@
                             <input class="btn" type="reset" value="Reset" onclick="resetValues()">
                         </div>
                     </form>
+                        <?php
+                    if (isset($errors)) {
+                        echo '<div class="errorbox"><div class="erroritems">';
+                            foreach ($errors as $error) {
+                                echo "<p>" . $error ."</p>";
+                            }
+                        echo '</div></div>';
+                    }
+                ?>
                 </section>
+                
+            
                 
                 
                 
