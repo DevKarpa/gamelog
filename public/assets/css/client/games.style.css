@@ -124,3 +124,71 @@ footer{
     margin-top: 500px;
 }
 
+@media screen and (max-width: 900px) {
+
+    header{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    nav{
+        font-size: 0.60em;
+    }
+    
+    nav ul{
+        gap: 1px !important; 
+    }
+    
+    nav ul li:not(:last-child):after{
+        content: '' !important;
+    }
+    
+    .gameSearch{
+        font-size: 0.8em;
+    }
+    
+    .gameSearch h2{
+        text-align: center;
+        font-size: 2em;
+    }
+    
+    form{
+        flex-direction: column-reverse;
+    }
+    
+    form #gametxt, form #platform{
+        width: 100% !important;
+    }
+    
+    main{
+        margin-top: 20px;
+    }
+    
+    .game{
+        font-size: 0.7em;
+    }
+    
+    .gameImg img{
+        width: 200px;
+    }
+    
+    .gameContentLeft, .gameContentRight{
+        gap: 10px !important;
+    }
+    
+    .gameYear{
+        font-size: 1em;
+    }
+    
+    .gameTitle{
+        font-size: 1.3em;
+    }
+    
+    .gameButtons a{
+        font-size: 4em;
+        margin-right: 10px;
+    }
+    
+
+}
+

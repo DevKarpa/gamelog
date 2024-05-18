@@ -33,6 +33,14 @@ nav ul li a{
     text-decoration: none;
     color: white;
     margin-right: 15px;
+    transition-duration: 300ms;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+nav a:hover{
+   transition-duration: 300ms;
+   background: rgba(0, 0, 255, 0.40);
 }
 
 nav ul li:not(:last-child):after{
@@ -130,6 +138,8 @@ footer{
     border: 5px solid #f5c6cb;
 }
 
+/* DISEÑO DE TABLET */
+
 @media screen and (max-width: 1500px) {
     .content{
         padding-left: 5%;
@@ -143,5 +153,17 @@ footer{
     .footLinks{
         font-size: 0.8em;
         justify-content: center;
+    }
+}
+
+/* DISEÑO DE MOVIL */
+
+@media screen and (max-width: 900px) {
+    .content{
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+    footer{
+        padding: 30px;
     }
 }

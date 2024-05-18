@@ -128,3 +128,28 @@ input:hover, select:hover{
 .btn{
     cursor: pointer;
 }
+
+@media screen and (max-width: 900px) {
+
+    header{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    nav{
+        font-size: 0.60em;
+    }
+    
+    nav ul{
+        gap: 1px !important; 
+    }
+    
+    nav ul li:not(:last-child):after{
+        content: '' !important;
+    }
+    
+    .midPage{
+        flex-direction: column;
+    }
+    
+}

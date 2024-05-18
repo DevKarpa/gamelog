@@ -236,14 +236,14 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $data['droppedGames'] = count($userGamesModel->getDroppedGamesByUserID($id));
         $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
         $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
-        $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
+        $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 10);
         $data['conections'] = $userCon->getAllConectionsFromUserID($id);
         //$data['pending'] = $userModel->checkPendingFriendRequest($id);
 
         // Si existe page en el get
         if (isset($_GET['page'])) {
             $data['page'] = $_GET['page'];
-            $offset = ($data['page'] - 1) * 5;
+            $offset = ($data['page'] - 1) * 10;
             // Según el orden se ejecuta una consulta u otra para mostrar los juegos
             switch ($data['order']) {
                 case 0:

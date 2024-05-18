@@ -377,33 +377,50 @@ footer{
     }
 }
 
-@media screen and (max-width: 600px) {
-    .content{
-        padding-left: 3% !important;
-        padding-right: 3% !important;
-    }
-    
+@media screen and (max-width: 900px) {
+
     header{
         flex-direction: column;
         align-items: center;
     }
     
     nav{
-        font-size: 0.65em;
+        font-size: 0.60em;
     }
     
+    nav ul{
+        gap: 1px !important; 
+    }
+    
+    nav ul li:not(:last-child):after{
+        content: '' !important;
+    }
+
     .topSection{
         margin: 0px;
-        flex-direction: column-reverse;
-        align-items: center;
+        flex-direction: column;
+        
         gap: 20px;
     }
     
+    .userImg img{
+        width: 100px !important;
+    }
+    
+    .userText{
+        font-size: 0.8em;
+    }
+    
+    .userSubMenu ul{
+        justify-content: center !important;
+    }
+    
     .centerPage{
+        margin-top: 10px;
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .conItems{
         display: flex;
         gap: 20px;
@@ -428,8 +445,9 @@ footer{
     
     .userStat{
         font-size: 0.6em;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
-    
     
     .gameImg img{
         width: 200px;
@@ -476,5 +494,7 @@ footer{
     .pageBtn span{
         font-size: 1em;
     }
+    
+    
 
 }

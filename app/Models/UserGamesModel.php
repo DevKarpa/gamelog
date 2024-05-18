@@ -78,7 +78,7 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
 
     // Obtiene los juegos por paginación
     function getPagedGamesByUserID($offset, $id) {
-        $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID LIMIT 5 OFFSET ?");
+        $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID LIMIT 10 OFFSET ?");
         $query->execute([$id, $offset]);
         return $query->fetchAll();
     }
@@ -98,10 +98,10 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
     // Obtiene los juegos por ID de usuario y status con paginación ordenado por Nombre
     function getPagedGamesByUserIDandName($id, $offset, $status) {
         if ($status >= 0 && $status <= 3) {
-            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = ? GROUP BY games.gameID ORDER BY games.gameTitle LIMIT 5 OFFSET ? ");
+            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = ? GROUP BY games.gameID ORDER BY games.gameTitle LIMIT 10 OFFSET ? ");
             $query->execute([$id, $status, $offset]);
         } else {
-            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID ORDER BY games.gameTitle LIMIT 5 OFFSET ? ");
+            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID ORDER BY games.gameTitle LIMIT 10 OFFSET ? ");
             $query->execute([$id, $offset]);
         }
         return $query->fetchAll();
@@ -110,10 +110,10 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
     // Obtiene los juegos por ID de usuario y status con paginación ordenado por Devs
     function getPagedGamesByUserIDandDevs($id, $offset, $status) {
         if ($status >= 0 && $status <= 3) {
-            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = ? GROUP BY games.gameID ORDER BY developers LIMIT 5 OFFSET ?");
+            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = ? GROUP BY games.gameID ORDER BY developers LIMIT 10 OFFSET ?");
             $query->execute([$id, $status, $offset]);
         }else{
-            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID ORDER BY developers LIMIT 5 OFFSET ?");
+            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID ORDER BY developers LIMIT 10 OFFSET ?");
             $query->execute([$id, $offset]);
         }
 
@@ -123,10 +123,10 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
     // Obtiene los juegos por ID de usuario y status con paginación ordenado por Fecha de inicio
     function getPagedGamesByUserIDandInicio($id, $offset, $status) {
         if ($status >= 0 && $status <= 3) {
-            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = ? GROUP BY games.gameID ORDER BY userGames.fechaInicio LIMIT 5 OFFSET ?");
+            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = ? GROUP BY games.gameID ORDER BY userGames.fechaInicio LIMIT 10 OFFSET ?");
             $query->execute([$id, $status, $offset]);
         }else{
-            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID ORDER BY userGames.fechaInicio LIMIT 5 OFFSET ?");
+            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID ORDER BY userGames.fechaInicio LIMIT 10 OFFSET ?");
             $query->execute([$id, $offset]);
         }
 
@@ -136,10 +136,10 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
     // Obtiene los juegos por ID de usuario y status con paginación ordenado por Fin
     function getPagedGamesByUserIDandFin($id, $offset, $status) {
         if ($status >= 0 && $status <= 3) {
-            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = ? GROUP BY games.gameID ORDER BY userGames.fechaFin LIMIT 5 OFFSET ?");
+            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? AND status.statusID = ? GROUP BY games.gameID ORDER BY userGames.fechaFin LIMIT 10 OFFSET ?");
             $query->execute([$id, $status, $offset]);
         }else{
-            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID ORDER BY userGames.fechaFin LIMIT 5 OFFSET ?");
+            $query = $this->pdo->prepare(self::BASE . "WHERE userGames.userID = ? GROUP BY games.gameID ORDER BY userGames.fechaFin LIMIT 10 OFFSET ?");
             $query->execute([$id, $offset]);
         }
 
