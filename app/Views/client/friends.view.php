@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../assets/css/client/profile.style.css" type="text/css">
         <link rel="stylesheet" href="../assets/css/client/main.style.css" type="text/css">
         <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-        <title>Amigos de <?php echo $user['username'] ?></title>
+        <title>Siguiendo | <?php echo $user['username'] ?></title>
     </head>
     <body>
         <div class="content">
@@ -42,7 +42,8 @@
                 <div class="userSubMenu">
                     <ul>
                         <li><a href="/profile/<?php echo $user['userID'] ?>?page=1&order=0&status=4">Perfil</a></li>
-                        <li><a href="/profilefriends/<?php echo $user['userID'] ?>">Seguidores</a></li>
+                        <li><a href="/profilefriends/<?php echo $user['userID'] ?>">Siguiendo</a></li>
+                        <li><a href="/profilefriendsc/<?php echo $user['userID'] ?>">Seguidores</a></li>
                         <?php if (isset($_SESSION['user'])) {
                             if ($_SESSION['user']['userID'] == $user['userID']) {?>
                         <li><a href="/settings">Editar&nbsp;Perfil</a></li>
@@ -117,7 +118,7 @@
                 <main>
                     <section class="gameListContainer">
                         <div class="gameListTitle">
-                            <span class="glTitle">Seguidores</span>
+                            <span class="glTitle"><?php echo $title ?></span>
                             <span class="glSub"><?php echo count($friends) ?></span>
                         </div>
                         <div class="friendList">

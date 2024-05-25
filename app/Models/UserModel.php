@@ -119,6 +119,13 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
         $query->execute([$id]);
         return $query->fetchAll();
     }
+    
+    // Obtiene los usuarios que te están siguiendo
+    function getFriendscFromUserID($id): ?array {
+        $query = $this->pdo->prepare(self::BASE . "JOIN userFriends ON users.userID = userFriends.mainUserID WHERE userFriends.friendUserID = ?");
+        $query->execute([$id]);
+        return $query->fetchAll();
+    }
 
     // Obtiene los ID de amigos de un usuario
     function getFriendsIDFromUserID($id): ?array {
@@ -137,8 +144,11 @@ class UserModel extends \Com\Daw2\Core\BaseModel {
     function addNewFriend($mainUserID, $friendUserID): void {
         $query = $this->pdo->prepare("INSERT INTO userFriends(mainUserID, friendUserId) VALUES (?,?)");
         $query->execute([$mainUserID, $friendUserID]);
-        // Por el momento los añade mutuamente
-        $query->execute([$friendUserID,$mainUserID]);
     }
     
+    // El usuario main deja de seguir a friendUser
+    function unfollowUser($mainUserID, $friendUserID) {
+        $query = $this->pdo->prepare("DELETE FROM userFriends WHERE mainUserID = ? AND friendUserId = ?");
+        $query->execute([$mainUserID, $friendUserID]);
+    }
 }

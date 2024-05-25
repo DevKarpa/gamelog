@@ -27,13 +27,21 @@ class DBManager {
 
     public function getConnection($emulatePrepares = false) {
         if (is_null($this->db)) {
+            
             $host = $_ENV['db.host'];
             $db = $_ENV['db.schema'];
             $user = $_ENV['db.user'];
             $pass = $_ENV['db.pass'];
             $charset = $_ENV['db.charset'];
             $emulated = (bool)$_ENV['db.emulated'];
-
+            /*
+            $host = "localhost";
+            $db = "proxecto";
+            $user = "admin";
+            $pass = "daw2pass";
+            $charset = "utf8mb4";
+            $emulated = false;
+*/
             $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

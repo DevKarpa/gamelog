@@ -54,6 +54,25 @@ main{
     margin-right: 10%;
 }
 
+.followCont{
+    display: flex;
+    justify-content: center; 
+    margin-top: 30px;
+}
+
+.followBtn{
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(23, 255, 38, 0.43);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.unfollow{
+    background: rgba(255, 0, 0, 0.43);
+}
+
 .topSection .userSubMenu ul{
     display: flex;
     gap:20px;
@@ -494,6 +513,7 @@ footer{
     .pageBtn span{
         font-size: 1em;
     }
+    
     
     
 

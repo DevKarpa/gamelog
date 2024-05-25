@@ -297,6 +297,34 @@ class FrontController {
                         }
                         , 'post');
                         
+                Route::add('/profilefriendsc/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->showUserProfileFriendsc($id);
+                        }
+                        , 'get');
+
+                Route::add('/profilefriendsc/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->showUserProfileFriendsc($id);
+                        }
+                        , 'post');
+                        
+                Route::add('/unfollow/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->unfollowUser($id);
+                        }
+                        , 'get');
+
+                Route::add('/unfollow/([0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\UserController();
+                            $controlador->unfollowUser($id);
+                        }
+                        , 'post');
+ 
                 // BUSCADOR DE JUEGOS, CON BOTÓN DE AÑADIR (AL PERFIL LOGEADO)
 
             Route::add('/search',

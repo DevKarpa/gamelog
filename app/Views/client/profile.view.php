@@ -42,12 +42,25 @@
                 <div class="userSubMenu">
                     <ul>
                         <li><a href="/profile/<?php echo $user['userID'] ?>?page=1&order=0&status=4">Perfil</a></li>
-                        <li><a href="/profilefriends/<?php echo $user['userID'] ?>">Seguidores</a></li>
+                        <li><a href="/profilefriends/<?php echo $user['userID'] ?>">Siguiendo</a></li>
+                        <li><a href="/profilefriendsc/<?php echo $user['userID'] ?>">Seguidores</a></li>
                         <?php if (isset($_SESSION['user'])) {
                             if ($_SESSION['user']['userID'] == $user['userID']) {?>
                         <li><a href="/settings">Editar&nbsp;Perfil</a></li>
                         <?php } }?>
                     </ul>
+                    <?PHP
+                    // AÑADIR AMIGO
+                    if(isset($_SESSION['user'])){
+                        if ($_SESSION['user']['userID'] != $user['userID']) {
+                            if (!in_array($user['userID'], $_SESSION['friends'])) {
+                                ?> <div class="followCont"> <a class="followBtn" href="/addfriend/<?php echo $user['userID'] ?>">Seguir</a> </div><?php
+                            }else{
+                                ?> <div class="followCont"> <a class="followBtn unfollow" href="/unfollow/<?php echo $user['userID'] ?>">Dejar de seguir</a> </div><?php
+                            }
+                        } 
+                    }
+                    ?>
                 </div>
             </section>
             
@@ -184,29 +197,6 @@
                     </section>
                 </main>
             </div>
-
-                                    <?php
-                                    if (isset($pending)) {
-                                        if (count($pending) > 0) {
-                                            foreach ($pending as $pendiente) {
-                                                echo "<a href='/profile/" . $pendiente['userID'] . "?page=1&order=0&status=4'>" . $pendiente['username'] . "</a> <a href='/accept/" . $pendiente['userID'] . "'>Aceptar</a> <a href='/reject/" . $pendiente['userID'] . "'>Rechazar</a>" . "<br>";
-                                            }
-                                        }
-                                    }
-                                    ?>
-        <?PHP
-            // AÑADIR AMIGO
-            if(isset($_SESSION['user'])){
-                if ($_SESSION['user']['userID'] != $user['userID']) {
-                    if (!in_array($user['userID'], $_SESSION['friends'])) {
-                        ?> <a href="/addfriend/<?php echo $user['userID'] ?>"> + Añadir amigos</a><br> <?php
-                    }
-                } 
-            }
-        ?>
-                                        
-
-                                    
         </div>
         <footer>
             <div class="footLeft">

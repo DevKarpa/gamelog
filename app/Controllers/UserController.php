@@ -274,6 +274,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
         $userCon = new \Com\Daw2\Models\UserConectionsModel();
         $data = [];
+        $data['title'] = "Siguiendo";
         $data['user'] = $userModel->getUserById($id);
         $data['friends'] = $userModel->getFriendsFromUserID($id);
         $data['allgames'] = $userGamesModel->getGamesByUserID($id);
@@ -285,7 +286,27 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
         $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
         $data['conections'] = $userCon->getAllConectionsFromUserID($id);
-        //$data['pending'] = $userModel->checkPendingFriendRequest($id);
+
+        $this->view->showViews(array('client/friends.view.php'), $data);
+    }
+    
+    function showUserProfileFriendsc($id) {
+        $userModel = new \Com\Daw2\Models\UserModel();
+        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
+        $userCon = new \Com\Daw2\Models\UserConectionsModel();
+        $data = [];
+        $data['title'] = "Seguidores";
+        $data['user'] = $userModel->getUserById($id);
+        $data['friends'] = $userModel->getFriendscFromUserID($id);
+        $data['allgames'] = $userGamesModel->getGamesByUserID($id);
+        $data['completedGames'] = count($userGamesModel->getCompletedGamesByUserID($id));
+        $data['playingGames'] = count($userGamesModel->getPlayingGamesByUserID($id));
+        $data['pendingGames'] = count($userGamesModel->getPendingGamesByUserID($id));
+        $data['droppedGames'] = count($userGamesModel->getDroppedGamesByUserID($id));
+        $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
+        $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
+        $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
+        $data['conections'] = $userCon->getAllConectionsFromUserID($id);
 
         $this->view->showViews(array('client/friends.view.php'), $data);
     }
@@ -368,6 +389,14 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $userModel = new \Com\Daw2\Models\UserModel();
         $userModel->addNewFriend($_SESSION['user']['userID'],$id);
         $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
-        header("location: /profile/". $_SESSION['user']['userID'] ."?page=1&order=0&status=4");
+        header("location: /profile/". $id ."?page=1&order=0&status=4");
     }
+    
+    function unfollowUser($id) {
+        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel->unfollowUser($_SESSION['user']['userID'],$id);
+        $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
+        header("location: /profile/". $id ."?page=1&order=0&status=4");
+    }
+    
 }
