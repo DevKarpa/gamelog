@@ -17,5 +17,9 @@ class InicioController extends \Com\Daw2\Core\BaseController {
     public function userIndex() {
         $this->view->showViews(array('client/index.view.php'));
     }
+    
+    public function loadHelpPage(){
+        $this->view->showViews(array('client/help.view.php'));
+    }
 
 }

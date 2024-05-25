@@ -23,7 +23,7 @@
             <div class="icon">
                 <i class="ion ion-person"></i>
             </div>
-            <a href="#" class="small-box-footer">Show list <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="user-list" class="small-box-footer">Show list <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>    
     <div class="col-lg col-12">
@@ -36,7 +36,7 @@
             <div class="icon">
                 <i class="fas fa-code"></i>
             </div>
-            <a href="#" class="small-box-footer">Show list <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="dev-list" class="small-box-footer">Show list <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
 </div>

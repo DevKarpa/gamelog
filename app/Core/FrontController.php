@@ -37,6 +37,22 @@ class FrontController {
                         $controlador->registerUser();
                     }
                     , 'post');
+                    
+            // PÁGINA DE AYUDA, TERMINOS Y CONDICIONES
+
+            Route::add('/help',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\InicioController();
+                        $controlador->loadHelpPage();
+                    }
+                    , 'get');
+
+            Route::add('/help',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\InicioController();
+                        $controlador->loadHelpPage();
+                    }
+                    , 'post');
 
             // BUSCADOR DE JUEGOS, CON BOTÓN DE AÑADIR (AL PERFIL LOGEADO)
 
@@ -435,6 +451,22 @@ class FrontController {
                         }
                         , 'post');
             }
+            
+            // PÁGINA DE AYUDA, TERMINOS Y CONDICIONES
+
+            Route::add('/help',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\InicioController();
+                        $controlador->loadHelpPage();
+                    }
+                    , 'get');
+
+            Route::add('/help',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\InicioController();
+                        $controlador->loadHelpPage();
+                    }
+                    , 'post');
 
             Route::add('/logout',
                     function () {

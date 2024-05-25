@@ -1,0 +1,42 @@
+header{
+    display: flex;
+    justify-content: space-between;
+}
+.title{
+    font-size: 4em;
+}
+
+.title a{
+    color:white;
+    text-decoration: none;
+}
+
+main{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-bottom: 30px
+}
+
+
+@media screen and (max-width: 900px) {
+
+    header{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    nav{
+        font-size: 0.60em;
+    }
+    
+    nav ul{
+        gap: 1px !important; 
+    }
+    
+    nav ul li:not(:last-child):after{
+        content: '' !important;
+    }
+    
+}

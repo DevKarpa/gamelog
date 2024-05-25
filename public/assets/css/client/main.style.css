@@ -146,9 +146,7 @@ footer{
         padding-right: 5%;
     }
     
-    footer{
-        flex-direction: column-reverse;
-    }
+    
     
     .footLinks{
         font-size: 0.8em;
@@ -165,5 +163,6 @@ footer{
     }
     footer{
         padding: 30px;
+        flex-direction: column-reverse;
     }
 }

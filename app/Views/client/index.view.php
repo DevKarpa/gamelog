@@ -115,9 +115,9 @@
                     <a href="#"><i class="footImg fab fa-facebook"></i></i></a>
                 </div>
                 <div class="footLinks">
-                    <a href="#">Terminos de Servicio</a>
-                    <a href="#">Política de Privacidad</a>
-                    <a href="#">FAQ</a>
+                    <a href="/help">Terminos de Servicio</a>
+                    <a href="/help">Política de Privacidad</a>
+                    <a href="/help">FAQ</a>
 
                 </div>
             </div>

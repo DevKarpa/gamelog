@@ -24,6 +24,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
             }
         }
 
+        
         if (!is_null($user)) {
             header("location: /");
         } else {
@@ -41,8 +42,8 @@ class UserController extends \Com\Daw2\Core\BaseController {
 
         if (isset($_POST['submit'])) {
             if (isset($_POST['username']) && isset($_POST['pass']) && isset($_POST['pass2'])) {
-                var_dump(count($this->checkRegisterData($_POST)));
                 if (count($this->checkRegisterData($_POST)) == 0) {
+                    echo "todo bien";
                     $_SESSION['user'] = $userModel->registerUser($_POST);
                     $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
                     $userCon->createNewRegister($_SESSION['user']['userID']);
@@ -55,7 +56,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
                 $data['error'] = "Rellena todas las casillas";
             }
         }
-
+        
         $this->view->showViews(array('login.view.php'), $data);
     }
 

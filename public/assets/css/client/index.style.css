@@ -241,6 +241,10 @@
 
 @media screen and (max-width: 900px) {
     
+    .headerTxt #title{
+        font-size: 6.5em;
+    }
+    
     .headerTxt{
         margin-top: 60px;
         display: flex;
