@@ -15,13 +15,14 @@
                 <nav>
                     <ul>
                         <?php if (isset($_SESSION['user'])) { ?>
-                            <li><a href="/profile/<?php echo $_SESSION['user']['userID'] ?>?page=1&order=0&status=4">Mi perfil</a></li>
+
                         <?php } else { ?>
                             <li><a href="/register">Registrarse</a></li> <?php } ?>
                         <li><a href="/search">Buscar Juegos</a></li>
                         <li><a href="/help">Ayuda</a></li>
                         <?php if (isset($_SESSION['user'])) { ?>
-                            <li><a href="/logout">Cerrar sesión</a></li>
+                            <li><a href="#" id="dropdown" class="glUserImg"><img src="../assets/img/profile/<?php echo $_SESSION['user']['userID'] ?>.jpg"></a></li>
+
                         <?php } ?>
                     </ul>
                 </nav>
@@ -49,6 +50,8 @@
                         <li><a href="/settings">Editar&nbsp;Perfil</a></li>
                         <?php } }?>
                     </ul>
+                    
+                    <div class="followCont"> <a class="followBtn searchBtn" href="/searchusers">Buscar Usuarios</a> </div>
                 </div>
             </section>
             
@@ -122,6 +125,7 @@
                             <span class="glSub"><?php echo count($friends) ?></span>
                         </div>
                         <div class="friendList">
+                            
                             <?php if (count($friends) != 0) { 
                             foreach ($friends as $friend) { ?>
                       
@@ -136,23 +140,23 @@
                             </a>
                             
                             <?php }}else{
-                                echo "<span class='noGamesAlert'>No tienes amigos :(<span>";
+                                echo "<span class='noGamesAlert'>No existen resultados :(<span>";
                             } ?>
                         </div>
                     </section>
                 </main>
             </div>
-                                    <?php
-                                    if (isset($pending)) {
-                                        if (count($pending) > 0) {
-                                            foreach ($pending as $pendiente) {
-                                                echo "<a href='/profile/" . $pendiente['userID'] . "?page=1&order=0&status=4'>" . $pendiente['username'] . "</a> <a href='/accept/" . $pendiente['userID'] . "'>Aceptar</a> <a href='/reject/" . $pendiente['userID'] . "'>Rechazar</a>" . "<br>";
-                                            }
-                                        }
-                                    }
-                                    
-                                    ?>
-        <?PHP
+            <?php
+            if (isset($pending)) {
+                if (count($pending) > 0) {
+                    foreach ($pending as $pendiente) {
+                        echo "<a href='/profile/" . $pendiente['userID'] . "?page=1&order=0&status=4'>" . $pendiente['username'] . "</a> <a href='/accept/" . $pendiente['userID'] . "'>Aceptar</a> <a href='/reject/" . $pendiente['userID'] . "'>Rechazar</a>" . "<br>";
+                    }
+                }
+            }
+
+            ?>
+            <?PHP
             // AÑADIR AMIGO
             if(isset($_SESSION['user'])){
                 if ($_SESSION['user']['userID'] != $user['userID']) {
@@ -186,5 +190,16 @@
                 </div>
             </div>
         </footer>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+        <script>
+            tippy("#dropdown", {
+                content: '<ul class="drop"><li><a href="/profile/<?php echo $_SESSION["user"]["userID"] ?>?page=1&order=0&status=4">Mi perfil</a></li><li><a href="/logout">Cerrar sesión</a></li></ul>',
+                allowHTML: true,
+                trigger: 'click',
+                interactive: true,
+                placement: 'bottom'
+            });
+        </script>
     </body>
 </html>

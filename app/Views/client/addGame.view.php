@@ -17,13 +17,14 @@
                 <nav>
                     <ul>
                         <?php if (isset($_SESSION['user'])) { ?>
-                            <li><a href="/profile/<?php echo $_SESSION['user']['userID'] ?>?page=1&order=0&status=4">Mi perfil</a></li>
+
                         <?php } else { ?>
                             <li><a href="/register">Registrarse</a></li> <?php } ?>
                         <li><a href="/search">Buscar Juegos</a></li>
                         <li><a href="/help">Ayuda</a></li>
                         <?php if (isset($_SESSION['user'])) { ?>
-                            <li><a href="/logout">Cerrar sesión</a></li>
+                            <li><a href="#" id="dropdown" class="glUserImg"><img src="../assets/img/profile/<?php echo $_SESSION['user']['userID'] ?>.jpg"></a></li>
+
                         <?php } ?>
                     </ul>
                 </nav>
@@ -88,11 +89,7 @@
                     }
                 ?>
                 </section>
-                
-            
-                
-                
-                
+
             </main>
         
         </div>
@@ -118,7 +115,8 @@
                 </div>
             </div>
         </footer>
-        
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
         <script>
             var start = document.getElementById('start');
             var end = document.getElementById('end');
@@ -139,6 +137,14 @@
                 console.log("JUGANDO 🎮️");
                 console.log("JUGANDO ✅️");
             }
+            
+            tippy("#dropdown", {
+                content: '<ul class="drop"><li><a href="/profile/<?php echo $_SESSION["user"]["userID"] ?>?page=1&order=0&status=4">Mi perfil</a></li><li><a href="/logout">Cerrar sesión</a></li></ul>',
+                allowHTML: true,
+                trigger: 'click',
+                interactive: true,
+                placement: 'bottom'
+            });
         </script>
         
     </body>

@@ -92,16 +92,18 @@ main{
 
 .topSection .userSubMenu ul li{
     list-style: none;
+    
 }
 
 .topSection .userSubMenu ul li a{
     text-decoration: none;
     color: white;
-    margin-right: 10px;
+    transition-duration: 300ms;
 }
 
-.topSection .userSubMenu ul li:not(:last-child):after{
-  content: '|';
+.topSection .userSubMenu ul li a:hover{
+    transition-duration: 300ms;
+    color: lightgrey;
 }
 
 .centerPage{
@@ -386,6 +388,10 @@ main{
     font-weight: bold;
 }
 
+.searchBtn{
+    background: rgba(1, 92, 219, 0.23);
+}
+
 footer{
     margin-top: 60px;
 }
@@ -403,17 +409,7 @@ footer{
         align-items: center;
     }
     
-    nav{
-        font-size: 0.60em;
-    }
     
-    nav ul{
-        gap: 1px !important; 
-    }
-    
-    nav ul li:not(:last-child):after{
-        content: '' !important;
-    }
 
     .topSection{
         margin: 0px;
@@ -432,6 +428,10 @@ footer{
     
     .userSubMenu ul{
         justify-content: center !important;
+    }
+    
+    .userSubMenu ul li a{
+        font-size: 0.8em;
     }
     
     .centerPage{

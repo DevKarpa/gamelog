@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="./assets/css/client/games.style.css"  type="text/css">
         <link rel="stylesheet" href="./assets/css/client/main.style.css"  type="text/css">
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-        <title>Buscar juegos</title>
+        <title>Buscar usuarios</title>
     </head>
     <body>
         <div class="content">
@@ -29,17 +29,9 @@
             </header>
             <main>
                 <section class="gameSearch">
-                    <h2>Busca juegos que añadir a tu perfil</h2>
+                    <h2>Busca usuarios a los que seguir</h2>
                     <form>
-                        <input type="text" id="gametxt" onkeyup="showGame(this.value)" placeholder="Título del juego...">
-                        <select name="platform" id="platform" onclick="showGame(document.getElementById('gametxt').value)">
-                            <option value="0">Todas</option>
-                            <?php
-                            foreach ($platforms as $plat) {
-                                echo "<option value='" . $plat['platformID'] . "'>" . $plat['platformName'] . "</option>";
-                            }
-                            ?>
-                        </select>
+                        <input type="text" id="gametxt" onkeyup="showGame(this.value)" placeholder="Nombre de usuario..." style="width: 100%">
                     </form>
                 </section>
                 <section class="gameShow">

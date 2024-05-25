@@ -341,7 +341,7 @@ class FrontController {
                         }
                         , 'post');
  
-                // BUSCADOR DE JUEGOS, CON BOTÓN DE AÑADIR (AL PERFIL LOGEADO)
+            // BUSCADOR DE JUEGOS, CON BOTÓN DE AÑADIR (AL PERFIL LOGEADO)
 
             Route::add('/search',
                     function () {
@@ -354,6 +354,22 @@ class FrontController {
                     function () {
                         $controlador = new \Com\Daw2\Controllers\GameController();
                         $controlador->searchGames();
+                    }
+                    , 'post');
+                    
+            // searchfriends
+                    
+            Route::add('/searchusers',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\UserController();
+                        $controlador->searchUsers();
+                    }
+                    , 'get');
+
+            Route::add('/searchusers',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\UserController();
+                        $controlador->searchUsers();
                     }
                     , 'post');
 
@@ -370,6 +386,22 @@ class FrontController {
                     function ($txt,$id) {
                         $controlador = new \Com\Daw2\Controllers\GameController();
                         $controlador->asyncSearchGames($txt,$id);
+                    }
+                    , 'post');
+                    
+            // VISTA PARA CONTROLAR ASINCRONISMO AL BUSCAR USUARIOS
+
+            Route::add('/asyncuser/([a-z0-9 ]+)/([0-9]+)',
+                    function ($txt,$id) {
+                        $controlador = new \Com\Daw2\Controllers\GameController();
+                        $controlador->asyncSearchUsers($txt,$id);
+                    }
+                    , 'get');
+
+            Route::add('/asyncuser/([a-z0-9 ]+)/([0-9]+)',
+                    function ($txt,$id) {
+                        $controlador = new \Com\Daw2\Controllers\GameController();
+                        $controlador->asyncSearchUsers($txt,$id);
                     }
                     , 'post');
 

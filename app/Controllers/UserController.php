@@ -400,4 +400,9 @@ class UserController extends \Com\Daw2\Core\BaseController {
         header("location: /profile/". $id ."?page=1&order=0&status=4");
     }
     
+    function searchUsers() {
+        $data = [];
+        $this->view->showViews(array('client/users.view.php'), $data);
+    }
+    
 }

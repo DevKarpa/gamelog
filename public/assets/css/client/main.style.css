@@ -16,35 +16,88 @@ body{
     padding-right: 10%;
 }
 
-nav ul{
+.title{
+    padding-top: 5px;
+}
+
+.title > a{
+    background: linear-gradient(-70deg, #2dff00, #0095ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
+
+nav > ul{
     display: flex;
-    gap:20px;
+    gap:30px;
     justify-content: right;
     padding: 20px;
     font-size: 1.7em;
     font-weight: bold;
+    align-items: center;
 }
 
-nav ul li{
+nav > ul > li{
     list-style: none;
+    
+    
 }
 
-nav ul li a{
+nav > ul > li > a{
     text-decoration: none;
     color: white;
-    margin-right: 15px;
     transition-duration: 300ms;
     border-radius: 10px;
     padding: 3px;
+    display: flex;
+    transition-duration: 300ms;
 }
 
-nav a:hover{
-   transition-duration: 300ms;
-   background: rgba(0, 0, 255, 0.40);
+nav > ul > li > a:hover{
+    transition-duration: 300ms;
+    color: lightgrey;
 }
 
-nav ul li:not(:last-child):after{
-  content: '|';
+.glUserImg{
+    margin-top: 3px;
+}
+
+.glUserImg img{
+    width: 50px;
+    margin: 0px;
+    border-radius: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.tippy-box{
+    background: rgba(1, 92, 219, 0.23);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.tippy-arrow{
+    display: none;
+}
+
+.drop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding: 0px;
+    gap: 5px;
+}
+
+.drop li a{
+    color: white;
+    text-decoration: none;
+    font-size: 1.3em;
+    transition-duration: 300ms;
+}
+
+.drop li a:hover{
+    transition-duration: 300ms;
+    color: lightgray;
 }
 
 footer{
@@ -160,6 +213,13 @@ footer{
     .content{
         padding-left: 3%;
         padding-right: 3%;
+    }
+    nav{
+        font-size: 0.8em;
+    }
+    
+    nav > ul{
+        gap: 10px !important; 
     }
     footer{
         padding: 30px;
