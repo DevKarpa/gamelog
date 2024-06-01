@@ -35,7 +35,7 @@ main{
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border: 2px solid #2dff00;
-        padding: 3px;
+    padding: 3px;
 }
 
 .topSection .userInfo .userText{
@@ -351,7 +351,8 @@ main{
 }
 
 .disablePageElement{
-    display: none !important;
+    opacity: 0.3;
+    cursor:default;
 }
 
 .friendList{
@@ -379,7 +380,7 @@ main{
     gap: 10px;
 }
 
-.userImg img{
+.userImgd img{
     width: 40px;
     border-radius: 100%;
     aspect-ratio: 1 / 1;
@@ -453,8 +454,6 @@ footer{
         flex-direction: column;
         align-items: center;
     }
-    
-    
 
     .topSection{
         margin: 0px;
@@ -462,14 +461,17 @@ footer{
         
         gap: 20px;
     }
+
+    .friendList{
+        justify-content: center;
+    }
+    
+    .userDiv{
+        width:80%;
+    }
     
     .userImg img{
         width: 100px !important;
-        
-    }
-    
-    .userText{
-        font-size: 0.8em;
     }
     
     .userSubMenu ul{
@@ -490,7 +492,7 @@ footer{
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: space-around !important;
     }
     
     .conItems li{

@@ -150,7 +150,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
         
         $games = $userGamesModel->getGamesByUserIDandStatus($id, $status);
-        
+        $i = 0;
         foreach ($games as $game) {
             if (str_contains(strtolower($game['gameTitle']), $txt)) {
                 
@@ -193,6 +193,10 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
                 </div>
             <?php
             }
+            if ($i == 30) {
+                break;
+            }
+            $i++;
         }
         
     }

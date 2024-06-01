@@ -22,7 +22,7 @@
         
         <section class="bg-gray-900 min-h-screen flex items-center justify-center">
           <div class="flex flex-col items-center justify-center px-6 py-12 mx-auto w-full max-w-md">
-            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-white">
+            <a href="#" id="title" class="flex items-center mb-6 text-2xl font-semibold text-white">
               GAMELOG
             </a>
             <div class="w-full bg-gray-800 rounded-lg shadow border border-gray-700">

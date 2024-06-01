@@ -1,5 +1,13 @@
 
 section{
    height: 100vh;
-   background: linear-gradient(90deg, #0f113d, #00365d);
+   background: linear-gradient(45deg, black, #090084);
+}
+
+#title{
+    font-size: 3em;
+    background: linear-gradient(-70deg, #2dff00, #0095ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    line-height: 100%;
 }

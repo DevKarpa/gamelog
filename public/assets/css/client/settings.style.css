@@ -77,7 +77,6 @@ main{
 }
 
 
-
 .topSection .userSubMenu ul li a{
     text-decoration: none;
     color: white;
@@ -182,4 +181,79 @@ main{
 .endSection input:hover{
     transition-duration: 200ms;
     background: rgba(1, 92, 255, 1);
+}
+
+@media screen and (max-width: 900px) {
+    
+    main{
+        margin-top: 20px;
+    }
+
+    header{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .topSection{
+        margin: 0px;
+        flex-direction: column;
+        
+        gap: 20px;
+    }
+
+    .friendList{
+        justify-content: center;
+    }
+    
+    .userDiv{
+        width:80%;
+    }
+    
+    .userImg img{
+        width: 100px !important;
+    }
+    
+    .userSubMenu ul{
+        justify-content: center !important;
+    }
+    
+    .userSubMenu ul li a{
+        font-size: 0.8em;
+    }
+    
+    .centerPage{
+        margin-top: 10px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .conItems{
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: space-around !important;
+    }
+    
+    .conItems li{
+        display:flex;
+        gap: 4px;
+    }
+    
+    .passItem{
+        flex-direction: column;
+    }
+    
+    .userInfo{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .topSection{
+        flex-direction: column-reverse;
+    }
+    
+    
+    
+    
+
 }

@@ -187,11 +187,11 @@
                             <div class="paging">
                                 <?php if(isset($page)){ ?>
                                     <div class="pageBtn">
-                                        <a class="pagingElement <?php echo ($_GET["page"]===1) ? 'disablePageElement' : '' ?>" href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><<</a>
+                                        <a class="pagingElement <?php echo ($_GET["page"]==1) ? 'disablePageElement' : '' ?>" href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><<</a>
                                         <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page - 1 < 1 ? 1 : $page - 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><</a>
                                         <span class="pageNumber">Página <?php echo $_GET["page"] ?></span>
                                         <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage < $page + 1 ? $page : $page + 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">></a>
-                                        <a class="pagingElement <?php echo ($_GET["page"]===$maxpage) ? 'disablePageElement' : '' ?>" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">>></a>
+                                        <a class="pagingElement <?php echo ($_GET["page"]==$maxpage) ? 'disablePageElement' : '' ?>" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">>></a>
                                     </div>
                                 <?php } ?>
                             </div>
@@ -230,6 +230,11 @@
                 trigger: 'click',
                 interactive: true,
                 placement: 'bottom'
+            });
+            
+            // Evita que funcione el enlace del elemento deshabilitado
+            $('.disablePageElement').click(function(event) {
+                event.preventDefault();
             });
             
             function searchGame(txt, userid){

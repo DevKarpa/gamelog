@@ -19,6 +19,10 @@ main{
     margin-bottom: 30px
 }
 
+p a{
+    color: white;
+}
+
 
 @media screen and (max-width: 900px) {
 

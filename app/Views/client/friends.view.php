@@ -59,7 +59,7 @@
                 <aside>
                     <section class="userCon">
                         <span class="asideTitle">Conexiones</span>
-                        <ul>
+                        <ul class="conItems">
                             <?php
                             $count = 0;
                             foreach ($conections as $key => $value) {
@@ -131,7 +131,7 @@
 
                                 <div class='userDiv'>
                                     <div class='userLeft'>
-                                        <div class='userImg'>
+                                        <div class='userImgd'>
                                         <a href='/profile/<?php echo $friend['userID']?>?page=1&order=0&status=4'>
                                             <img src='../assets/img/profile/<?php echo $friend['userID']?>.jpg'>
                                         </a>

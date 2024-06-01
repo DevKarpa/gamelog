@@ -52,11 +52,14 @@
 
                 <section>
                     <h3>Uso de imágenes</h3>
-                    <p>Las marcas comerciales y los nombres comerciales utilizados en GameLog son propiedad de sus respectivos propietarios y se están utilizando bajo la ley de <a target="_blank" href="https://es.wikipedia.org/wiki/Uso_justo">Fair Use</a></p>
+                    <p>Las marcas comerciales y los nombres comerciales utilizados en GameLog son propiedad de sus respectivos propietarios y se están utilizando bajo la ley de <a target="_blank" href="https://es.wikipedia.org/wiki/Uso_justo">Fair Use</a>, además GameLog funciona bajo un uso no comercial.</p>
                 </section>
 
                 <section>
                     <h3>Preguntas Frecuentes (FAQ)</h3>
+                    <p>aa</p>
+                    <p>aa</p>
+                    <p>aa</p>
                     <p>aa</p>
                 </section>
             </main>
