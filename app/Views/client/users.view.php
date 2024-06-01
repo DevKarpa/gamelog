@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./assets/css/client/games.style.css"  type="text/css">
+        <link rel="stylesheet" href="./assets/css/client/users.style.css"  type="text/css">
         <link rel="stylesheet" href="./assets/css/client/main.style.css"  type="text/css">
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
         <title>Buscar usuarios</title>
@@ -31,11 +31,11 @@
                 <section class="gameSearch">
                     <h2>Busca usuarios a los que seguir</h2>
                     <form>
-                        <input type="text" id="gametxt" onkeyup="showGame(this.value)" placeholder="Nombre de usuario..." style="width: 100%">
+                        <input type="text" id="gametxt" onkeyup="showUsers(this.value)" placeholder="Nombre de usuario..." style="width: 100%">
                     </form>
                 </section>
                 <section class="gameShow">
-                    <div id="gamelist"></div>
+                    <div id="userList"></div>
                 </section>
             </main>
         </div>
@@ -62,28 +62,26 @@
         </footer>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://unpkg.com/tippy.js@6"></script>
+        <script src="plugins/jquery/jquery.min.js"></script>
         <script>
-            gamelist = document.getElementById('gamelist');
-            platform = document.getElementById('platform');
 
-            function showGame(txt) {
+            function showUsers(txt) {
 
-                if (txt.length != 0) {
+                if (txt.length !== 0) {
 
                     var xmlhttp = new XMLHttpRequest();
 
                     xmlhttp.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            gamelist.innerHTML = this.responseText;
+                        if (this.readyState === 4 && this.status === 200) {
+                            $("#userList").html(this.responseText);
                         }
-                    }
+                    };
 
-                    // La dirección cambia si la web está hosteada en remoto
-                    xmlhttp.open("GET", "/async/" + txt.toLowerCase() + "/" + platform.value, true);
+                    xmlhttp.open("GET", "/asyncuser/" + txt.toLowerCase(), true);
                     xmlhttp.send();
 
                 } else {
-                    gamelist.innerHTML = "";
+                    $("#userList").html("");
                 }
 
             }

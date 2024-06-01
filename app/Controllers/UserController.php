@@ -405,4 +405,51 @@ class UserController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('client/users.view.php'), $data);
     }
     
+    function asyncSearchUsers($txt) {
+        $userModel = new \Com\Daw2\Models\UserModel();
+
+        $following = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
+        $users = $userModel->getAllUsers();
+        
+        $i = 0;
+
+        foreach ($users as $user) {
+            if($user['userID']!=$_SESSION['user']['userID']){   
+                if (str_contains(strtolower($user['username']), $txt)) {
+
+                    $displayname = ($user['userDisplayName']==null) ? $user['username'] : $user['userDisplayName'];
+                    $friend = (in_array($user['userID'], $following)) ? "<a class='fbtn unfollowButton' href='/unfollow/".$user['userID']."'>Unfollow</a>" : "<a class='fbtn followButton' href='/addfriend/".$user['userID']."'>Seguir</a>";
+
+                    echo "
+                        <div class='userDiv'>
+                        
+                            <div class='userLeft'>
+                                <div class='userImg'>
+                                <a href='/profile/".$user['userID']."?page=1&order=0&status=4'>
+                                    <img src='assets/img/profile/" . $user['userID'] . ".jpg'>
+                                </a>
+                                </div>
+                                <div class='userText'>
+                                    <span><a href='/profile/".$user['userID']."?page=1&order=0&status=4'>".$displayname."</a></span>
+                                    <span><a href='/profile/".$user['userID']."?page=1&order=0&status=4'>@".$user['username']."</a></span>
+                                </div>
+                                
+                            </div>
+                            <div class='userButton'>
+                                ".$friend."
+                            </div>
+                            
+                        </div>";
+
+                    if ($i == 30) {
+                        break;
+                    }
+                    $i++;
+
+                }
+            }
+        }
+        
+    }
+    
 }

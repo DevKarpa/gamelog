@@ -34,6 +34,8 @@ main{
     border-radius: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    border: 2px solid #2dff00;
+        padding: 3px;
 }
 
 .topSection .userInfo .userText{
@@ -348,45 +350,88 @@ main{
     font-size: 2em;
 }
 
+.disablePageElement{
+    display: none !important;
+}
+
 .friendList{
     display: flex;
     flex-wrap: wrap;
-    gap: 80px;
+    gap: 20px;
     margin-top: 20px;
 }
 
-.friend{
+.userDiv{
     display: flex;
+    margin-top: 20px;
+    background-color: #002244;
     align-items: center;
-    color: white;
+    justify-content: space-between;
+    width: 280px;
+    padding: 5px;
+    border-radius: 10px;
     text-decoration: none;
-    font-size: 1.4em;
-    padding: 10px 20px 10px 20px;
-    gap: 10px;
-    background: rgba(1, 92, 219, 0.23);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.friendImg img{
-    width: 130px;
+.userLeft{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.userImg img{
+    width: 40px;
     border-radius: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     vertical-align: middle;
 }
 
-.friendText{
+.userText{
     display: flex;
     flex-direction: column;
 }
 
-.friendText span:first-child{
+.userText span a{
+    text-decoration: none;
+}
+
+.userText span:first-child a{
+    color: white;
     font-weight: bold;
 }
+
+.userText span:last-child a{
+    color: lightgray;
+}
+
+.userButton{
+    justify-self: end;
+}
+
+.userButton > a{
+    color: black;
+    text-decoration: none;
+    background-color: white;
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+    transition-duration: 200ms;
+}
+
+#gametxt{
+    width: 100%;
+    color: white;
+    font-size: 1.5em;
+    padding: 10px;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
 
 .searchBtn{
     background: rgba(1, 92, 219, 0.23);
@@ -420,6 +465,7 @@ footer{
     
     .userImg img{
         width: 100px !important;
+        
     }
     
     .userText{

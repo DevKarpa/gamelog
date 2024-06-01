@@ -128,16 +128,20 @@
                             
                             <?php if (count($friends) != 0) { 
                             foreach ($friends as $friend) { ?>
-                      
-                            <a class="friend" href='/profile/<?php echo $friend['userID'] ?>?page=1&order=0&status=4'>
-                                <div class="friendImg">
-                                    <img src="../assets/img/profile/<?php echo $friend['userID']?>.jpg">
+
+                                <div class='userDiv'>
+                                    <div class='userLeft'>
+                                        <div class='userImg'>
+                                        <a href='/profile/<?php echo $friend['userID']?>?page=1&order=0&status=4'>
+                                            <img src='../assets/img/profile/<?php echo $friend['userID']?>.jpg'>
+                                        </a>
+                                        </div>
+                                        <div class='userText'>
+                                            <span><a href='/profile/<?php echo $friend['userID']?>?page=1&order=0&status=4'><?php echo ($friend['userDisplayName']==null) ? $friend['username'] : $friend['userDisplayName'] ?></a></span>
+                                            <span><a href='/profile/<?php echo $friend['userID']?>?page=1&order=0&status=4'>@<?php echo $friend['username']?></a></span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="friendText">
-                                    <span><?php echo ($friend['userDisplayName']==null) ? $friend['username'] : $friend['userDisplayName'] ?></span>
-                                    <span>@<?php echo $friend['username'] ?></span>
-                                </div>
-                            </a>
                             
                             <?php }}else{
                                 echo "<span class='noGamesAlert'>No existen resultados :(<span>";
@@ -156,19 +160,7 @@
             }
 
             ?>
-            <?PHP
-            // AÑADIR AMIGO
-            if(isset($_SESSION['user'])){
-                if ($_SESSION['user']['userID'] != $user['userID']) {
-                    if (!in_array($user['userID'], $_SESSION['friends'])) {
-                        ?> <a href="/addfriend/<?php echo $user['userID'] ?>"> + Añadir amigos</a><br> <?php
-                    }
-                } 
-            }
-        ?>
-                                        
-
-                                    
+                            
         </div>
         <footer>
             <div class="footLeft">

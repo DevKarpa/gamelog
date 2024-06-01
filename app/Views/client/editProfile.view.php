@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="assets/css/client/settings.style.css" type="text/css">
         <link rel="stylesheet" href="assets/css/client/main.style.css" type="text/css">
-        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" type="text/css">
         <title>EDITAR PERFIL</title>
     </head>
     <body>
@@ -72,8 +72,8 @@
                     <section class="passSection">
                         <h2>Contraseña</h2>
                         <div class="passItem">
-                            <input type="password" name="passwordc1" placeholder="Contraseña">
-                            <input type="password" name="passwordc2" placeholder="Repetir contraseña">
+                            <input type="password" name="passwordc1" placeholder="Contraseña" autocomplete="off">
+                            <input type="password" name="passwordc2" placeholder="Repetir contraseña" autocomplete="off">
                         </div>
                     </section>
 
@@ -139,6 +139,7 @@
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://unpkg.com/tippy.js@6"></script>
         <script>
+            
             tippy("#dropdown", {
                 content: '<ul class="drop"><li><a href="/profile/<?php echo $_SESSION["user"]["userID"] ?>?page=1&order=0&status=4">Mi perfil</a></li><li><a href="/logout">Cerrar sesión</a></li></ul>',
                 allowHTML: true,
@@ -146,6 +147,7 @@
                 interactive: true,
                 placement: 'bottom'
             });
+
         </script>
     </body>
 </html>

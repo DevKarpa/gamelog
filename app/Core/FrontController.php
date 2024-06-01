@@ -391,19 +391,36 @@ class FrontController {
                     
             // VISTA PARA CONTROLAR ASINCRONISMO AL BUSCAR USUARIOS
 
-            Route::add('/asyncuser/([a-z0-9 ]+)/([0-9]+)',
-                    function ($txt,$id) {
-                        $controlador = new \Com\Daw2\Controllers\GameController();
-                        $controlador->asyncSearchUsers($txt,$id);
+            Route::add('/asyncuser/([a-z0-9 ]+)',
+                    function ($txt) {
+                        $controlador = new \Com\Daw2\Controllers\UserController();
+                        $controlador->asyncSearchUsers($txt);
                     }
                     , 'get');
 
-            Route::add('/asyncuser/([a-z0-9 ]+)/([0-9]+)',
-                    function ($txt,$id) {
-                        $controlador = new \Com\Daw2\Controllers\GameController();
-                        $controlador->asyncSearchUsers($txt,$id);
+            Route::add('/asyncuser/([a-z0-9 ]+)',
+                    function ($txt) {
+                        $controlador = new \Com\Daw2\Controllers\UserController();
+                        $controlador->asyncSearchUsers($txt);
                     }
                     , 'post');
+                    
+            // BUSCADOR DE JUEGOS PARA EL PERFIL
+                    
+            Route::add('/asyncprofilegame/([a-z0-9 ]+)/([0-9]+)/([0-9]+)',
+                    function ($txt,$id,$status) {
+                        $controlador = new \Com\Daw2\Controllers\UserGamesController();
+                        $controlador->asyncSearchUserGames($txt,$id,$status);
+                    }
+                    , 'get');
+
+            Route::add('/asyncprofilegame/([a-z0-9 ]+)/([0-9]+)/([0-9]+)',
+                    function ($txt,$id,$status) {
+                        $controlador = new \Com\Daw2\Controllers\UserGamesController();
+                        $controlador->asyncSearchUserGames($txt,$id,$status);
+                    }
+                    , 'post');
+                    
 
                 // EDITAR DATOS DEL USUARIO LOGEADO
 

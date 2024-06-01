@@ -64,7 +64,6 @@
                     ?>
                 </div>
             </section>
-            
             <div class="centerPage">
                 <aside>
                     <section class="userCon">
@@ -142,9 +141,11 @@
                             </ul>
                         </div>
                         <div class="gameList">
+                            <input type="text" id="gametxt" onkeyup="searchGame(this.value,<?php echo $user['userID'] ?>)" placeholder="Buscar...">
+                            <div id='gamesearch'></div>
                             <?php if (count($games) != 0) { 
                             foreach ($games as $game) { ?>
-                            <div class='game'>
+                            <div class='game no_search'>
                                 <div class='gameContentLeft'>
                                         <div class='gameImg'>
                                             <?php echo "<img src='../assets/img/games/" . $game['gameID'] . ".png'>" ?>
@@ -186,11 +187,11 @@
                             <div class="paging">
                                 <?php if(isset($page)){ ?>
                                     <div class="pageBtn">
-                                        <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><<</a>
+                                        <a class="pagingElement <?php echo ($_GET["page"]===1) ? 'disablePageElement' : '' ?>" href="/profile/<?php echo $user['userID'] ?>?page=1&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><<</a>
                                         <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $page - 1 < 1 ? 1 : $page - 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>"><</a>
                                         <span class="pageNumber">Página <?php echo $_GET["page"] ?></span>
                                         <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage < $page + 1 ? $page : $page + 1 ?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">></a>
-                                        <a class="pagingElement" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">>></a>
+                                        <a class="pagingElement <?php echo ($_GET["page"]===$maxpage) ? 'disablePageElement' : '' ?>" href="/profile/<?php echo $user['userID'] ?>?page=<?php echo $maxpage?>&order=<?php echo isset($order) ? $order : 0 ?>&status=<?php echo isset($status) ? $status : 4 ?>">>></a>
                                     </div>
                                 <?php } ?>
                             </div>
@@ -221,6 +222,7 @@
         </footer>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://unpkg.com/tippy.js@6"></script>
+        <script src="../plugins/jquery/jquery.min.js"></script>
         <script>
             tippy("#dropdown", {
                 content: '<ul class="drop"><li><a href="/profile/<?php echo $_SESSION["user"]["userID"] ?>?page=1&order=0&status=4">Mi perfil</a></li><li><a href="/logout">Cerrar sesión</a></li></ul>',
@@ -229,6 +231,34 @@
                 interactive: true,
                 placement: 'bottom'
             });
+            
+            function searchGame(txt, userid){
+                getParams = new URLSearchParams(location.search);
+                status = getParams.get('status');
+                
+
+                if (txt.length !== 0) {
+
+                    var xmlhttp = new XMLHttpRequest();
+
+                    xmlhttp.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                            $("#gamesearch").html(this.responseText);
+                            $(".no_search").hide();
+                            $(".paging").hide();
+                        }
+                    };
+
+                    // La dirección cambia si la web está hosteada en remoto
+                    xmlhttp.open("GET", "/asyncprofilegame/" + txt.toLowerCase() + "/" + userid + "/" + status , true);
+                    xmlhttp.send();
+
+                } else {
+                    $("#gamesearch").html('');
+                    $(".no_search").show();
+                    $(".paging").show();
+                }
+            }
         </script>
     </body>
 </html>
