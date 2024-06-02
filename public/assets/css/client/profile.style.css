@@ -566,3 +566,34 @@ footer{
     
 
 }
+@media screen and (max-width: 460px) {
+    .gameListOrder ul li a{
+        font-size: 0.7em;
+    }
+    
+    .gameImg img{
+        width: 150px;
+    }
+    .gameButtons a{
+        font-size: 1.3em;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    
+    .gameContentLeft{
+        gap: 10px !important;
+    }
+    
+    .gameContentRight{
+        font-size: 0.7em;
+        margin-right: 5px;
+    }
+    
+    .gameTitle{
+        font-size: 0.8em;
+    }
+    
+    .userSubMenu ul{
+        gap: 10px !important;
+    }
+}

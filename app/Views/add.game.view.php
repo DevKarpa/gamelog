@@ -36,8 +36,8 @@
                         </div>
 
                         <div class="mb-3 col-sm-4">
-                            <label for="platform">Plataforma</label>
-                            <select class="form-control select2" id="platform" name="platform" required>
+                            <label for="platform">Plataforma/s</label>
+                            <select class="form-control js-example-basic-multiple" id="platform" name="platform[]" multiple="multiple" required>
 
                                 <?php
                                 foreach ($platforms as $platform) {

@@ -6,8 +6,8 @@
 <div class="row">       
     <div class="col-12">
         <?php
-        if (isset($deletedGame)) {
-            ?> <div class="alert alert-success"><p>El juego <?php echo $deletedGame ?> ha sido borrado correctamente.</p></div> <?php
+        if (isset($_GET['del'])) {
+            ?> <div class="alert alert-danger"><p>El juego <?php echo $_GET['del'] ?> ha sido borrado correctamente.</p></div> <?php
         }
         ?>
     </div>
@@ -118,7 +118,7 @@
         if(isset($page)){
             ?>
         <div class="card shadow mb-4 d-flex">
-                <div class="col-2 align-self-center">
+                <div class="col-2 align-self-center" style="padding-top:10px;padding-bottom:10px;">
                     <span>Página <span><?php echo isset($_GET["page"]) ? $_GET["page"] : ""; ?></span></span>
                     <a class="btn btn-primary" href="/game-list?page=<?php echo $page-1<1 ? 1 : $page-1 ?>"><<a>
                     <a class="btn btn-primary" href="/game-list?page=<?php echo $maxpage<$page+1 ? $page : $page+1 ?>">><a>

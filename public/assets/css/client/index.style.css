@@ -276,8 +276,8 @@
         gap: 10px;
     }
     
-    nav{
-        font-size: 0.60em;
+    nav li a{
+        font-size: 0.8em;
     }
     
     nav ul{
@@ -287,5 +287,21 @@
     nav ul li:not(:last-child):after{
         content: '' !important;
     }
+
+}
+
+@media screen and (max-width: 460px) {
+    .popularGameItem img{
+        width: 100%;
+    }
+    .statBlock{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #title{
+        font-size: 5em !important;
+    }
+    
     
 }

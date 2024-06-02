@@ -153,3 +153,13 @@ input:hover, select:hover{
     }
     
 }
+
+@media screen and (max-width: 450px){
+    .popularGameItem img{
+        width: 300px;
+    }
+    input, select {
+        font-size: 1em;
+        gap: 10px;
+    }
+}

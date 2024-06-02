@@ -182,7 +182,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
                         <div class='gameButtons'>
                             <?php
                                 if(isset($_SESSION['user'])){
-                                    if ($_SESSION['user']['userID'] === $id) {
+                                    if ($_SESSION['user']['userID'] == $id) {
                                         echo "<a href='/edit/" . $game['gameID'] . "'><i class='fas fa-pen-square'></i></a>";
                                         echo "<a href='/delete/" . $game['gameID'] . "'><i class='fas fa-trash'></i></a>";
                                     }

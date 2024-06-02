@@ -45,15 +45,16 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $devModel = new \Com\Daw2\Models\DevModel();
         $platModel = new \Com\Daw2\Models\PlatformModel();
         $data = [];
-        $data['titulo'] = 'Add new game';
+        $data['titulo'] = 'Añadir nuevo juego';
         $data['seccion'] = 'game-list';
         $data['games'] = $gameModel->getAll();
         $data['devs'] = $devModel->getAllDevs();
         $data['platforms'] = $platModel->getAllPlatforms();
 
         $post = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-
+        
         if (isset($post['submit'])) {
+            
             $data['errores'] = $this->checkGameErrors($post, $_FILES);
 
             if (count($data['errores']) == 0) {
@@ -70,7 +71,7 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $devModel = new \Com\Daw2\Models\DevModel();
         $platModel = new \Com\Daw2\Models\PlatformModel();
         $data = [];
-        $data['titulo'] = 'Add new game';
+        $data['titulo'] = 'Editar juego';
         $data['seccion'] = 'game-list';
         $data['games'] = $gameModel->getAll();
         $data['devs'] = $devModel->getAllDevs();
@@ -96,7 +97,7 @@ class GameController extends \Com\Daw2\Core\BaseController {
         $devModel = new \Com\Daw2\Models\DevModel();
         $platModel = new \Com\Daw2\Models\PlatformModel();
         $errors = [];
-        echo (int) date("Y");
+
         // Comprobación de título del juego
         if (strlen($metadata['name']) > 60 || is_null($metadata['name'])) {
             $errors['name'] = "El título del juego debe tener una longitud de entre 1 y 60 carácteres.";
@@ -145,17 +146,9 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
     // Elimina el juego de la base de datos
     function deleteGame($id) {
-        $gameModel = new \Com\Daw2\Models\GameModel();
-        $deletedGame = $gameModel->getGameById($id)['gameTitle'];
-
-        $data = [];
-        $data['titulo'] = 'Lista de juegos';
-        $data['seccion'] = 'game-list';
-        $data['deletedGame'] = $deletedGame;
-        $gameModel->deleteGameById($id);
-        $data['games'] = $gameModel->getAll();
-
-        $this->view->showViews(array('templates/header.view.php', 'games.view.php', 'templates/footer.view.php'), $data);
+        
+        header("location: /game-list?page=1&del=" . $id);
+        
     }
 
     // FUNCIONES USADAS PARA LA VISTA DEL USUARIO NO ADMINISTRADOR

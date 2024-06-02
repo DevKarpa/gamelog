@@ -19,20 +19,33 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
     // Guarda el juego en la base de datos, y en otra para relacionarlo con los devs
     // ademas de guardar la imagen del juego localmente.
     function saveNewGame($metadata, $img) {
+        
+        $count = 1;
 
         // Guarda el juego en la tabla games
-        $query = $this->pdo->prepare("INSERT INTO games (gameTitle,gameYear,gamePlatform) VALUES (?,?,?)");
-        $query->execute([$metadata['name'], $metadata['year'], $metadata['platform']]);
+        foreach ($metadata['platform'] as $platform) {
+            $query = $this->pdo->prepare("INSERT INTO games (gameTitle,gameYear,gamePlatform) VALUES (?,?,?)");
+            $query->execute([$metadata['name'], $metadata['year'], $platform]);
+            
+            // Relaciona el juego con la/las desarrolladoras añadiendo los registros necesarios en la tabla
+            // devGames
+            foreach ($metadata['devs'] as $dev) {
+                $query = $this->pdo->prepare("INSERT INTO devGames (devID,gameID) VALUES (?,?)");
+                $query->execute([$dev, $this->getLastRegister()]);
+            }
 
-        // Relaciona el juego con la/las desarrolladoras añadiendo los registros necesarios en la tabla
-        // devGames
-        foreach ($metadata['devs'] as $dev) {
-            $query = $this->pdo->prepare("INSERT INTO devGames (devID,gameID) VALUES (?,?)");
-            $query->execute([$dev, $this->getLastRegister()]);
+
+            // Llamada a la función que guarda la imagen
+            if(count($metadata['platform'])==$count){
+                $this->saveImage($img, 0);
+            }else{
+                $this->copyImage($img, 0);
+            }
+            
+            
+            $count++;
         }
 
-        // Llamada a la función que guarda la imagen
-        $this->saveImage($img, 0);
     }
 
     // Le da un nombre a la imagen tomando como base el ID del último juego 
@@ -43,6 +56,14 @@ class GameModel extends \Com\Daw2\Core\BaseModel {
         }
         $dir = "assets/img/games/" . $id . ".png";
         move_uploaded_file($img["image"]["tmp_name"], $dir);
+    }
+    
+    function copyImage($img, $id) {
+        if ($id == 0) {
+            $id = $this->getLastRegister();
+        }
+        $dir = "assets/img/games/" . $id . ".png";
+        copy($img["image"]["tmp_name"], $dir);
     }
 
     // Devuelve el último gameID de la tabla games

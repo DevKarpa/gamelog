@@ -15,14 +15,16 @@ class PlatformModel extends \Com\Daw2\Core\BaseModel {
     }
     
     // Comprueba que la plataforma introducida existe
-    function checkPlatformExists($platform): bool {
-        $query = $this->pdo->prepare(self::BASE . "WHERE platformID = ?");
-        $query->execute([$platform]);
-        
-        if(count($query->fetchAll())==0){
-            return false;
+    function checkPlatformExists($platforms): bool {
+        foreach ($platforms as $platform) {
+            $query = $this->pdo->prepare(self::BASE . "WHERE platformID = ?");
+            $query->execute([$platform]);
+            
+            if(count($query->fetchAll())==0){
+                return false;
+            }
         }
-        
+
         return true;
     }
 
