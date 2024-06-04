@@ -19,10 +19,12 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
 
         if (isset($_POST['submit'])) {
             $reg = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-            $reg['fecha'] = explode(" - ", $reg['fecha']);
+            if(isset($reg['fecha'])){
+                $reg['fecha'] = explode(" - ", $reg['fecha']);
             
-            $reg['fecha'][0] = $this->checkDateValues($reg)[0];
-            $reg['fecha'][1] = $this->checkDateValues($reg)[1];
+                $reg['fecha'][0] = $this->checkDateValues($reg)[0];
+                $reg['fecha'][1] = $this->checkDateValues($reg)[1];
+            }
             
             if (count($this->checkRegValues($reg)) == 0) {
                 $userGamesModel->addNewRegister($id, $reg, $data['user']);
@@ -53,12 +55,14 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         $goToProfile = false;
 
         if (isset($_POST['submit'])) {
-            $reg = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-            $reg['fecha'] = explode(" - ", $reg['fecha']);
             
-            $reg['fecha'][0] = $this->checkDateValues($reg)[0];
-            $reg['fecha'][1] = $this->checkDateValues($reg)[1];
+            $reg = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+            if(isset($reg['fecha'])){
+                $reg['fecha'] = explode(" - ", $reg['fecha']);
 
+                $reg['fecha'][0] = $this->checkDateValues($reg)[0];
+                $reg['fecha'][1] = $this->checkDateValues($reg)[1];
+            }
             if (count($this->checkRegValues($reg)) == 0) {
                 $userGamesModel->deleteGameRegister($id, $data['user']);
                 $userGamesModel->addNewRegister($id, $reg, $data['user']);
@@ -90,7 +94,6 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         if(isset($reg['fecha'][0])){
             if($reg['fecha'][0]!="" || $reg['fecha'][0]!=null){
               $datei = str_replace('/', '-', $reg['fecha'][0]);
-                var_dump($datei);
                 $inicio = date('Y-m-d', strtotime($datei));  
             }
             
@@ -99,7 +102,6 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         if(isset($reg['fecha'][1])){
             if($reg['fecha'][1]!="" || $reg['fecha'][1]!=null){
                 $datef = str_replace('/', '-', $reg['fecha'][1]);
-                var_dump($datef);
                 $fin = date('Y-m-d', strtotime($datef));
             }
             
@@ -116,10 +118,6 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         
         $inicio = (isset($reg['fecha'][0]) ? $reg['fecha'][0] : "");
         $fin = (isset($reg['fecha'][1]) ? $reg['fecha'][1] : "");
-
-        var_dump($inicio . "<br>" . $fin);
-        
-        echo "<BR><BR><BR>";
 
         if (!$statusModel->checkStatusExistsById($reg['status'])) {
             $errors['status'] = "Estado inválido";
@@ -173,9 +171,6 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
                 }
                 if ($reg['note'] < 0 || $reg['note'] > 100){
                     $errors['note'] = "La nota debe estar comprendida entre 0 y 100";
-                }
-                if($inicio>$fin){
-                    $errors['logic'] = "La fecha de inicio no puede ser superior a la de finalización";
                 }
             }
 

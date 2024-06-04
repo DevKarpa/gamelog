@@ -8,15 +8,10 @@ use \PDO;
 
 class DBManager {
 
-    // Contenedor de la instancia de la Clase
     private static $instance;
     private $db;
 
-    //Previene creacion de objetos via new
-
     private function __construct() {}
-
-    // Única forma para obtener el objeto singleton
 
     public static function getInstance() {
         if (is_null(self::$instance)) {
@@ -25,7 +20,7 @@ class DBManager {
         return self::$instance;
     }
 
-    public function getConnection($emulatePrepares = false) {
+    public function getConnection() {
         if (is_null($this->db)) {
             
             $host = $_ENV['db.host'];
@@ -34,14 +29,7 @@ class DBManager {
             $pass = $_ENV['db.pass'];
             $charset = $_ENV['db.charset'];
             $emulated = (bool)$_ENV['db.emulated'];
-            /*
-            $host = "localhost";
-            $db = "proxecto";
-            $user = "admin";
-            $pass = "daw2pass";
-            $charset = "utf8mb4";
-            $emulated = false;
-*/
+
             $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

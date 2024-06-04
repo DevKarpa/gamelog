@@ -7,10 +7,5 @@ try{
     $dotenv->load();
     Com\Daw2\Core\FrontController::main();    
 } catch (Exception $e) {
-    if($_ENV['app.debug']){
-        throw $e;
-    }
-    else{
-        echo $e->getMessage();
-    }
+    echo $e->getMessage();
 }

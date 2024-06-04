@@ -23,6 +23,37 @@ p a{
     color: white;
 }
 
+section{
+    color: white;
+    font-size: 1.3em;
+    padding: 10px;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.pregunta{
+    margin-left: 5px;
+}
+
+.respuesta{
+    margin-left: 30px;
+}
+
+.faqitem{
+    padding: 10px;
+    margin: 20px;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    
+}
+
+
 
 @media screen and (max-width: 900px) {
 
@@ -41,6 +72,11 @@ p a{
     
     nav ul li:not(:last-child):after{
         content: '' !important;
+    }
+    
+    section{
+        color: white;
+        font-size: 1em;
     }
     
 }

@@ -33,18 +33,24 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
     function addNewRegister($id, $reg, $user):void {
 
         // Si la fecha está vacía, guarda null
-        if (!strtotime($reg['fecha'][1])) {
+        if(isset($reg['fecha'])){
+            if (!strtotime($reg['fecha'][1])) {
+                $reg['fecha'][1] = null;
+            }
+
+            if (!strtotime($reg['fecha'][0])) {
+                $reg['fecha'][0] = null;
+            }
+        }else{
+            $reg['fecha'] = [];
+            $reg['fecha'][0] = null;
             $reg['fecha'][1] = null;
         }
-
-        if (!strtotime($reg['fecha'][0])) {
-            $reg['fecha'][0] = null;
-        }
+        
 
         if (empty($reg['note'])) {
             $reg['note'] = null;
         }
-        var_dump($reg['fecha']);
         $query = $this->pdo->prepare("INSERT INTO userGames (userID, gameID, fechaInicio, fechaFin, nota, statusID) VALUES (?,?,?,?,?,?)");
         $query->execute([$user['userID'], $id, $reg['fecha'][0], $reg['fecha'][1], $reg['note'], $reg['status']]);
     }

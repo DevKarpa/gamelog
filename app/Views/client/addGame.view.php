@@ -43,8 +43,7 @@
                                 
                                 $fulldate .= " - " . $fechaf;
                             }
-                            
-                            
+
                         }
                         ?>
                     </ul>
@@ -52,7 +51,15 @@
             </header>
             
             <main>
-                
+                <?php
+                    if (isset($errors)) {
+                        echo '<div class="errorbox"><div class="erroritems">';
+                            foreach ($errors as $error) {
+                                echo "<p>" . $error ."</p>";
+                            }
+                        echo '</div></div>';
+                    }
+                ?>
                 <section class="midPage">
                     <section class="gameData">
                         <div class='gameImg'>
@@ -95,15 +102,6 @@
                             <input class="btn" type="reset" value="Reset" onclick="resetDateValues()">
                         </div>
                     </form>
-                        <?php
-                    if (isset($errors)) {
-                        echo '<div class="errorbox"><div class="erroritems">';
-                            foreach ($errors as $error) {
-                                echo "<p>" . $error ."</p>";
-                            }
-                        echo '</div></div>';
-                    }
-                ?>
                 </section>
 
             </main>
@@ -136,6 +134,7 @@
         <script src="../plugins/jquery/jquery.min.js"></script>
         <script src="../plugins/air-datepicker/air-datepicker.js"></script>
         <script src="../plugins/air-datepicker/es.js"></script>
+        <?php include("plugins/dropdownmenu/drop.php"); ?>
         
         <script>
 
@@ -174,14 +173,7 @@
                         break;
                 }
             }
-            
-            tippy("#dropdown", {
-                content: '<ul class="drop"><li><a href="/profile/<?php echo $_SESSION["user"]["userID"] ?>?page=1&order=0&status=4">Mi perfil</a></li><li><a href="/logout">Cerrar sesión</a></li></ul>',
-                allowHTML: true,
-                trigger: 'click',
-                interactive: true,
-                placement: 'bottom'
-            });
+
         </script>
         
     </body>
