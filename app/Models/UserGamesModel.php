@@ -33,20 +33,20 @@ class UserGamesModel extends \Com\Daw2\Core\BaseModel {
     function addNewRegister($id, $reg, $user):void {
 
         // Si la fecha está vacía, guarda null
-        if (!strtotime($reg['end'])) {
-            $reg['end'] = null;
+        if (!strtotime($reg['fecha'][1])) {
+            $reg['fecha'][1] = null;
         }
 
-        if (!strtotime($reg['start'])) {
-            $reg['start'] = null;
+        if (!strtotime($reg['fecha'][0])) {
+            $reg['fecha'][0] = null;
         }
 
         if (empty($reg['note'])) {
             $reg['note'] = null;
         }
-
+        var_dump($reg['fecha']);
         $query = $this->pdo->prepare("INSERT INTO userGames (userID, gameID, fechaInicio, fechaFin, nota, statusID) VALUES (?,?,?,?,?,?)");
-        $query->execute([$user['userID'], $id, $reg['start'], $reg['end'], $reg['note'], $reg['status']]);
+        $query->execute([$user['userID'], $id, $reg['fecha'][0], $reg['fecha'][1], $reg['note'], $reg['status']]);
     }
 
     // Comprueba si un usuario tiene cierto juego

@@ -6,10 +6,11 @@
         <link rel="stylesheet" href="../assets/css/client/addgame.style.css">
         <link rel="stylesheet" href="../assets/css/client/main.style.css">
         <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="../plugins/air-datepicker/air-datepicker.css">
         
         <title><?php echo $game['gameTitle'] ?></title>
     </head>
-    <body>
+    <body onload="updateDateValues()">
         <div class="content">
             
             <header>
@@ -26,6 +27,26 @@
                             <li><a href="#" id="dropdown" class="glUserImg"><img src="../assets/img/profile/<?php echo $_SESSION['user']['userID'] ?>.jpg"></a></li>
 
                         <?php } ?>
+                        <?php
+                        
+                        if (isset($reg)){
+                            $fecha = explode("-", $reg['fechaInicio']);
+                            
+                            $fecha = implode("/", array_reverse($fecha));
+                            
+                            $fulldate = $fecha;
+                            
+                            if($reg['fechaFin']){
+                                $fechaf = explode("-", $reg['fechaFin']);
+                                //asort($fechaf);
+                                $fechaf = implode("/", array_reverse($fechaf));
+                                
+                                $fulldate .= " - " . $fechaf;
+                            }
+                            
+                            
+                        }
+                        ?>
                     </ul>
                 </nav>
             </header>
@@ -43,12 +64,12 @@
                         <form action="/<?php echo (isset($reg) ? "edit/" : "add/") . $game['gameID'] ?>" method="post" enctype="multipart/form-data">
                             <div class="statusItem">
                                 <label>Status</label>
-                                <select name="status" id="status" onchange="changeColor()">
+                                <select name="status" id="status">
                                     <?php
-                                                foreach ($statusList as $status) {
-                                                    $selected = isset($reg) ? $reg['statusID']==$status['statusID'] ? "selected" : " " : " ";
-                                                    echo "<option value=". $status['statusID'] ." " . $selected . ">".$status['statusName']."</option>";
-                                                }
+                                        foreach ($statusList as $status) {
+                                            $selected = isset($reg) ? $reg['statusID']==$status['statusID'] ? "selected" : " " : " ";
+                                            echo "<option value=". $status['statusID'] ." " . $selected . ">".$status['statusName']."</option>";
+                                        }
                                     ?>
 
                                 </select>
@@ -56,19 +77,14 @@
                             <div class="datesItem">
                                 <div class="dItem">
                                     <label>Inicio</label>
-                                    <input type="date" id="start" name="start" value="<?php echo isset($reg) ? $reg['fechaInicio'] : '' ?>">
-                                </div>
-                                <div class="dItem">
-                                   <label>Fin</label>
-                                    <input type="date" id="end" name="end" value="<?php echo isset($reg) ? $reg['fechaFin'] : '' ?>">
+                                    <input type="text" id="fecha" name="fecha" value="<?php echo isset($reg) ? $fulldate : '' ?>">
                                 </div>
                             </div>
                             <div class="noteItem">
                                 <label>Nota (Opcional)</label>
                                 <input id="nota" name="note" type="number" min="0" max="100" value="<?php echo isset($reg) ? $reg['nota'] : '' ?>">
                             </div>
-                            
-                        
+
                     </section>
                     
                 </section>
@@ -76,7 +92,7 @@
                 <section class="bottomPage">
                         <div class="buttonsItem">
                             <input class="btn" type="submit" name="submit" id="submit" value="Enviar">
-                            <input class="btn" type="reset" value="Reset" onclick="resetValues()">
+                            <input class="btn" type="reset" value="Reset" onclick="resetDateValues()">
                         </div>
                     </form>
                         <?php
@@ -117,25 +133,46 @@
         </footer>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://unpkg.com/tippy.js@6"></script>
+        <script src="../plugins/jquery/jquery.min.js"></script>
+        <script src="../plugins/air-datepicker/air-datepicker.js"></script>
+        <script src="../plugins/air-datepicker/es.js"></script>
+        
         <script>
-            var start = document.getElementById('start');
-            var end = document.getElementById('end');
-            var status = document.getElementById('status');
 
-            // Por alguna razon solo funciona en /add porque 
-            // no puede sobreescribir los datos escritos por PHP
-            function resetValues(){
-                start.value = "";
-                end.value = "";
-                status.value = 0;
-                
+            var fecha = new AirDatepicker('#fecha', {
+                range: false
+            });
+
+            $('#status').change(function(){
+                resetDateValues();
+                updateDateValues();
+            });
+            
+            function resetDateValues(){
+                $('#fecha').attr('disabled',false);
+                $('#fecha').val(' ');
+                updateDateValues();
             }
             
-            function changeColor(){
-                console.log("PAUSADO ⏸️");
-                console.log("PENDIENTE ⌛️");
-                console.log("JUGANDO 🎮️");
-                console.log("JUGANDO ✅️");
+            function updateDateValues(){
+                switch($('#status').val()){
+                    case "3":
+                        fecha = new AirDatepicker('#fecha', {
+                            range: true,
+                            multipleDatesSeparator: " - "
+                        });
+                        console.log('hooolaaaa');
+                        break;
+                    case "1":
+                        $('#fecha').attr('disabled',true);
+                        break;
+                    default:
+                        fecha = new AirDatepicker('#fecha', {
+                            range: false
+                        });
+                        
+                        break;
+                }
             }
             
             tippy("#dropdown", {

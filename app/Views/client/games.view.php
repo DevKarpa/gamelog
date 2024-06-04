@@ -70,9 +70,8 @@
         </footer>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://unpkg.com/tippy.js@6"></script>
+        <script src="plugins/jquery/jquery.min.js"></script>
         <script>
-            gamelist = document.getElementById('gamelist');
-            platform = document.getElementById('platform');
 
             function showGame(txt) {
 
@@ -82,16 +81,16 @@
 
                     xmlhttp.onreadystatechange = function () {
                         if (this.readyState == 4 && this.status == 200) {
-                            gamelist.innerHTML = this.responseText;
+                            $('#gamelist').html(this.responseText);
                         }
                     }
 
                     // La dirección cambia si la web está hosteada en remoto
-                    xmlhttp.open("GET", "/async/" + txt.toLowerCase() + "/" + platform.value, true);
+                    xmlhttp.open("GET", "/async/" + txt.toLowerCase() + "/" + $('#platform').val(), true);
                     xmlhttp.send();
 
                 } else {
-                    gamelist.innerHTML = "";
+                    $('#gamelist').html('');
                 }
 
             }

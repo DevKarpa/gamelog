@@ -19,6 +19,11 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
 
         if (isset($_POST['submit'])) {
             $reg = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+            $reg['fecha'] = explode(" - ", $reg['fecha']);
+            
+            $reg['fecha'][0] = $this->checkDateValues($reg)[0];
+            $reg['fecha'][1] = $this->checkDateValues($reg)[1];
+            
             if (count($this->checkRegValues($reg)) == 0) {
                 $userGamesModel->addNewRegister($id, $reg, $data['user']);
                 $goToProfile = true;
@@ -30,7 +35,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         if(!$goToProfile){
             $this->view->showViews(array('client/addGame.view.php'), $data);
         }else{
-            header("location: /profile/" . $_SESSION['user']['userID'] . "?page=1");
+            header("location: /profile/" . $_SESSION['user']['userID'] . "?page=1&order=0&status=4&add=" . $data['game']['gameID']);
         }
         
     }
@@ -49,6 +54,11 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
 
         if (isset($_POST['submit'])) {
             $reg = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+            $reg['fecha'] = explode(" - ", $reg['fecha']);
+            
+            $reg['fecha'][0] = $this->checkDateValues($reg)[0];
+            $reg['fecha'][1] = $this->checkDateValues($reg)[1];
+
             if (count($this->checkRegValues($reg)) == 0) {
                 $userGamesModel->deleteGameRegister($id, $data['user']);
                 $userGamesModel->addNewRegister($id, $reg, $data['user']);
@@ -61,7 +71,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         if(!$goToProfile){
             $this->view->showViews(array('client/addGame.view.php'), $data);
         }else{
-            header("location: /profile/" . $_SESSION['user']['userID'] . "?page=1");
+            header("location: /profile/" . $_SESSION['user']['userID'] . "?page=1&order=0&status=4&edit=" . $data['game']['gameID']);
         }
     }
 
@@ -70,7 +80,32 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
         $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
         $user = $_SESSION['user'];
         $userGamesModel->deleteGameRegister($id, $user);
-        header("location: /profile/" . $user['userID'] . "?page=1");
+        header("location: /profile/" . $user['userID'] . "?page=1&order=0&status=4&del=" . $data['game']['gameID']);
+    }
+    
+    function checkDateValues($reg){
+        $inicio = "";
+        $fin = "";
+
+        if(isset($reg['fecha'][0])){
+            if($reg['fecha'][0]!="" || $reg['fecha'][0]!=null){
+              $datei = str_replace('/', '-', $reg['fecha'][0]);
+                var_dump($datei);
+                $inicio = date('Y-m-d', strtotime($datei));  
+            }
+            
+        }
+
+        if(isset($reg['fecha'][1])){
+            if($reg['fecha'][1]!="" || $reg['fecha'][1]!=null){
+                $datef = str_replace('/', '-', $reg['fecha'][1]);
+                var_dump($datef);
+                $fin = date('Y-m-d', strtotime($datef));
+            }
+            
+        }
+        
+        return [$inicio,$fin];
     }
 
     // Comprueba que los datos introducidos al añadir/editar juego de la colección,
@@ -78,18 +113,23 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
     function checkRegValues($reg): array {
         $statusModel = new \Com\Daw2\Models\StatusModel();
         $errors = [];
+        
+        $inicio = (isset($reg['fecha'][0]) ? $reg['fecha'][0] : "");
+        $fin = (isset($reg['fecha'][1]) ? $reg['fecha'][1] : "");
+
+        var_dump($inicio . "<br>" . $fin);
+        
+        echo "<BR><BR><BR>";
 
         if (!$statusModel->checkStatusExistsById($reg['status'])) {
             $errors['status'] = "Estado inválido";
         } else {
             // Si el juego ha sido cancelado
             if ($reg['status'] == 0) {
-                if (!strtotime($reg['start'])) {
+                if (!strtotime($inicio)) {
                     $errors['start'] = "La fecha inicial es obligatoria.";
                 }
-                if (strtotime($reg['end'])) {
-                    $errors['end'] = "Si el juego ha sido cancelado, no has podido terminarlo";
-                }
+
                 if ($reg['note'] < 0 || $reg['note'] > 100){
                     $errors['note'] = "La nota debe estar comprendida entre 0 y 100";
                 }
@@ -98,10 +138,10 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
 
             // Si el juego está pendiente
             if ($reg['status'] == 1) {
-                if (strtotime($reg['start'])) {
+                if (strtotime($inicio)) {
                     $errors['start'] = "Si tienes el juego pendiente, no puedes haberlo iniciado.";
                 }
-                if (strtotime($reg['end'])) {
+                if (strtotime($fin)) {
                     $errors['end'] = "Si tienes el juego pendiente, no puedes haberlo finalizado.";
                 }
                 if ($reg['note']!=null){
@@ -111,10 +151,10 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
 
             // Si el juego está en progreso
             if ($reg['status'] == 2) {
-                if (!strtotime($reg['start'])) {
+                if (!strtotime($inicio)) {
                     $errors['start'] = "La fecha inicial es obligatoria si has empezado el juego.";
                 }
-                if (strtotime($reg['end'])) {
+                if (strtotime($fin)) {
                     $errors['end'] = "Si el juego sigue en progreso, no has podido terminarlo.";
                 }
                 if ($reg['note'] < 0 || $reg['note'] > 100){
@@ -124,23 +164,21 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
 
             // Si el juego ha sido completado
             if ($reg['status'] == 3) {
-                if (!strtotime($reg['end'])) {
-                    $errors['end'] = "La fecha de finalización es obligatoria si el juego ha sido completado.";
-                }
-                if (!strtotime($reg['start'])) {
+
+                if (!strtotime($inicio)) {
                     $errors['start'] = "La fecha de inicio es obligatoria si el juego ha sido completado.";
+                }
+                if (!strtotime($fin)) {
+                    $errors['end'] = "La fecha de finalización es obligatoria si el juego ha sido completado.";
                 }
                 if ($reg['note'] < 0 || $reg['note'] > 100){
                     $errors['note'] = "La nota debe estar comprendida entre 0 y 100";
                 }
-            }
-            
-            // Comprueba que la fecha de inicio sea antes que la de finalización
-            if(strtotime($reg['start'])&&strtotime($reg['end'])){
-                if($reg['start']>$reg['end']){
+                if($inicio>$fin){
                     $errors['logic'] = "La fecha de inicio no puede ser superior a la de finalización";
                 }
             }
+
         }
 
         return $errors;
