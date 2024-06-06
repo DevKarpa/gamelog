@@ -83,7 +83,7 @@
                             </div>
                             <div class="datesItem">
                                 <div class="dItem">
-                                    <label>Inicio</label>
+                                    <label>Fecha</label>
                                     <input type="text" id="fecha" name="fecha" value="<?php echo isset($reg) ? $fulldate : '' ?>">
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                 <section class="bottomPage">
                         <div class="buttonsItem">
                             <input class="btn" type="submit" name="submit" id="submit" value="Enviar">
-                            <input class="btn" type="reset" value="Reset" onclick="resetDateValues()">
+                            <input class="btn" type="reset" value="Vaciar" onclick="resetDateValues()">
                         </div>
                     </form>
                 </section>

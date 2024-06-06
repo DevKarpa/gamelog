@@ -167,27 +167,35 @@ footer{
     .game{
         font-size: 0.7em;
     }
-    
-    .gameImg img{
-        width: 200px;
-    }
-    
+
     .gameContentLeft, .gameContentRight{
         gap: 10px !important;
     }
     
-    .gameYear{
-        font-size: 1em;
+    
+    .gameImg img{
+        width: 170px;
     }
     
     .gameTitle{
-        font-size: 1.3em;
+        font-size: 1em;
     }
     
-    .gameButtons a{
-        font-size: 4em;
-        margin-right: 10px;
+    .gamePlat{
+        font-size: 1em;
     }
+    
+    .gameYear{
+        font-size: 1.4em;
+    }
+
+    
+    .gameButtons a{
+        font-size: 2em;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
     
 
 }

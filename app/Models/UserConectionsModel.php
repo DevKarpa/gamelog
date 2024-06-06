@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Com\Daw2\Models;
+namespace Com\Gamelog\Models;
 
-class UserConectionsModel extends \Com\Daw2\Core\BaseModel {
+class UserConectionsModel extends \Com\Gamelog\Core\BaseModel {
 
     function createNewRegister($id): void {
         $query = $this->pdo->prepare("INSERT INTO userConections (userID) VALUES (?)");

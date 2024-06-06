@@ -1,8 +1,8 @@
 <?php
 declare(strict_types = 1);
-namespace Com\Daw2\Controllers;
+namespace Com\Gamelog\Controllers;
 
-class ErroresController extends \Com\Daw2\Core\BaseController {
+class ErroresController extends \Com\Gamelog\Core\BaseController {
     
     // Se encarga de cargar la vista referente al error 404
     function error404() : void{

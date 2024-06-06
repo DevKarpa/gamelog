@@ -10,7 +10,7 @@ class UserGamesModelTest extends TestCase {
         $dotenv = Dotenv\Dotenv::createImmutable('../');
         $dotenv->load();
         
-        $model = new Com\Daw2\Models\UserGamesModel();
+        $model = new Com\Gamelog\Models\UserGamesModel();
         
         $gameID = 42; // ID del juego 'Farming Simulator 22'
         $user = ["userID" => 14]; // ID del usuario "alex"
@@ -23,7 +23,7 @@ class UserGamesModelTest extends TestCase {
         $dotenv = Dotenv\Dotenv::createImmutable('../');
         $dotenv->load();
         
-        $model = new Com\Daw2\Models\UserGamesModel();
+        $model = new Com\Gamelog\Models\UserGamesModel();
         
         $gameID = 42; // ID del juego 'Farming Simulator 22'
         $user = ["userID" => 18]; // ID del usuario "PCouce"

@@ -1,11 +1,11 @@
 {
-    "name": "com/daw2",
-    "description": "Framework DAw2",
+    "name": "com/gamelog",
+    "description": "Proxecto Final Alejandro",
     "type": "project",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Com\\Daw2\\": "app/"
+            "Com\\Gamelog\\": "app/"
         }
     },
     "require": {
@@ -14,5 +14,6 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.6"
+
     }
 }

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Com\Daw2\Controllers;
+namespace Com\Gamelog\Controllers;
 
-class DevController extends \Com\Daw2\Core\BaseController {
+class DevController extends \Com\Gamelog\Core\BaseController {
 
     // Guarda datos de todos los devs ordenados para mostrarlos en la vista
     function showAllDevs(): void {
-        $devModel = new \Com\Daw2\Models\DevModel();
+        $devModel = new \Com\Gamelog\Models\DevModel();
         $data = [];
         $data['titulo'] = 'Lista de devs';
         $data['seccion'] = 'dev-list';
@@ -19,7 +19,7 @@ class DevController extends \Com\Daw2\Core\BaseController {
     
     // Añade devs a la base de datos siempre que este no exista
     function addDev() {
-        $devModel = new \Com\Daw2\Models\DevModel();
+        $devModel = new \Com\Gamelog\Models\DevModel();
         $data = [];
         $data['titulo'] = 'Añadir desarrolladores';
         $data['seccion'] = 'dev-list';
@@ -43,8 +43,8 @@ class DevController extends \Com\Daw2\Core\BaseController {
     
     // Elimina el dev con el id pasado por parámetro 
     function deleteDev($id) {
-        $gameModel = new \Com\Daw2\Models\GameModel();
-        $devModel = new \Com\Daw2\Models\DevModel();
+        $gameModel = new \Com\Gamelog\Models\GameModel();
+        $devModel = new \Com\Gamelog\Models\DevModel();
         $deletedDev = $devModel->getDevById($id);
 
         $data = [];

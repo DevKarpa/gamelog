@@ -7,7 +7,7 @@ class UserControllerTest extends TestCase {
     
     public function testCheckUserPassword() {
         
-        $controller = new Com\Daw2\Controllers\UserController();
+        $controller = new Com\Gamelog\Controllers\UserController();
 
         $this->assertIsNotArray($controller->
                 checkUserPassword('1234', '1234'));

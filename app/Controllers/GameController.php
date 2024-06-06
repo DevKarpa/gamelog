@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Com\Daw2\Controllers;
+namespace Com\Gamelog\Controllers;
 
-class GameController extends \Com\Daw2\Core\BaseController {
+class GameController extends \Com\Gamelog\Core\BaseController {
 
     // Guarda todos los juegos, les aplica paginación y filtros y los muestra
     // en la vista.
     function showAllGames(): void {
-        $gameModel = new \Com\Daw2\Models\GameModel();
-        $devModel = new \Com\Daw2\Models\DevModel();
-        $platModel = new \Com\Daw2\Models\PlatformModel();
+        $gameModel = new \Com\Gamelog\Models\GameModel();
+        $devModel = new \Com\Gamelog\Models\DevModel();
+        $platModel = new \Com\Gamelog\Models\PlatformModel();
         $data = [];
         $offset = null;
         $data['titulo'] = 'Lista de juegos';
@@ -41,9 +41,9 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
     // Añade juego a la base de datos, siempre que no tenga errores.
     function addGame(): void {
-        $gameModel = new \Com\Daw2\Models\GameModel();
-        $devModel = new \Com\Daw2\Models\DevModel();
-        $platModel = new \Com\Daw2\Models\PlatformModel();
+        $gameModel = new \Com\Gamelog\Models\GameModel();
+        $devModel = new \Com\Gamelog\Models\DevModel();
+        $platModel = new \Com\Gamelog\Models\PlatformModel();
         $data = [];
         $data['titulo'] = 'Añadir nuevo juego';
         $data['seccion'] = 'game-list';
@@ -67,9 +67,9 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
     // Edita un juego ya existente, comprobando que no tenga fallos
     function editGame($id) {
-        $gameModel = new \Com\Daw2\Models\GameModel();
-        $devModel = new \Com\Daw2\Models\DevModel();
-        $platModel = new \Com\Daw2\Models\PlatformModel();
+        $gameModel = new \Com\Gamelog\Models\GameModel();
+        $devModel = new \Com\Gamelog\Models\DevModel();
+        $platModel = new \Com\Gamelog\Models\PlatformModel();
         $data = [];
         $data['titulo'] = 'Editar juego';
         $data['seccion'] = 'game-list';
@@ -94,8 +94,8 @@ class GameController extends \Com\Daw2\Core\BaseController {
 
     // Comprueba que los datos introducidos al añadir/editar juego, están correctos.
     function checkGameErrors($metadata, $img) {
-        $devModel = new \Com\Daw2\Models\DevModel();
-        $platModel = new \Com\Daw2\Models\PlatformModel();
+        $devModel = new \Com\Gamelog\Models\DevModel();
+        $platModel = new \Com\Gamelog\Models\PlatformModel();
         $errors = [];
 
         // Comprobación de título del juego
@@ -154,7 +154,7 @@ class GameController extends \Com\Daw2\Core\BaseController {
     // FUNCIONES USADAS PARA LA VISTA DEL USUARIO NO ADMINISTRADOR
     // Carga la vista principal de /search
     function searchGames(): void {
-        $platModel = new \Com\Daw2\Models\PlatformModel();
+        $platModel = new \Com\Gamelog\Models\PlatformModel();
         $data['platforms'] = $platModel->getAllPlatforms();
         $this->view->showViews(array('client/games.view.php'), $data);
     }
@@ -162,8 +162,8 @@ class GameController extends \Com\Daw2\Core\BaseController {
     // Función que se ejecuta de forma asíncrona, y va mostrando los juegos que coinciden con
     // el texto pasado por parámetro
     function asyncSearchGames($txt, $id) {
-        $gameModel = new \Com\Daw2\Models\GameModel();
-        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
+        $gameModel = new \Com\Gamelog\Models\GameModel();
+        $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
 
         if (isset($_SESSION['user'])) {
             $userGames = $userGamesModel->getGamesIDByUserID($_SESSION['user']['userID']);

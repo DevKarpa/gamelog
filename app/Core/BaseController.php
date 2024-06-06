@@ -1,5 +1,5 @@
 <?php
-  namespace Com\Daw2\Core;
+  namespace Com\Gamelog\Core;
   
   abstract class BaseController {
       protected $view;

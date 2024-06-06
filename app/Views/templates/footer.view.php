@@ -55,9 +55,4 @@ $(document).ready(function() {
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="assets/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!--<script src="dist/js/demo.js"></script>-->
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<!--<script src="dist/js/pages/dashboard.js"></script>-_>
-</body>
-</html>
+

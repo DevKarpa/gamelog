@@ -1,6 +1,6 @@
 <?php
 
-namespace Com\Daw2\Core;
+namespace Com\Gamelog\Core;
 
 class View {
 

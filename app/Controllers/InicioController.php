@@ -1,8 +1,8 @@
 <?php
 
-namespace Com\Daw2\Controllers;
+namespace Com\Gamelog\Controllers;
 
-class InicioController extends \Com\Daw2\Core\BaseController {
+class InicioController extends \Com\Gamelog\Core\BaseController {
 
     // Carga la página de inicio del administrador
     public function index() {

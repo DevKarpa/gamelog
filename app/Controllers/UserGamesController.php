@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Com\Daw2\Controllers;
+namespace Com\Gamelog\Controllers;
 
-class UserGamesController extends \Com\Daw2\Core\BaseController {
+class UserGamesController extends \Com\Gamelog\Core\BaseController {
 
     // Carga un juego nuevo a la colección
     function addGameToCollection($id) {
-        $gameModel = new \Com\Daw2\Models\GameModel();
-        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
-        $statusModel = new \Com\Daw2\Models\StatusModel();
+        $gameModel = new \Com\Gamelog\Models\GameModel();
+        $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
+        $statusModel = new \Com\Gamelog\Models\StatusModel();
         $data = [];
         $data['user'] = $_SESSION['user'];
         $data['game'] = $gameModel->getGameById($id);
@@ -44,9 +44,9 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
 
     // Carga un juego de tu colección
     function editGameFromCollection($id) {
-        $gameModel = new \Com\Daw2\Models\GameModel();
-        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
-        $statusModel = new \Com\Daw2\Models\StatusModel();
+        $gameModel = new \Com\Gamelog\Models\GameModel();
+        $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
+        $statusModel = new \Com\Gamelog\Models\StatusModel();
         $data = [];
         $data['user'] = $_SESSION['user'];
         $data['game'] = $gameModel->getGameById($id);
@@ -81,7 +81,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
 
     // Elimina un juego de tu colección
     function deleteGameFromCollection($id) {
-        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
+        $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
         $user = $_SESSION['user'];
         $userGamesModel->deleteGameRegister($id, $user);
         header("location: /profile/" . $user['userID'] . "?page=1&order=0&status=4&del=" . $data['game']['gameID']);
@@ -113,7 +113,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
     // Comprueba que los datos introducidos al añadir/editar juego de la colección,
     // sean coherentes.
     function checkRegValues($reg): array {
-        $statusModel = new \Com\Daw2\Models\StatusModel();
+        $statusModel = new \Com\Gamelog\Models\StatusModel();
         $errors = [];
         
         $inicio = (isset($reg['fecha'][0]) ? $reg['fecha'][0] : "");
@@ -180,7 +180,7 @@ class UserGamesController extends \Com\Daw2\Core\BaseController {
     }
     
     function asyncSearchUserGames($txt,$id,$status) {
-        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
+        $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
         
         $games = $userGamesModel->getGamesByUserIDandStatus($id, $status);
         $i = 0;

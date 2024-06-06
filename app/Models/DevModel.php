@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Com\Daw2\Models;
+namespace Com\Gamelog\Models;
 
-class DevModel extends \Com\Daw2\Core\BaseModel {
+class DevModel extends \Com\Gamelog\Core\BaseModel {
 
     private const BASE = "SELECT * FROM devs ";
 

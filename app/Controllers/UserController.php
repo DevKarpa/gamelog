@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Com\Daw2\Controllers;
+namespace Com\Gamelog\Controllers;
 
-class UserController extends \Com\Daw2\Core\BaseController {
+class UserController extends \Com\Gamelog\Core\BaseController {
 
     // Logea al usuario si coinciden las credenciales y guarda sus datos
     // en sesión, al igual que a su lista de amigos.
     function loginUser(): void {
-        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
         $user = null;
         $data = [];
 
@@ -35,8 +35,8 @@ class UserController extends \Com\Daw2\Core\BaseController {
     // Registra al usuario si las credenciales son válidas y ya no están
     // siendo utilizadas, y guarda en sesión los datos.
     function registerUser(): void {
-        $userModel = new \Com\Daw2\Models\UserModel();
-        $userCon = new \Com\Daw2\Models\UserConectionsModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
+        $userCon = new \Com\Gamelog\Models\UserConectionsModel();
         $data = [];
         $data['register'] = true;
 
@@ -68,7 +68,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
 
     // Guarda todos los usuarios para llevarlos a la vista
     function showAllUsers() {
-        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
         $data = [];
         $data['titulo'] = 'Lista de usuarios';
         $data['seccion'] = 'user-list';
@@ -80,7 +80,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
     // Comprueba que los datos introducidos en el formulario de registro son correctos
     function checkRegisterData($data): array {
         $errors = [];
-        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
 
         // Comprobación de username, si existe ya en la base de datos, o si no cuenta con la longitud correcta.
         if (!$userModel->checkUserExists($data['username'])) {
@@ -136,8 +136,8 @@ class UserController extends \Com\Daw2\Core\BaseController {
     // Elimina a un usuario desde la vista de admin, no te puedes borrar a ti
     // mismo.
     function deleteUser($id) {
-        $userModel = new \Com\Daw2\Models\UserModel();
-        $userCon = new \Com\Daw2\Models\UserConectionsModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
+        $userCon = new \Com\Gamelog\Models\UserConectionsModel();
         $deletedUser = $userModel->getUserById($id);
 
         $data = [];
@@ -160,7 +160,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
 
     // Carga la vista para editar a un usuario
     function editUser($id) {
-        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
 
         $data = [];
         $data['titulo'] = 'Editar usuario';
@@ -180,7 +180,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
     // Comprueba que los datos introducidos para editar un usuario sean correctos
     function checkEditUserData($input, $user) {
         $errors = [];
-        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
 
         // Comprobación de username, solo se aplica el cambio si el username no
         // existe, o es el mismo que el propio usuario que estamos editando
@@ -224,9 +224,9 @@ class UserController extends \Com\Daw2\Core\BaseController {
     // Muestra el perfil de un usuario, sus juegos, amigos, y con paginación
     // y ordenamiento.
     function showUserProfile($id) {
-        $userModel = new \Com\Daw2\Models\UserModel();
-        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
-        $userCon = new \Com\Daw2\Models\UserConectionsModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
+        $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
+        $userCon = new \Com\Gamelog\Models\UserConectionsModel();
         $data = [];
         $data['user'] = $userModel->getUserById($id);
         $data['friends'] = $userModel->getFriendsFromUserID($id);
@@ -271,9 +271,9 @@ class UserController extends \Com\Daw2\Core\BaseController {
     }
     
     function showUserProfileFriends($id) {
-        $userModel = new \Com\Daw2\Models\UserModel();
-        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
-        $userCon = new \Com\Daw2\Models\UserConectionsModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
+        $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
+        $userCon = new \Com\Gamelog\Models\UserConectionsModel();
         $data = [];
         $data['title'] = "Siguiendo";
         $data['user'] = $userModel->getUserById($id);
@@ -292,9 +292,9 @@ class UserController extends \Com\Daw2\Core\BaseController {
     }
     
     function showUserProfileFriendsc($id) {
-        $userModel = new \Com\Daw2\Models\UserModel();
-        $userGamesModel = new \Com\Daw2\Models\UserGamesModel();
-        $userCon = new \Com\Daw2\Models\UserConectionsModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
+        $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
+        $userCon = new \Com\Gamelog\Models\UserConectionsModel();
         $data = [];
         $data['title'] = "Seguidores";
         $data['user'] = $userModel->getUserById($id);
@@ -315,8 +315,8 @@ class UserController extends \Com\Daw2\Core\BaseController {
     // Carga la vista para editar tu usuario, comprueba si los datos introducidos
     // están correctos.
     function editCurrentUser() {
-        $userModel = new \Com\Daw2\Models\UserModel();
-        $userCon = new \Com\Daw2\Models\UserConectionsModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
+        $userCon = new \Com\Gamelog\Models\UserConectionsModel();
         $data = [];
         $data['user'] = $_SESSION['user'];
         $data['conections'] = $userCon->getAllConectionsFromUserID($data['user']['userID']);
@@ -371,7 +371,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
 
     // Comprueba que un nombre de usuario sea válido
     function checkUsername($id, $username) {
-        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
         $errors = [];
 
         if (!$userModel->checkUsernameExists($id, $username)) {
@@ -387,14 +387,14 @@ class UserController extends \Com\Daw2\Core\BaseController {
     
     // Añade un amigo a tu lista, y carga de vuelta el perfil del usuario logeado.
     function addFriend($id) {
-        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
         $userModel->addNewFriend($_SESSION['user']['userID'],$id);
         $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
         header("location: /profile/". $id ."?page=1&order=0&status=4");
     }
     
     function unfollowUser($id) {
-        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
         $userModel->unfollowUser($_SESSION['user']['userID'],$id);
         $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
         header("location: /profile/". $id ."?page=1&order=0&status=4");
@@ -406,7 +406,7 @@ class UserController extends \Com\Daw2\Core\BaseController {
     }
     
     function asyncSearchUsers($txt) {
-        $userModel = new \Com\Daw2\Models\UserModel();
+        $userModel = new \Com\Gamelog\Models\UserModel();
 
         $following = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
         $users = $userModel->getAllUsers();

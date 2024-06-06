@@ -10,7 +10,7 @@ class UserModelTest extends TestCase {
         $dotenv = Dotenv\Dotenv::createImmutable('../');
         $dotenv->load();
         
-        $model = new Com\Daw2\Models\UserModel();
+        $model = new Com\Gamelog\Models\UserModel();
         
         $username = "alexTEST";
         $password = '1qazXSW"';
@@ -23,7 +23,7 @@ class UserModelTest extends TestCase {
         $dotenv = Dotenv\Dotenv::createImmutable('../');
         $dotenv->load();
         
-        $model = new Com\Daw2\Models\UserModel();
+        $model = new Com\Gamelog\Models\UserModel();
         
         $username = "PCouceiro";
 

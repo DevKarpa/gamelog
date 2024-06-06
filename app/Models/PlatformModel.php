@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Com\Daw2\Models;
+namespace Com\Gamelog\Models;
 
-class PlatformModel extends \Com\Daw2\Core\BaseModel {
+class PlatformModel extends \Com\Gamelog\Core\BaseModel {
 
     private const BASE = "SELECT * FROM platforms ";
 

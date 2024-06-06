@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Com\Daw2\Models;
+namespace Com\Gamelog\Models;
 
-class StatusModel extends \Com\Daw2\Core\BaseModel {
+class StatusModel extends \Com\Gamelog\Core\BaseModel {
     
     // Obtiene todos los status
     function getAllStatus(): array {
