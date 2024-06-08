@@ -89,8 +89,8 @@
                                 </div>
                             </div>
                             <div class="noteItem">
-                                <label>Nota (Opcional)</label>
-                                <input id="nota" name="note" type="number" min="0" max="100" placeholder="100" value="<?php echo isset($reg) ? $reg['nota'] : '' ?>">
+                                <label>Nota 0-100 (Opcional)</label>
+                                <input id="nota" name="note" type="number" min="0" max="100" value="<?php echo isset($reg) ? $reg['nota'] : '' ?>">
                             </div>
 
                     </section>
