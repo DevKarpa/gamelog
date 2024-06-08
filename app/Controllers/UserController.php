@@ -365,8 +365,27 @@ class UserController extends \Com\Gamelog\Core\BaseController {
             $_SESSION['user']['userDesc'] = $desc;
             $data['user'] = $_SESSION['user'];
         }
+        
+        if(!empty($_FILES)){
+            if($this->checkGameImage($_FILES)){
+                // Llamada a la función que guarda la imagen
+                $userModel->updateImage($_FILES, $data['user']['userID']);
+            }
+        }
 
         $this->view->showViews(array('client/editProfile.view.php'), $data);
+    }
+    
+    // Comprueba que el archivo subido se trata de una imagen
+    function checkGameImage($img) {
+        $upload = true;
+
+        $check = getimagesize($img["img"]["tmp_name"]);
+        if ($check === false) {
+            $upload = false;
+        }
+
+        return $upload;
     }
 
     // Comprueba que un nombre de usuario sea válido

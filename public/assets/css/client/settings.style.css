@@ -36,6 +36,12 @@ main{
     object-fit: cover;
 }
 
+    .userImg{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
 .topSection .userInfo .userText{
     display: flex;
     flex-direction: column;
@@ -87,7 +93,7 @@ main{
   content: '|';
 }
 
-#upinput{
+.upinput{
     background: none;
     border: none;
     background: rgba(1, 92, 255, 0.1);
@@ -100,7 +106,7 @@ main{
     font-family: "Lato", sans-serif;
 }
 
-#dn > #upinput{
+#dn > .upinput{
     font-weight: bold;
     width: 70%;
 }
@@ -183,6 +189,22 @@ main{
     background: rgba(1, 92, 255, 1);
 }
 
+#fileImg{
+    display:none;
+}
+
+.fileimgdiv{
+    margin-top: 10px;
+}
+
+.filebtn{
+    background: rgba(1, 92, 255, 0.6);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    padding: 5px;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 900px) {
     
     main{
@@ -212,6 +234,8 @@ main{
     .userImg img{
         width: 100px !important;
     }
+    
+    
     
     .userSubMenu ul{
         justify-content: center !important;

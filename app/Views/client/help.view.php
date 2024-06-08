@@ -6,8 +6,9 @@
         <link rel="stylesheet" href="../assets/css/client/help.style.css">
         <link rel="stylesheet" href="../assets/css/client/main.style.css">
         <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+        <link rel="icon" type="image/x-icon" href="../assets/img/favicon.png">
 
-        <title>Ayuda</title>
+        <title>Gamelog | Ayuda</title>
     </head>
     <body>
         <div class="content">

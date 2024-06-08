@@ -28,6 +28,9 @@
   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper"> 
@@ -68,7 +71,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="assets/img/profile/<?php echo $_SESSION['user']['userID'] ?>.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block"><?php echo isset($_SESSION['user']) ? $_SESSION['user']['username'] : 'none' ?></a>

@@ -151,4 +151,9 @@ class UserModel extends \Com\Gamelog\Core\BaseModel {
         $query = $this->pdo->prepare("DELETE FROM userFriends WHERE mainUserID = ? AND friendUserId = ?");
         $query->execute([$mainUserID, $friendUserID]);
     }
+    
+    function updateImage($img, $id){
+        $dir = "assets/img/profile/" . $id . ".jpg";
+        move_uploaded_file($img["img"]["tmp_name"], $dir);
+    }
 }

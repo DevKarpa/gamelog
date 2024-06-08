@@ -6,7 +6,9 @@
         <link rel="stylesheet" href="../assets/css/client/profile.style.css" type="text/css">
         <link rel="stylesheet" href="../assets/css/client/main.style.css" type="text/css">
         <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-        <title>Siguiendo | <?php echo $user['username'] ?></title>
+        <link rel="icon" type="image/x-icon" href="../assets/img/favicon.png">
+
+        <title>Gamelog | Siguiendo</title>
     </head>
     <body>
         <div class="content">

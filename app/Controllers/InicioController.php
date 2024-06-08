@@ -7,8 +7,7 @@ class InicioController extends \Com\Gamelog\Core\BaseController {
     // Carga la página de inicio del administrador
     public function index() {
         $data = array(
-            'titulo' => 'Administrator page',
-            'breadcrumb' => ['adminindex']
+            'titulo' => 'Panel de control'
         );        
         $this->view->showViews(array('templates/header.view.php', 'inicio.view.php', 'templates/footer.view.php'), $data);
     }

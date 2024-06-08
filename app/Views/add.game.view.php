@@ -75,7 +75,7 @@
 
 
                         <div class="mb-3 col-sm-6">
-                            <label for="codigo">Steam Grid (Aspect Ratio 92 : 43) <a title="Ayuda con la imagen" href="imghelp">?</a></label>
+                            <label for="codigo">Steam Grid (Aspect Ratio 92 : 43) <a title="Ayuda con la imagen" href="help">?</a></label>
                             <input class="form-control-file" id="image" type="file" name="image" accept="image/*" required>
                             <p class="text-danger"><?php echo isset($errores['image']) ? $errores['image'] : ''; ?></p>
                         </div>

@@ -6,7 +6,8 @@
         <link rel="stylesheet" href="assets/css/client/settings.style.css" type="text/css">
         <link rel="stylesheet" href="assets/css/client/main.style.css" type="text/css">
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" type="text/css">
-        <title>EDITAR PERFIL</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+        <title>Gamelog | Editar Perfil</title>
     </head>
     <body>
 
@@ -46,12 +47,18 @@
                     <section class="topSection">
                         <div class="userInfo">
                             <div class="userImg">
-                                <a><img src="../assets/img/profile/<?php echo $user['userID'] ?>.jpg"></a>
+                                <a><img src="../assets/img/profile/<?php echo $user['userID'] ?>.jpg"></a> 
+                                <div class="fileimgdiv">
+                                    <label for="fileImg" class="filebtn">Cambiar imagen</label>
+                                    <input type="file" id="fileImg" name="img"  accept="image/*">
+                                </div>
+                                    
+                                
                             </div>
                             <div class="userText">
-                                <span id="dn"><input id="upinput" type="text" name="displayNamec" value="<?php echo ($user['userDisplayName'] == null) ? $user['username'] : $user['userDisplayName'] ?>"></span>
-                                <span>@<input id="upinput"  type="text" name="usernamec" value="<?php echo $user['username'] ?>"></span>
-                                <span><textarea id="upinput" name="descc"><?php echo $user['userDesc'] ?></textarea></span>
+                                <span id="dn"><input class="upinput" type="text" name="displayNamec" value="<?php echo ($user['userDisplayName'] == null) ? $user['username'] : $user['userDisplayName'] ?>"></span>
+                                <span>@<input class="upinput"  type="text" name="usernamec" value="<?php echo $user['username'] ?>"></span>
+                                <span><textarea class="upinput" name="descc"><?php echo $user['userDesc'] ?></textarea></span>
                             </div>
                         </div>
 
@@ -136,8 +143,15 @@
                 </div>
             </div>
         </footer>
+        <script src="../plugins/jquery/jquery.min.js"></script>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://unpkg.com/tippy.js@6"></script>
         <?php include("plugins/dropdownmenu/drop.php"); ?>
+        <script>
+            $("#fileImg").change(function (){
+                $(".filebtn").html('Foto subida');
+            });
+             
+        </script>
     </body>
 </html>

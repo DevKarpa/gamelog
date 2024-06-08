@@ -7,8 +7,9 @@
         <link rel="stylesheet" href="../assets/css/client/main.style.css">
         <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
         <link rel="stylesheet" href="../plugins/air-datepicker/air-datepicker.css">
-        
-        <title><?php echo $game['gameTitle'] ?></title>
+        <link rel="icon" type="image/x-icon" href="../assets/img/favicon.png">
+
+        <title>Gamelog | <?php echo $game['gameTitle'] ?></title>
     </head>
     <body onload="updateDateValues()">
         <div class="content">
@@ -89,7 +90,7 @@
                             </div>
                             <div class="noteItem">
                                 <label>Nota (Opcional)</label>
-                                <input id="nota" name="note" type="number" min="0" max="100" value="<?php echo isset($reg) ? $reg['nota'] : '' ?>">
+                                <input id="nota" name="note" type="number" min="0" max="100" placeholder="100" value="<?php echo isset($reg) ? $reg['nota'] : '' ?>">
                             </div>
 
                     </section>
@@ -99,7 +100,7 @@
                 <section class="bottomPage">
                         <div class="buttonsItem">
                             <input class="btn" type="submit" name="submit" id="submit" value="Enviar">
-                            <input class="btn" type="reset" value="Vaciar" onclick="resetDateValues()">
+                            <input class="btn" type="reset" value="Reiniciar" onclick="resetDateValues()">
                         </div>
                     </form>
                 </section>
