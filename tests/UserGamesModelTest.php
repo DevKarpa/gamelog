@@ -1,7 +1,5 @@
 <?php
 use PHPUnit\Framework\TestCase;
-require_once '../app/Models/UserGamesModel.php';
-
 
 class UserGamesModelTest extends TestCase {
     
@@ -12,7 +10,7 @@ class UserGamesModelTest extends TestCase {
         
         $model = new Com\Gamelog\Models\UserGamesModel();
         
-        $gameID = 42; // ID del juego 'Farming Simulator 22'
+        $gameID = 11; // ID del juego 'Celeste'
         $user = ["userID" => 14]; // ID del usuario "alex"
 
         $this->assertTrue($model->checkUserHasGame($gameID, $user));

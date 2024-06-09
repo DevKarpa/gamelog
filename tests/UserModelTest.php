@@ -1,7 +1,5 @@
 <?php
 use PHPUnit\Framework\TestCase;
-require_once '../app/Models/UserModel.php';
-
 
 class UserModelTest extends TestCase {
     
@@ -12,7 +10,7 @@ class UserModelTest extends TestCase {
         
         $model = new Com\Gamelog\Models\UserModel();
         
-        $username = "alexTEST";
+        $username = "alex";
         $password = '1qazXSW"';
 
         $this->assertIsArray($model->loginUser($username, $password));
@@ -25,7 +23,7 @@ class UserModelTest extends TestCase {
         
         $model = new Com\Gamelog\Models\UserModel();
         
-        $username = "PCouceiro";
+        $username = "PCouce";
 
         $this->assertTrue($model->checkUserExists($username));
     }

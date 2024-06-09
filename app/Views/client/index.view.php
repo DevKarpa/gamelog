@@ -22,7 +22,7 @@
                         <li><a href="/search">Buscar Juegos</a></li>
                         <li><a href="/help">Ayuda</a></li>
                         <?php if (isset($_SESSION['user'])) { ?>
-                            <li><a href="#" id="dropdown" class="glUserImg"><img src="../assets/img/profile/<?php echo $_SESSION['user']['userID'] ?>.jpg"></a></li>
+                        <li><a href="#" id="dropdown" class="glUserImg"><img src="../assets/img/profile/<?php echo $_SESSION['user']['userID'] ?>.jpg" alt="foto de perfil"></a></li>
 
                         <?php } ?>
                     </ul>
@@ -94,12 +94,12 @@
                 <section class="popularGamesSection">
                     <p>Juegos Populares</p>
                     <div class="popularGamesBlock">
-                        <div class="popularGameItem"><span>Forza Horizon 4</span><img src="assets/img/games/40.png"></div>
-                        <div class="popularGameItem"><span>Grand Theft Auto V</span><img src="assets/img/games/100.png"></div>
-                        <div class="popularGameItem"><span>Castle Crashers</span><img src="assets/img/games/120.png"></div>
-                        <div class="popularGameItem"><span>Left 4 Dead</span><img src="assets/img/games/33.png"></div>
-                        <div class="popularGameItem"><span>Spore</span><img src="assets/img/games/9.png"></div>
-                        <div class="popularGameItem"><span>Sonic Origins</span><img src="assets/img/games/78.png"></div>
+                        <div class="popularGameItem"><span>Forza Horizon 4</span><img alt="Foto de juego" src="assets/img/games/40.png"></div>
+                        <div class="popularGameItem"><span>Grand Theft Auto V</span><img alt="Foto de juego" src="assets/img/games/100.png"></div>
+                        <div class="popularGameItem"><span>Castle Crashers</span><img alt="Foto de juego" src="assets/img/games/120.png"></div>
+                        <div class="popularGameItem"><span>Left 4 Dead</span><img alt="Foto de juego" src="assets/img/games/33.png"></div>
+                        <div class="popularGameItem"><span>Spore</span><img alt="Foto de juego" src="assets/img/games/9.png"></div>
+                        <div class="popularGameItem"><span>Sonic Origins</span><img alt="Foto de juego" src="assets/img/games/78.png"></div>
                     </div>
                 </section>
             </main>
@@ -112,16 +112,15 @@
             </div>
             <div class="footRight">
                 <div class="socialMedia">
-                    <a href="#"><i class="footImg fab fa-discord"></i></a>
-                    <a href="#"><i class="footImg fab fa-steam"></i></i></a>
-                    <a href="#"><i class="footImg fab fa-twitter"></i></i></a>
-                    <a href="#"><i class="footImg fab fa-facebook"></i></i></a>
+                    <a href="https://discord.com/" title="Servidor de Discord"><i class="footImg fab fa-discord"></i></a>
+                    <a href="https://store.steampowered.com/?l=spanish" title="Grupo de Steam"><i class="footImg fab fa-steam"></i></i></a>
+                    <a href="https://twitter.com/" title="Cuenta de Twitter"><i class="footImg fab fa-twitter"></i></i></a>
+                    <a href="https://www.facebook.com/" title="Grupo de Facebook"><i class="footImg fab fa-facebook"></i></i></a>
                 </div>
                 <div class="footLinks">
-                    <a href="/help">Terminos de Servicio</a>
-                    <a href="/help">Política de Privacidad</a>
-                    <a href="/help">FAQ</a>
-
+                    <a href="/help#1">Terminos de Servicio</a>
+                    <a href="/help#2">Política de Privacidad</a>
+                    <a href="/help#3">FAQ</a>
                 </div>
             </div>
         </footer>

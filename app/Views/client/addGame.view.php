@@ -117,16 +117,15 @@
             </div>
             <div class="footRight">
                 <div class="socialMedia">
-                    <a href="#"><i class="footImg fab fa-discord"></i></a>
-                    <a href="#"><i class="footImg fab fa-steam"></i></i></a>
-                    <a href="#"><i class="footImg fab fa-twitter"></i></i></a>
-                    <a href="#"><i class="footImg fab fa-facebook"></i></i></a>
+                    <a href="https://discord.com/" title="Servidor de Discord"><i class="footImg fab fa-discord"></i></a>
+                    <a href="https://store.steampowered.com/?l=spanish" title="Grupo de Steam"><i class="footImg fab fa-steam"></i></i></a>
+                    <a href="https://twitter.com/" title="Cuenta de Twitter"><i class="footImg fab fa-twitter"></i></i></a>
+                    <a href="https://www.facebook.com/" title="Grupo de Facebook"><i class="footImg fab fa-facebook"></i></i></a>
                 </div>
                 <div class="footLinks">
-                    <a href="/help">Terminos de Servicio</a>
-                    <a href="/help">Política de Privacidad</a>
-                    <a href="/help">FAQ</a>
-
+                    <a href="/help#1">Terminos de Servicio</a>
+                    <a href="/help#2">Política de Privacidad</a>
+                    <a href="/help#3">FAQ</a>
                 </div>
             </div>
         </footer>

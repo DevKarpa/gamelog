@@ -1,7 +1,6 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once '../app/Controllers/UserController.php';
 
 class UserControllerTest extends TestCase {
     
@@ -9,8 +8,7 @@ class UserControllerTest extends TestCase {
         
         $controller = new Com\Gamelog\Controllers\UserController();
 
-        $this->assertIsNotArray($controller->
-                checkUserPassword('1234', '1234'));
+        $this->assertIsNotArray($controller->checkUserPassword('1qazXSW"', '1qazXSW"'));
         
     }
 }
