@@ -77,20 +77,20 @@ main{
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-
 .topSection .userSubMenu ul li{
     list-style: none;
+    
 }
-
 
 .topSection .userSubMenu ul li a{
     text-decoration: none;
     color: white;
-    margin-right: 10px;
+    transition-duration: 300ms;
 }
 
-.topSection .userSubMenu ul li:not(:last-child):after{
-  content: '|';
+.topSection .userSubMenu ul li a:hover{
+    transition-duration: 300ms;
+    color: lightgrey;
 }
 
 .upinput{

@@ -180,56 +180,58 @@ class UserGamesController extends \Com\Gamelog\Core\BaseController {
     }
     
     function asyncSearchUserGames($txt,$id,$status) {
-        $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
         
-        $games = $userGamesModel->getGamesByUserIDandStatus($id, $status);
-        $i = 0;
-        foreach ($games as $game) {
-            if (str_contains(strtolower($game['gameTitle']), $txt)) {
-                
-            ?>
-                <div class='game'>
-                    <div class='gameContentLeft'>
-                            <div class='gameImg'>
-                                <?php echo "<img src='../assets/img/games/" . $game['gameID'] . ".png'>" ?>
-                            </div>
-                            <div class='gameText'>
+        if(strlen($txt)>=3){
+
+            $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
+
+            $games = $userGamesModel->getGamesByUserIDandStatus($id, $status);
+
+            foreach ($games as $game) {
+                if (str_contains(strtolower($game['gameTitle']), $txt)) {
+
+                ?>
+                    <div class='game'>
+                        <div class='gameContentLeft'>
+                                <div class='gameImg'>
+                                    <?php echo "<img src='../assets/img/games/" . $game['gameID'] . ".png'>" ?>
+                                </div>
+                                <div class='gameText'>
+                                    <?php
+                                        if(isset($game['nota'])){
+                                            $class = ($game['nota']<=100 && $game['nota']>=81) ? "gnExcelent" : (($game['nota']<=80 && $game['nota']>=61) ? "gnGood" : (($game['nota']<=60 && $game['nota']>=40) ? "gnMixed" : (($game['nota']<=39 && $game['nota']>=0) ? "gnBad" : "")));
+                                        }
+                                    ?>
+                                    <?php echo "<span class='gameTitle'>" . $game['gameTitle'] . (isset($game['nota']) ? "<span class='gameNote " . $class . "'>". $game['nota'] . "</span>" : '') . "</span>" ?>
+                                    <div class="gamePlat">
+                                        <?php echo "<span>" . $game['platformName'] . "</span>" ?>
+                                    </div>
+                                    <div class="gameTime">
+                                        <?php echo "<span>" . $game['fechaInicio'] . "</span>" ?>
+                                        <?php echo "<span>" . $game['fechaFin'] . "</span>" ?>
+                                    </div>
+
+                                </div>
+                        </div>
+                        <div class='gameContentRight'>
+                            <?php echo "<span class='gameStatus'>" . $game['statusName'] . "</span>" ?>
+                            <div class='gameButtons'>
                                 <?php
-                                    if(isset($game['nota'])){
-                                        $class = ($game['nota']<=100 && $game['nota']>=81) ? "gnExcelent" : (($game['nota']<=80 && $game['nota']>=61) ? "gnGood" : (($game['nota']<=60 && $game['nota']>=40) ? "gnMixed" : (($game['nota']<=39 && $game['nota']>=0) ? "gnBad" : "")));
+                                    if(isset($_SESSION['user'])){
+                                        if ($_SESSION['user']['userID'] == $id) {
+                                            echo "<a href='/edit/" . $game['gameID'] . "'><i class='fas fa-pen-square'></i></a>";
+                                            echo "<a href='/delete/" . $game['gameID'] . "'><i class='fas fa-trash'></i></a>";
+                                        }
                                     }
                                 ?>
-                                <?php echo "<span class='gameTitle'>" . $game['gameTitle'] . (isset($game['nota']) ? "<span class='gameNote " . $class . "'>". $game['nota'] . "</span>" : '') . "</span>" ?>
-                                <div class="gamePlat">
-                                    <?php echo "<span>" . $game['platformName'] . "</span>" ?>
-                                </div>
-                                <div class="gameTime">
-                                    <?php echo "<span>" . $game['fechaInicio'] . "</span>" ?>
-                                    <?php echo "<span>" . $game['fechaFin'] . "</span>" ?>
-                                </div>
-
                             </div>
+                        </div>     
                     </div>
-                    <div class='gameContentRight'>
-                        <?php echo "<span class='gameStatus'>" . $game['statusName'] . "</span>" ?>
-                        <div class='gameButtons'>
-                            <?php
-                                if(isset($_SESSION['user'])){
-                                    if ($_SESSION['user']['userID'] == $id) {
-                                        echo "<a href='/edit/" . $game['gameID'] . "'><i class='fas fa-pen-square'></i></a>";
-                                        echo "<a href='/delete/" . $game['gameID'] . "'><i class='fas fa-trash'></i></a>";
-                                    }
-                                }
-                            ?>
-                        </div>
-                    </div>     
-                </div>
-            <?php
+                <?php
+                }
             }
-            if ($i == 30) {
-                break;
-            }
-            $i++;
+        }else{
+            echo "Introduce al menos 3 caracteres.";
         }
         
     }

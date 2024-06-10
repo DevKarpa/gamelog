@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
         
-        <title>Gamelog | Buscar usuarios</title>>
+        <title>Gamelog | Buscar usuarios</title>
     </head>
     <body>
         <div class="content">

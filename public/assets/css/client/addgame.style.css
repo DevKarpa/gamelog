@@ -26,6 +26,9 @@ main{
 .popularGameItem img{
     width: 500px;
     border-radius: 10px;
+    aspect-ratio: 92 / 43;
+    object-fit: cover;
+    vertical-align: middle;
 }
 .popularGameItem{
     transition-duration: 0.5s;

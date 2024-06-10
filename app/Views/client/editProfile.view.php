@@ -9,7 +9,7 @@
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
         <title>Gamelog | Editar Perfil</title>
     </head>
-    <body>
+    <body onload="reloadImgCache()">
 
         <div class="content">
             <header>
@@ -47,7 +47,7 @@
                     <section class="topSection">
                         <div class="userInfo">
                             <div class="userImg">
-                                <a><img src="../assets/img/profile/<?php echo $user['userID'] ?>.jpg"></a> 
+                                <a><img id="userImgItem"></a> 
                                 <div class="fileimgdiv">
                                     <label for="fileImg" class="filebtn">Cambiar imagen</label>
                                     <input type="file" id="fileImg" name="img"  accept="image/*">
@@ -64,14 +64,13 @@
 
                         <div class="userSubMenu">
                             <ul>
-                                <li><a href="/profile/<?php echo $user['userID'] ?>?page=1&order=0&status=4">Perfil</a></li>
-                                <li><a href="/profilefriends/<?php echo $user['userID'] ?>">Seguidores</a></li>
+                                <li><a href="/profile/<?php echo $user['userID'] ?>?page=1&order=0&status=4">Juegos</a></li>
+                                <li><a href="/profilefriends/<?php echo $user['userID'] ?>">Siguiendo</a></li>
+                                <li><a href="/profilefriendsc/<?php echo $user['userID'] ?>">Seguidores</a></li>
                                 <?php if (isset($_SESSION['user'])) {
-                                    if ($_SESSION['user']['userID'] == $user['userID']) {
-                                        ?>
-                                        <li><a href="/settings">Editar&nbsp;Perfil</a></li>
-                                    <?php }
-                                } ?>
+                                    if ($_SESSION['user']['userID'] == $user['userID']) {?>
+                                <li><a href="/settings">Editar&nbsp;Perfil</a></li>
+                                <?php } }?>
                             </ul>
                         </div>
                     </section>
@@ -142,7 +141,7 @@
                 </div>
             </div>
         </footer>
-        <script src="../plugins/jquery/jquery.min.js"></script>
+        <script src="../plugins/jquery/jquery.min.js?n=<?php echo time()?>"></script>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://unpkg.com/tippy.js@6"></script>
         <?php include("plugins/dropdownmenu/drop.php"); ?>
@@ -150,7 +149,11 @@
             $("#fileImg").change(function (){
                 $(".filebtn").html('Foto subida');
             });
-             
+            
+            // Recarga la caché de la imagen de perfil
+            function reloadImgCache(){
+                $('#userImgItem').attr("src", "../assets/img/profile/<?php echo $user['userID'] ?>.jpg?n=<?php echo time()?>");
+            }
         </script>
     </body>
 </html>

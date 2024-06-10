@@ -24,7 +24,7 @@ class UserController extends \Com\Gamelog\Core\BaseController {
             }
         }
 
-        
+
         if (!is_null($user)) {
             header("location: /");
         } else {
@@ -47,7 +47,7 @@ class UserController extends \Com\Gamelog\Core\BaseController {
                     $_SESSION['user'] = $userModel->registerUser($_POST);
                     $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
                     $userCon->createNewRegister($_SESSION['user']['userID']);
-                    copy("assets/img/profile/2.jpg","assets/img/profile/".$_SESSION['user']['userID'].".jpg");
+                    copy("assets/img/profile/2.jpg", "assets/img/profile/" . $_SESSION['user']['userID'] . ".jpg");
                     header("location: /");
                 } else {
                     $data['errors'] = $this->checkRegisterData($_POST);
@@ -56,7 +56,7 @@ class UserController extends \Com\Gamelog\Core\BaseController {
                 $data['error'] = "Rellena todas las casillas";
             }
         }
-        
+
         $this->view->showViews(array('login.view.php'), $data);
     }
 
@@ -151,7 +151,7 @@ class UserController extends \Com\Gamelog\Core\BaseController {
             $userModel->deleteUserById($id);
             $userCon->deleteRegister($id);
         }
-        
+
 
         $data['users'] = $userModel->getAllUsers();
 
@@ -220,7 +220,6 @@ class UserController extends \Com\Gamelog\Core\BaseController {
     }
 
     // FUNCIONES USADAS PARA LA VISTA DEL USUARIO NO ADMINISTRADOR
-
     // Muestra el perfil de un usuario, sus juegos, amigos, y con paginación
     // y ordenamiento.
     function showUserProfile($id) {
@@ -237,10 +236,9 @@ class UserController extends \Com\Gamelog\Core\BaseController {
         $data['droppedGames'] = count($userGamesModel->getDroppedGamesByUserID($id));
         $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
         $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
-        $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 10);
+        $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id, $data['status'])) / 10);
         $data['conections'] = $userCon->getAllConectionsFromUserID($id);
         //$data['pending'] = $userModel->checkPendingFriendRequest($id);
-
         // Si existe page en el get
         if (isset($_GET['page'])) {
             $data['page'] = $_GET['page'];
@@ -269,7 +267,7 @@ class UserController extends \Com\Gamelog\Core\BaseController {
 
         $this->view->showViews(array('client/profile.view.php'), $data);
     }
-    
+
     function showUserProfileFriends($id) {
         $userModel = new \Com\Gamelog\Models\UserModel();
         $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
@@ -285,12 +283,12 @@ class UserController extends \Com\Gamelog\Core\BaseController {
         $data['droppedGames'] = count($userGamesModel->getDroppedGamesByUserID($id));
         $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
         $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
-        $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
+        $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id, $data['status'])) / 5);
         $data['conections'] = $userCon->getAllConectionsFromUserID($id);
 
         $this->view->showViews(array('client/friends.view.php'), $data);
     }
-    
+
     function showUserProfileFriendsc($id) {
         $userModel = new \Com\Gamelog\Models\UserModel();
         $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
@@ -306,7 +304,7 @@ class UserController extends \Com\Gamelog\Core\BaseController {
         $data['droppedGames'] = count($userGamesModel->getDroppedGamesByUserID($id));
         $data['order'] = isset($_GET['order']) ? filter_var($_GET['order'], FILTER_SANITIZE_NUMBER_INT) : 0;
         $data['status'] = isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT) : 4;
-        $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id,$data['status'])) / 5);
+        $data['maxpage'] = ceil(count($userGamesModel->getGamesByUserIDandStatus($id, $data['status'])) / 5);
         $data['conections'] = $userCon->getAllConectionsFromUserID($id);
 
         $this->view->showViews(array('client/friends.view.php'), $data);
@@ -342,40 +340,42 @@ class UserController extends \Com\Gamelog\Core\BaseController {
                 $data['errors'] = $this->checkUserPassword($_POST['passwordc1'], $_POST['passwordc2']);
             }
         }
-        
-        if(isset($_POST['displayNamec'])){
+
+        if (isset($_POST['displayNamec'])) {
             $displayName = filter_var($_POST['displayNamec'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $userModel->changeDisplayName($data['user']['userID'],$displayName);
+            $userModel->changeDisplayName($data['user']['userID'], $displayName);
             $_SESSION['user']['userDisplayName'] = $displayName;
             $data['user'] = $_SESSION['user'];
         }
-        
-        if(isset($_POST['submit'])){
-            $con = ["twitter" => $_POST['twitter'],"steam" => $_POST['steam'],"xbox" => $_POST['xbox'],"playstation" => $_POST['playstation'],"nintendo" => $_POST['nintendo']];
-        
+
+        if (isset($_POST['submit'])) {
+            $con = ["twitter" => $_POST['twitter'], "steam" => $_POST['steam'], "xbox" => $_POST['xbox'], "playstation" => $_POST['playstation'], "nintendo" => $_POST['nintendo']];
+
             $userCon->updateRegisterFromUserID($data['user']['userID'], $con);
-            
+
             //Recarga las conexiones
             $data['conections'] = $userCon->getAllConectionsFromUserID($data['user']['userID']);
         }
-        
-        if(!empty($_POST['descc'])){
+
+        if (!empty($_POST['descc'])) {
             $desc = filter_var($_POST['descc'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $userModel->updateDescription($data['user']['userID'],$desc);
+            $userModel->updateDescription($data['user']['userID'], $desc);
             $_SESSION['user']['userDesc'] = $desc;
             $data['user'] = $_SESSION['user'];
         }
-        
-        if(!empty($_FILES)){
-            if($this->checkGameImage($_FILES)){
-                // Llamada a la función que guarda la imagen
-                $userModel->updateImage($_FILES, $data['user']['userID']);
+
+        if(isset($_FILES['img'])) {
+            if ($_FILES['img']['name'] != "") {
+                if ($this->checkGameImage($_FILES)) {
+                    // Llamada a la función que guarda la imagen
+                    $userModel->updateImage($_FILES, $data['user']['userID']);
+                }
             }
         }
 
         $this->view->showViews(array('client/editProfile.view.php'), $data);
     }
-    
+
     // Comprueba que el archivo subido se trata de una imagen
     function checkGameImage($img) {
         $upload = true;
@@ -403,72 +403,64 @@ class UserController extends \Com\Gamelog\Core\BaseController {
 
         return $errors;
     }
-    
+
     // Añade un amigo a tu lista, y carga de vuelta el perfil del usuario logeado.
     function addFriend($id) {
         $userModel = new \Com\Gamelog\Models\UserModel();
-        $userModel->addNewFriend($_SESSION['user']['userID'],$id);
+        $userModel->addNewFriend($_SESSION['user']['userID'], $id);
         $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
-        header("location: /profile/". $id ."?page=1&order=0&status=4");
+        header("location: /profile/" . $id . "?page=1&order=0&status=4");
     }
-    
+
     function unfollowUser($id) {
         $userModel = new \Com\Gamelog\Models\UserModel();
-        $userModel->unfollowUser($_SESSION['user']['userID'],$id);
+        $userModel->unfollowUser($_SESSION['user']['userID'], $id);
         $_SESSION['friends'] = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
-        header("location: /profile/". $id ."?page=1&order=0&status=4");
+        header("location: /profile/" . $id . "?page=1&order=0&status=4");
     }
-    
+
     function searchUsers() {
         $data = [];
         $this->view->showViews(array('client/users.view.php'), $data);
     }
-    
+
     function asyncSearchUsers($txt) {
+
         $userModel = new \Com\Gamelog\Models\UserModel();
 
         $following = $userModel->getFriendsIDFromUserID($_SESSION['user']['userID']);
         $users = $userModel->getAllUsers();
-        
-        $i = 0;
 
         foreach ($users as $user) {
-            if($user['userID']!=$_SESSION['user']['userID']){   
+            if ($user['userID'] != $_SESSION['user']['userID']) {
                 if (str_contains(strtolower($user['username']), $txt)) {
 
-                    $displayname = ($user['userDisplayName']==null) ? $user['username'] : $user['userDisplayName'];
-                    $friend = (in_array($user['userID'], $following)) ? "<a class='fbtn unfollowButton' href='/unfollow/".$user['userID']."'>Unfollow</a>" : "<a class='fbtn followButton' href='/addfriend/".$user['userID']."'>Seguir</a>";
+                    $displayname = ($user['userDisplayName'] == null) ? $user['username'] : $user['userDisplayName'];
+                    $friend = (in_array($user['userID'], $following)) ? "<a class='fbtn unfollowButton' href='/unfollow/" . $user['userID'] . "'>Unfollow</a>" : "<a class='fbtn followButton' href='/addfriend/" . $user['userID'] . "'>Seguir</a>";
 
                     echo "
                         <div class='userDiv'>
-                        
+
                             <div class='userLeft'>
                                 <div class='userImg'>
-                                <a href='/profile/".$user['userID']."?page=1&order=0&status=4'>
+                                <a href='/profile/" . $user['userID'] . "?page=1&order=0&status=4'>
                                     <img src='assets/img/profile/" . $user['userID'] . ".jpg'>
                                 </a>
                                 </div>
                                 <div class='userText'>
-                                    <span><a href='/profile/".$user['userID']."?page=1&order=0&status=4'>".$displayname."</a></span>
-                                    <span><a href='/profile/".$user['userID']."?page=1&order=0&status=4'>@".$user['username']."</a></span>
+                                    <span><a href='/profile/" . $user['userID'] . "?page=1&order=0&status=4'>" . $displayname . "</a></span>
+                                    <span><a href='/profile/" . $user['userID'] . "?page=1&order=0&status=4'>@" . $user['username'] . "</a></span>
                                 </div>
-                                
+
                             </div>
                             <div class='userButton'>
-                                ".$friend."
+                                " . $friend . "
                             </div>
-                            
-                        </div>";
 
-                    if ($i == 30) {
-                        break;
-                    }
-                    $i++;
+                        </div>";
 
                 }
             }
         }
-        
     }
-    
 }

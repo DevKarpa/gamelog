@@ -162,70 +162,72 @@ class GameController extends \Com\Gamelog\Core\BaseController {
     // Función que se ejecuta de forma asíncrona, y va mostrando los juegos que coinciden con
     // el texto pasado por parámetro
     function asyncSearchGames($txt, $id) {
-        $gameModel = new \Com\Gamelog\Models\GameModel();
-        $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
+        
+        if(strlen($txt)>=3){
 
-        if (isset($_SESSION['user'])) {
-            $userGames = $userGamesModel->getGamesIDByUserID($_SESSION['user']['userID']);
-        }
+            $gameModel = new \Com\Gamelog\Models\GameModel();
+            $userGamesModel = new \Com\Gamelog\Models\UserGamesModel();
 
-        $games = $gameModel->getAll();
-        $i = 0;
-
-        foreach ($games as $game) {
-            if (str_contains(strtolower($game['gameTitle']), $txt)) {
-                // Si el id de plataforma es distinto de 0, muestra juegos de todas las plataformas, sino
-                // solo muestra el juego de la plataforma correspondiente.
-                if ($id != 0) {
-                    if ($id == $game['platformID']) {
-                        echo "<div class='game'>
-                                <div class='gameContentLeft'>
-                                        <div class='gameImg'>
-                                            <img src='assets/img/games/" . $game['gameID'] . ".png'>
-                                        </div>
-                                        <div class='gameText'>
-                                            <span class='gameTitle'>" . $game['gameTitle'] . "</span>
-                                            <span class='gamePlat'>" . $game['platformName'] . "</span>
-                                        </div>
-                                    </div>
-                                <div class='gameContentRight'>
-                                        <span class='gameYear'>" . $game['gameYear'] . "</span>
-                                        <div class='gameButtons'>";
-                                    
-                                
-                        if (isset($_SESSION['user'])) {
-                            echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? '<i class="fas fa-pen-square"></i>' : '<i class="fas fa-plus-square"></i>') . "</a>";
-                        }
-                        echo "</div></div></div>";
-                    }
-                } else {
-                    echo "<div class='game'>
-                                <div class='gameContentLeft'>
-                                        <div class='gameImg'>
-                                            <img src='assets/img/games/" . $game['gameID'] . ".png'>
-                                        </div>
-                                        <div class='gameText'>
-                                            <span class='gameTitle'>" . $game['gameTitle'] . "</span>
-                                            <span class='gamePlat'>" . $game['platformName'] . "</span>
-                                        </div>
-                                    </div>
-                                <div class='gameContentRight'>
-                                        <span class='gameYear'>" . $game['gameYear'] . "</span>
-                                        <div class='gameButtons'>";
-                                    
-                                
-                        if (isset($_SESSION['user'])) {
-                            echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? '<i class="fas fa-pen-square"></i>' : '<i class="fas fa-plus-square"></i>') . "</a>";
-                        }
-                        echo "</div></div></div>";
-                    // TEMPORAL!! LIMITA A 30 LA CANTIDAD DE JUEGOS QUE SE MUESTRAN
-
-                    if ($i == 30) {
-                        break;
-                    }
-                    $i++;
-                }
+            if (isset($_SESSION['user'])) {
+                $userGames = $userGamesModel->getGamesIDByUserID($_SESSION['user']['userID']);
             }
+
+            $games = $gameModel->getAll();
+
+
+            foreach ($games as $game) {
+                if (str_contains(strtolower($game['gameTitle']), $txt)) {
+                    // Si el id de plataforma es distinto de 0, muestra juegos de todas las plataformas, sino
+                    // solo muestra el juego de la plataforma correspondiente.
+                    if ($id != 0) {
+                        if ($id == $game['platformID']) {
+                            echo "<div class='game'>
+                                    <div class='gameContentLeft'>
+                                            <div class='gameImg'>
+                                                <img src='assets/img/games/" . $game['gameID'] . ".png'>
+                                            </div>
+                                            <div class='gameText'>
+                                                <span class='gameTitle'>" . $game['gameTitle'] . "</span>
+                                                <span class='gamePlat'>" . $game['platformName'] . "</span>
+                                            </div>
+                                        </div>
+                                    <div class='gameContentRight'>
+                                            <span class='gameYear'>" . $game['gameYear'] . "</span>
+                                            <div class='gameButtons'>";
+
+
+                            if (isset($_SESSION['user'])) {
+                                echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? '<i class="fas fa-pen-square"></i>' : '<i class="fas fa-plus-square"></i>') . "</a>";
+                            }
+                            echo "</div></div></div>";
+                        }
+                    } else {
+                        echo "<div class='game'>
+                                    <div class='gameContentLeft'>
+                                            <div class='gameImg'>
+                                                <img src='assets/img/games/" . $game['gameID'] . ".png'>
+                                            </div>
+                                            <div class='gameText'>
+                                                <span class='gameTitle'>" . $game['gameTitle'] . "</span>
+                                                <span class='gamePlat'>" . $game['platformName'] . "</span>
+                                            </div>
+                                        </div>
+                                    <div class='gameContentRight'>
+                                            <span class='gameYear'>" . $game['gameYear'] . "</span>
+                                            <div class='gameButtons'>";
+
+
+                            if (isset($_SESSION['user'])) {
+                                echo "<a href='/" . (in_array($game['gameID'], $userGames) ? 'edit' : 'add') . "/" . $game['gameID'] . "'>" . (in_array($game['gameID'], $userGames) ? '<i class="fas fa-pen-square"></i>' : '<i class="fas fa-plus-square"></i>') . "</a>";
+                            }
+                            echo "</div></div></div>";
+
+                    }
+                }
+            
+            }
+        }else{
+            echo "Introduce al menos 3 caracteres.";
         }
     }
 }
