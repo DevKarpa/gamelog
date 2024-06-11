@@ -7,7 +7,7 @@
     <div class="col-12">
         <?php
         if (isset($_GET['del'])) {
-            ?> <div class="alert alert-danger"><p>El juego <?php echo $_GET['del'] ?> ha sido borrado correctamente.</p></div> <?php
+            ?> <div class="alert alert-success"><p>El juego <?php echo $_GET['del'] ?> ha sido borrado correctamente.</p></div> <?php
         }
         ?>
     </div>

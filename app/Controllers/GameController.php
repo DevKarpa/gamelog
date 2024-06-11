@@ -35,6 +35,10 @@ class GameController extends \Com\Gamelog\Core\BaseController {
                 $data['games'] = $gameModel->getAll();
             }
         }
+        
+        if(isset($_GET['del'])){
+            $gameModel->deleteGameById($_GET['del']);
+        }
 
         $this->view->showViews(array('templates/header.view.php', 'games.view.php', 'templates/footer.view.php'), $data);
     }

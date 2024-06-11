@@ -127,13 +127,6 @@ class FrontController {
                         }
                         , 'post');
 
-                Route::add('/game-list',
-                        function () {
-                            $controlador = new \Com\Gamelog\Controllers\GameController();
-                            $controlador->addGame();
-                        }
-                        , 'post');
-
                 Route::add('/game-list/add',
                         function () {
                             $controlador = new \Com\Gamelog\Controllers\GameController();
