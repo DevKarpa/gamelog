@@ -596,4 +596,8 @@ footer{
     .userSubMenu ul{
         gap: 10px !important;
     }
+    
+    .userSubMenu ul li:last-child{
+        margin-right: 10px;
+    }
 }

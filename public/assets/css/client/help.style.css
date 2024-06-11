@@ -79,4 +79,8 @@ section{
         font-size: 1em;
     }
     
+    main{
+        gap: 10px;
+    }
+    
 }

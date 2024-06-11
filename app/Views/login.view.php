@@ -13,10 +13,7 @@
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
         <!-- Tailwind CSS -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-        <!-- icheck bootstrap -->
-        <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="assets/css/adminlte.min.css">
+        <!-- Estilo -->
         <link rel="stylesheet" href="assets/css/client/login.style.css"
         
     </head>
@@ -68,13 +65,9 @@
         </section>
         
         
-        <!-- /.login-box -->
+        <!-- Tailwind JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
         <!-- jQuery -->
         <script src="plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="dist/js/adminlte.min.js"></script>
     </body>
 </html>
