@@ -50,6 +50,8 @@
                             <td>
                                 <a href="/dev-list/delete/<?php echo $dev['devID']?>" class="btn btn-danger"><i class="fas fa-trash"></i></a></td></tr>
                                 <?php
+                                }else{
+                                    echo "<td></td></tr>";
                                 }
                             }
                             ?>

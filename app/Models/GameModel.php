@@ -147,7 +147,7 @@ class GameModel extends \Com\Gamelog\Core\BaseModel {
         if (is_null($offset)) {
             $query = $this->pdo->prepare(self::BASE . "WHERE  " . implode("AND", $where) . " GROUP BY games.gameID");
         } else {
-            $query = $this->pdo->prepare(self::BASE . "WHERE  " . implode("AND", $where) . " GROUP BY games.gameID LIMIT 5 OFFSET ?");
+            $query = $this->pdo->prepare(self::BASE . "WHERE  " . implode("AND", $where) . " GROUP BY games.gameID LIMIT 25 OFFSET ?");
             $values[] = $offset;
         }
 
@@ -157,12 +157,9 @@ class GameModel extends \Com\Gamelog\Core\BaseModel {
     }
 
     function getPageGames($offset) {
-        $query = $this->pdo->prepare(self::BASE . "GROUP BY games.gameID LIMIT 5 OFFSET ?");
+        $query = $this->pdo->prepare(self::BASE . "GROUP BY games.gameID LIMIT 25 OFFSET ?");
         $query->execute([$offset]);
         return $query->fetchAll();
     }
-    
-    
-
     
 }

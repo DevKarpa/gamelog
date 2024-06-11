@@ -34,13 +34,8 @@
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <li class="nav-item">      
-          <a href="logout" class="nav-link"><i class="text-danger fas fa-sign-out-alt"></i></a>   
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>      
+           <a href="logout" class="nav-link"><i class="text-danger fas fa-sign-out-alt"></i></a>   
+      </li>  
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -61,7 +56,7 @@
           <img src="assets/img/profile/<?php echo $_SESSION['user']['userID'] ?>.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo isset($_SESSION['user']) ? $_SESSION['user']['username'] : 'none' ?></a>
+          <a href="<?php echo isset($_SESSION['user']) ? "/user-list/edit/" . $_SESSION['user']['userID'] : '#' ?>" class="d-block"><?php echo isset($_SESSION['user']) ? $_SESSION['user']['username'] : 'none' ?></a>
         </div>
       </div>
      
@@ -69,23 +64,17 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="/" class="nav-link active">
+              <a href="/" class="nav-link <?php echo !isset($seccion) ? "active" : "" ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Inicio
+                Panel de control
               </p>
             </a>
           </li> 
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Panel de control
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
+            
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/game-list?page=1" class="nav-link <?php echo isset($seccion) && $seccion === 'game-list' ? 'active' : ''; ?>">
@@ -95,7 +84,7 @@
               </li>
               <li class="nav-item">
                 <a href="/user-list" class="nav-link <?php echo isset($seccion) && $seccion === 'user-list' ? 'active' : ''; ?>">
-                  <i class="fas fa-user nav-icon"></i>
+                  <i class="fas fa-users nav-icon"></i>
                   <p>Lista de usuarios</p>
                 </a>
               </li>

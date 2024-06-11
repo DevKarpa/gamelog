@@ -21,7 +21,7 @@
                 <p>Lista de usuarios registrados</p>
             </div>
             <div class="icon">
-                <i class="ion ion-person"></i>
+                <i class="fas fa-users"></i>
             </div>
             <a href="user-list" class="small-box-footer">Mostrar listado <i class="fas fa-arrow-circle-right"></i></a>
         </div>
