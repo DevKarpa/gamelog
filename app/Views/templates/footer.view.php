@@ -44,7 +44,6 @@ $(document).ready(function() {
         tokenSeparators: [',']
     });
 });
-
 </script>
 
 <script src="assets/js/adminlte.js"></script>

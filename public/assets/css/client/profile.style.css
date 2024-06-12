@@ -169,7 +169,8 @@ main{
 
 .userStat:hover{
     background: rgba(0, 0, 255, 0.40);
-    transition-duration: 400ms;
+    transition-duration: 500ms;
+    transform: scale(1.1);
 }
 
 .userStat span:first-child{
@@ -256,6 +257,14 @@ main{
     display: flex;
     align-items: center;
     gap: 60px;
+}
+
+.game{
+    transition-duration: 500ms;
+}
+.game:hover{
+    transition-duration: 500ms;
+    transform: scale(1.01);
 }
 
 

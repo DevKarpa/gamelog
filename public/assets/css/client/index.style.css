@@ -155,7 +155,12 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+transition-duration: 500ms;
+}
 
+.infoblock:hover{
+    transition-duration: 500ms;
+    transform: scale(1.1);
 }
 
 .infoblock .infoIcon{
